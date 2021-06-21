@@ -1,28 +1,50 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+    <div id="app">
+        <div class="not-bootstrap-row">
+            <Navigation></Navigation>
+            <RouterView class="router-view"/>
+            <Wallet></Wallet>
+        </div>
+    </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
 
-export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+    import Navigation from "./components/Navigation";
+    import Wallet from "./components/Wallet";
+
+    export default {
+        name: 'App',
+        components: {
+            Wallet,
+            Navigation
+            // HelloWorld
+        },
+        data: function () {
+            return {visible: false}
+        }
+    }
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+
+<style lang="scss" scoped>
+    #app {
+        margin: 0 auto;
+        min-height: 100vh;
+        width: 1310px;
+        background-color: #cccccc;
+        display: flex;
+        flex-direction: column;
+
+        .not-bootstrap-row {
+            flex-grow: 1;
+            display: flex;
+            flex-wrap: nowrap;
+        }
+
+        .router-view {
+            flex-grow: 1;
+            min-width: 0;
+        }
+    }
 </style>
