@@ -1,23 +1,23 @@
 <template>
     <div id="app">
         <div class="not-bootstrap-row">
-            <Navigation></Navigation>
+<!--            <Navigation></Navigation>-->
             <RouterView class="router-view"/>
-            <Wallet></Wallet>
+<!--            <Wallet></Wallet>-->
         </div>
     </div>
 </template>
 
 <script>
 
-    import Navigation from "./components/Navigation";
-    import Wallet from "./components/Wallet";
+    // import Navigation from "./components/Navigation";
+    // import Wallet from "./components/Wallet";
 
     export default {
         name: 'App',
         components: {
-            Wallet,
-            Navigation
+            // Wallet,
+            // Navigation
             // HelloWorld
         },
         data: function () {
@@ -31,20 +31,12 @@
     #app {
         margin: 0 auto;
         min-height: 100vh;
-        width: 1310px;
-        background-color: #cccccc;
+        /*width: 1310px;*/
+        background-color: #000000;
+        text-align: center;
         display: flex;
-        flex-direction: column;
+        align-items: center; /*定义body的元素垂直居中*/
+        justify-content: center; /*定义body的里的元素水平居中*/
 
-        .not-bootstrap-row {
-            flex-grow: 1;
-            display: flex;
-            flex-wrap: nowrap;
-        }
-
-        .router-view {
-            flex-grow: 1;
-            min-width: 0;
-        }
     }
 </style>
