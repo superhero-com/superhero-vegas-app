@@ -2,18 +2,19 @@
     <div id="app">
         <div class="content">
             <el-container>
-                <el-aside width="200px">Aside</el-aside>
-                <el-container>
-                    <el-header>Header</el-header>
+                <el-aside width="272px"><navigation></navigation></el-aside>
+<!--                <el-container>-->
+<!--                    <el-header height="80px">Header</el-header>-->
 
-                    <el-container>
-                        <el-main>Main
+<!--                    <el-container>-->
+<!--                        <el-main>-->
+<!--                            <router-view></router-view>-->
 
-
-                        </el-main>
-                        <el-aside width="200px">Aside</el-aside>
-                    </el-container>
-                </el-container>
+<!--                        </el-main>-->
+<!--                        <el-aside width="306px">Aside</el-aside>-->
+<!--                    </el-container>-->
+<!--                    <el-footer>Footer</el-footer>-->
+<!--                </el-container>-->
             </el-container>
 
 
@@ -26,9 +27,11 @@
     // import Navigation from "./components/Navigation";
     // import Wallet from "./components/Wallet";
 
+    import Navigation from "./components/Navigation";
     export default {
         name: 'App',
         components: {
+            Navigation
             // Wallet,
             // Navigation
             // HelloWorld
@@ -63,7 +66,7 @@
         background-color: #B3C0D1;
         color: #333;
         text-align: center;
-        line-height: 60px;
+        line-height: 80px;
     }
 
     .el-aside {

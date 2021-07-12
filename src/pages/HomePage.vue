@@ -1,8 +1,7 @@
 <template>
     <div>
         <!--        <RouterLink to="login">Home</RouterLink>-->
-        <img src="../assets/logo.png" alt="">
-        <span>The coming virus is the application...</span>
+<!--        <img src="../assets/logo.png" alt="">-->
     </div>
 
 </template>
@@ -25,11 +24,5 @@
         width: 400px;
     }
 
-    span {
-        font-size: 20px;
-        display: block;
-        margin-top: 20px;
-        color: white;
-    }
 
 </style>
