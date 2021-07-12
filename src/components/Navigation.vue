@@ -46,6 +46,7 @@
 <style lang="scss" scoped>
     .navigation {
         background-color: antiquewhite;
+        min-height: 100vh;
         width: 251px;
 
 
