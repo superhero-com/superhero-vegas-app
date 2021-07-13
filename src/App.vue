@@ -73,7 +73,6 @@
         background-color: #D3DCE6;
         color: #333;
         text-align: center;
-        line-height: 200px;
     }
 
     .el-main {
