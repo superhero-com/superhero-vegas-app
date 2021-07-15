@@ -1,16 +1,36 @@
 <template>
     <div id="app">
         <div class="content">
-            <el-container>
-                <el-aside width="272px"><navigation></navigation></el-aside>
-                <el-main>
-                    <router-view></router-view>
+            <v-app>
+                <v-main>
+                    <v-row>
+                        <div class="nav">
+                            <v-col>
+                                <navigation style="width: 275px"></navigation>
+                            </v-col>
+                        </div>
 
-                </el-main>
-                <el-aside width="306px">Aside</el-aside>
-            </el-container>
+                        <div class="router">
+                            <v-col>
+
+                                <router-view></router-view>
 
 
+                            </v-col>
+                        </div>
+
+                        <div class="wallet">
+                            <v-col>
+
+
+
+                            </v-col>
+                        </div>
+
+
+                    </v-row>
+                </v-main>
+            </v-app>
         </div>
     </div>
 </template>
@@ -18,25 +38,27 @@
 <script>
 
     // import Navigation from "./components/Navigation";
-    // import Wallet from "./components/Wallet";
+    // import Navigation from "./components/Navigation";
 
     import Navigation from "./components/Navigation";
+
     export default {
         name: 'App',
-        components: {
-            Navigation
-            // Wallet,
-            // Navigation
-            // HelloWorld
-        },
-        data: function () {
-            return {visible: false}
-        }
-    }
+        components: {Navigation},
+        // components: {Navigation},
+        // components: {Navigation},
+        data: () => ({
+            links: [
+                'Dashboard',
+                'Messages',
+                'Profile',
+                'Updates',
+            ],
+        }),
+    };
 </script>
 
-
-<style lang="scss" scoped>
+<style>
     #app {
         margin: 0 auto;
         min-height: 100vh;
@@ -55,38 +77,21 @@
         justify-content: center; /*定义body的里的元素水平居中*/
     }
 
-    .el-header, .el-footer {
-        background-color: #B3C0D1;
-        color: #333;
-        text-align: center;
-        line-height: 80px;
+    .router {
+        width: 859px;
+        margin: auto 0;
+        height: 100vh;
+        overflow: auto;
+        background-color: #d6d6d0;
     }
 
-    .el-aside {
-        background-color: #08091D;
-        color: #333;
-        text-align: center;
+    .nav {
+        width: 275px;
     }
 
-    .el-main {
-        background-color: #E9EEF3;
-        color: #333;
-        text-align: center;
-        line-height: 160px;
+    .wallet {
+        width: 306px;
+        background-color: #535361;
     }
-
-    body > .el-container {
-        margin-bottom: 40px;
-    }
-
-    .el-container:nth-child(5) .el-aside,
-    .el-container:nth-child(6) .el-aside {
-        line-height: 260px;
-    }
-
-    .el-container:nth-child(7) .el-aside {
-        line-height: 320px;
-    }
-
 
 </style>

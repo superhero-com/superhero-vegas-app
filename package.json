@@ -9,15 +9,14 @@
   },
   "dependencies": {
     "@aeternity/aepp-sdk": "^8.2.0",
-    "boxicons": "^2.0.7",
     "core-js": "^3.6.5",
-    "element-ui": "^2.15.2",
     "font-awesome": "^4.7.0",
     "svg-inject": "^0.1.0",
     "svg-sprite": "^1.5.0",
     "svg-sprite-loader": "^6.0.9",
     "vue": "^2.6.11",
     "vue-router": "^3.5.1",
+    "vuetify": "^2.4.0",
     "vuex": "^3.6.2"
   },
   "devDependencies": {
@@ -29,13 +28,16 @@
     "eslint-plugin-vue": "^6.2.2",
     "node-sass": "^4.14.1",
     "raw-loader": "^4.0.2",
-    "sass-loader": "^8.0.2",
+    "sass": "~1.32.0",
+    "sass-loader": "^10.0.0",
     "svg-url-loader": "^6.0.0",
     "svgo": "^1.3.2",
     "svgo-loader": "^3.0.0",
     "vue-cli-plugin-svg-sprite": "~1.1.0",
+    "vue-cli-plugin-vuetify": "~2.4.1",
     "vue-svg-loader": "^0.16.0",
-    "vue-template-compiler": "^2.6.11"
+    "vue-template-compiler": "^2.6.11",
+    "vuetify-loader": "^1.7.0"
   },
   "eslintConfig": {
     "root": true,
