@@ -3,18 +3,18 @@
         <div class="content">
             <el-container>
                 <el-aside width="272px"><navigation></navigation></el-aside>
-<!--                <el-container>-->
-<!--                    <el-header height="80px">Header</el-header>-->
+                <el-container>
+                    <el-header height="80px">Header</el-header>
 
-<!--                    <el-container>-->
-<!--                        <el-main>-->
-<!--                            <router-view></router-view>-->
+                    <el-container>
+                        <el-main>
+                            <router-view></router-view>
 
-<!--                        </el-main>-->
-<!--                        <el-aside width="306px">Aside</el-aside>-->
-<!--                    </el-container>-->
-<!--                    <el-footer>Footer</el-footer>-->
-<!--                </el-container>-->
+                        </el-main>
+                        <el-aside width="306px">Aside</el-aside>
+                    </el-container>
+                    <el-footer>Footer</el-footer>
+                </el-container>
             </el-container>
 
 
@@ -47,7 +47,7 @@
     #app {
         margin: 0 auto;
         min-height: 100vh;
-        background-color: #001630;
+        background-color: #08091D;
         align-items: center; /*定义body的元素垂直居中*/
         justify-content: center; /*定义body的里的元素水平居中*/
         text-align: center;
@@ -70,7 +70,7 @@
     }
 
     .el-aside {
-        background-color: #D3DCE6;
+        background-color: #08091D;
         color: #333;
         text-align: center;
     }

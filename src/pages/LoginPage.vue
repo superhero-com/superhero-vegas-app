@@ -1,6 +1,6 @@
 <template>
     <div class="hello">
-        LoginPage NEW
+        LoginPage
     </div>
 </template>
 

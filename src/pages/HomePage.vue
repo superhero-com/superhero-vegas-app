@@ -2,6 +2,7 @@
     <div>
         <!--        <RouterLink to="login">Home</RouterLink>-->
 <!--        <img src="../assets/logo.png" alt="">-->
+        Home
     </div>
 
 </template>

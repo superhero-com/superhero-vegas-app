@@ -2,27 +2,22 @@
     <div class="sidebar">
 
         <div class="logo">
-            <img width="272" src="../assets/logo_vegas.png" alt="">
+            <svg-icon style="width: 200px" name="headerLogo"></svg-icon>
         </div>
         <ul class="nav-list">
             <li v-for="(item,index) in nva_list" :key="index">
-                <a :class='item.nva_class' href="#" @mouseover="mouseover(item.text)" @mouseleave="mouseleave">
-                    <box-icon class="icon" :type='item.icon_type' :color="item.icon_color" :name='item.icon'></box-icon>
-                    <span class="text">{{ item.text }} </span>
-                </a>
-            </li>
-        </ul>
-        <span class="group">Financial Bet</span>
-        <ul class="nav-list">
-            <li v-for="(item,index) in financial_list" :key="index">
-                <a :class='item.nva_class' href="#" @mouseover="mouseover(item.text)" @mouseleave="mouseleave">
-                    <box-icon class="icon" :type='item.icon_type' :color="item.icon_color" :name='item.icon'></box-icon>
-                    <span class="text">{{ item.text }} </span>
-                </a>
-            </li>
-        </ul>
-    </div>
+                <router-link :to='item.page'>
+                    <a :class='item.nva_class' href="#" @mouseover="mouseover(index)" @mouseleave="mouseleave"
+                       v-on:click="selectNave(index)">
+                        <svg-icon class="icon" :name='item.icon'></svg-icon>
+                        <span class="text">{{ item.text }} </span>
+                    </a>
+                </router-link>
 
+            </li>
+        </ul>
+
+    </div>
 </template>
 
 
@@ -36,78 +31,72 @@
         },
         data() {
             return {
+                currentSelect: 0,
                 nva_list: [
                     {
-                        text: 'Home',
+                        text: 'Market',
                         nva_class: 'item',
-                        icon: 'home-smile',
-                        icon_type: 'solid',
-                        icon_color: '#000000'
+                        icon: 'nav_home',
+                        page: '/',
                     },
+                    // {
+                    //     text: 'Private',
+                    //     nva_class: 'item',
+                    //     icon: 'nav_ae',
+                    //     page: '/login',
+                    // },
                     {
-                        text: 'My Bet',
+                        text: 'Participate',
                         nva_class: 'item',
-                        icon: 'user-circle',
-                        icon_type: 'solid',
-                        icon_color: '#000000'
+                        icon: 'nav_stock',
+                        page: '/login',
                     },
-                    {
-                        text: 'Favorites',
-                        nva_class: 'item',
-                        icon: 'bookmarks',
-                        icon_type: 'solid',
-                        icon_color: '#000000'
-                    }
-                ],
+                    // {
+                    //     text: 'Update',
+                    //     nva_class: 'item',
+                    //     icon: 'bookmarks',
+                    //     page: '/login',
+                    // },
+                    // {
+                    //     text: 'About',
+                    //     nva_class: 'item',
+                    //     icon: 'bookmarks',
+                    //     page: '/login',
+                    // }
 
-                financial_list: [
-                    {
-                        text: 'Coin',
-                        nva_class: 'item',
-                        icon: 'bitcoin',
-                        icon_type: 'logo',
-                        icon_color: '#000000'
-                    },
-                    {
-                        text: 'Stock',
-                        nva_class: 'item',
-                        icon: 'line-chart',
-                        icon_color: '#000000'
-                    }
-                ],
-
-                sport_list: [
-                    {
-                        text: 'Coin',
-                        nva_class: 'item',
-                        icon: 'football',
-                        icon_color: '#000000'
-                    },
-                    {
-                        text: 'basketball',
-                        nva_class: 'item',
-                        icon: 'basketball',
-                        icon_color: '#000000'
-                    }
                 ],
             }
         },
         methods: {
-            mouseover : function (index) {
 
-                for (let i = 0; i < this.nva_list.length; i++) {
-                    this.nva_list[i].icon_color = '#000000';
-                    this.nva_list[i].nva_class = 'item';
-                }
-                this.nva_list[index].icon_color = '#ff1000';
-                this.nva_list[index].nva_class = 'item-hover';
+
+            selectNave: function () {
+                // this.currentSelect = index;
+                // for (let i = 0; i < this.nva_list.length; i++) {
+                //     if (this.currentSelect === i) {
+                //         continue
+                //     }
+                //     this.nva_list[i].nva_class = 'item';
+                // }
+                // this.nva_list[index].nva_class = 'item-hover';
+
+            },
+            mouseover: function () {
+                // for (let i = 0; i < this.nva_list.length; i++) {
+                //     if (this.currentSelect === i) {
+                //         continue
+                //     }
+                //     this.nva_list[i].nva_class = 'item';
+                // }
+                // this.nva_list[index].nva_class = 'item-hover';
             },
             mouseleave: function () {
-
-                for (let i = 0; i < this.nva_list.length; i++) {
-                    this.nva_list[i].icon_color = '#000000';
-                    this.nva_list[i].nva_class = 'item';
-                }
+                // for (let i = 0; i < this.nva_list.length; i++) {
+                //     if (this.currentSelect === i) {
+                //         continue
+                //     }
+                //     this.nva_list[i].nva_class = 'item';
+                // }
             }
 
 
@@ -135,49 +124,85 @@
         justify-content: center;
     }
 
-    .group {
-        text-align: left;
-        display: flex;
-        align-items: center;
-        padding-left: 20px;
-        margin-left: 20px;
-        margin-top: 30px;
-        margin-bottom: 10px;
-    }
-
     .item {
         height: 50px;
         display: flex;
         align-items: center;
-        margin-left: 20px;
-        margin-right: 20px;
-        margin-top: 10px;
-        padding-left: 20px;
-    }
-
-
-    .item-hover {
-
-        height: 50px;
-        display: flex;
-        align-items: center;
-        margin-left: 20px;
-        margin-right: 20px;
-        margin-top: 10px;
+        margin-left: 35px;
+        margin-right: 35px;
+        margin-top: 15px;
         padding-left: 20px;
 
-        border-radius: 10px;
-        background-color: aquamarine;
-        color: #fa169f;
-        .text {
-            color: #fa169f;
+        .icon {
+            width: 24px;
+            fill: #535361;
+            height: 24px;
         }
 
+        .text {
+            margin-left: 15px;
+            color: #FFFFFF;
+            font-size: 15px;
+            font-family: Arial, serif;
+            font-weight: 400;
+            line-height: 17px;
+            letter-spacing: 1px;
+            opacity: 0.3;
+        }
     }
 
-    .text {
-        margin-left: 10px;
+
+    .router-link-active {
+
     }
+
+    .router-link-exact-active {
+        .item {
+            border-radius: 10px;
+            background-color: #12155a;
+
+            .icon {
+                fill: #FFFFFF;
+            }
+
+            .text {
+                color: #FFFFFF;
+                opacity: 1;
+            }
+        }
+    }
+
+    /*.item:hover {*/
+    /*    height: 50px;*/
+    /*    display: flex;*/
+    /*    align-items: center;*/
+    /*    margin-left: 35px;*/
+    /*    margin-right: 35px;*/
+    /*    margin-top: 15px;*/
+    /*    padding-left: 20px;*/
+    /*    border-radius: 10px;*/
+    /*    background-color: #12155a;*/
+
+    /*    .icon {*/
+    /*        width: 24px;*/
+    /*        fill: #FFFFFF;*/
+    /*        height: 24px;*/
+    /*    }*/
+
+    /*    .text {*/
+    /*        margin-left: 15px;*/
+    /*        color: #FFFFFF;*/
+    /*        font-size: 15px;*/
+    /*        font-weight: 400;*/
+    /*        line-height: 17px;*/
+    /*        letter-spacing: 1px;*/
+    /*        opacity: 1;*/
+    /*    }*/
+
+    /*    !*&.router-link-exact-active {*!*/
+    /*    !*    color: #b9181b;*!*/
+    /*    !*}*!*/
+    /*}*/
 
 
 </style>
