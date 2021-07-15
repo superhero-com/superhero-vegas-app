@@ -3,18 +3,11 @@
         <div class="content">
             <el-container>
                 <el-aside width="272px"><navigation></navigation></el-aside>
-                <el-container>
-                    <el-header height="80px">Header</el-header>
+                <el-main>
+                    <router-view></router-view>
 
-                    <el-container>
-                        <el-main>
-                            <router-view></router-view>
-
-                        </el-main>
-                        <el-aside width="306px">Aside</el-aside>
-                    </el-container>
-                    <el-footer>Footer</el-footer>
-                </el-container>
+                </el-main>
+                <el-aside width="306px">Aside</el-aside>
             </el-container>
 
 

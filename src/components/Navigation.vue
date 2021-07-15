@@ -7,8 +7,7 @@
         <ul class="nav-list">
             <li v-for="(item,index) in nva_list" :key="index">
                 <router-link :to='item.page'>
-                    <a :class='item.nva_class' href="#" @mouseover="mouseover(index)" @mouseleave="mouseleave"
-                       v-on:click="selectNave(index)">
+                    <a :class='item.nva_class' href="#">
                         <svg-icon class="icon" :name='item.icon'></svg-icon>
                         <span class="text">{{ item.text }} </span>
                     </a>
@@ -70,34 +69,6 @@
         methods: {
 
 
-            selectNave: function () {
-                // this.currentSelect = index;
-                // for (let i = 0; i < this.nva_list.length; i++) {
-                //     if (this.currentSelect === i) {
-                //         continue
-                //     }
-                //     this.nva_list[i].nva_class = 'item';
-                // }
-                // this.nva_list[index].nva_class = 'item-hover';
-
-            },
-            mouseover: function () {
-                // for (let i = 0; i < this.nva_list.length; i++) {
-                //     if (this.currentSelect === i) {
-                //         continue
-                //     }
-                //     this.nva_list[i].nva_class = 'item';
-                // }
-                // this.nva_list[index].nva_class = 'item-hover';
-            },
-            mouseleave: function () {
-                // for (let i = 0; i < this.nva_list.length; i++) {
-                //     if (this.currentSelect === i) {
-                //         continue
-                //     }
-                //     this.nva_list[i].nva_class = 'item';
-                // }
-            }
 
 
         }
