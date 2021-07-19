@@ -22,9 +22,9 @@
 <style lang="scss" scoped>
     .wallet {
         background-color: #fa169f;
-        width: 300px;
+        width: 306px;
 
-
+height: 200px;
 
 
     }

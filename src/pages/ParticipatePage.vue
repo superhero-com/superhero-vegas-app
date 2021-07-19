@@ -1,12 +1,12 @@
 <template>
     <div class="hello">
-        LoginPage
+        ParticipatePage
     </div>
 </template>
 
 <script>
     export default {
-        name: 'LoginPage',
+        name: 'ParticipatePage',
         props: {
             msg: String
         }

@@ -2,7 +2,7 @@
     <div class="sidebar">
 
         <div class="logo">
-            <svg-icon style="width: 200px" name="headerLogo"></svg-icon>
+            <img style="width: 200px" src="../assets/icons/nve_logo.png" alt=""/>
         </div>
         <ul class="nav-list">
             <li v-for="(item,index) in nva_list" :key="index">
@@ -38,30 +38,30 @@
                         icon: 'nav_home',
                         page: '/',
                     },
-                    // {
-                    //     text: 'Private',
-                    //     nva_class: 'item',
-                    //     icon: 'nav_ae',
-                    //     page: '/login',
-                    // },
+                    {
+                        text: 'Private',
+                        nva_class: 'item',
+                        icon: 'nav_private',
+                        page: '/private',
+                    },
                     {
                         text: 'Participate',
                         nva_class: 'item',
-                        icon: 'nav_stock',
-                        page: '/login',
+                        icon: 'nav_my',
+                        page: '/participate',
                     },
-                    // {
-                    //     text: 'Update',
-                    //     nva_class: 'item',
-                    //     icon: 'bookmarks',
-                    //     page: '/login',
-                    // },
-                    // {
-                    //     text: 'About',
-                    //     nva_class: 'item',
-                    //     icon: 'bookmarks',
-                    //     page: '/login',
-                    // }
+                    {
+                        text: 'Update',
+                        nva_class: 'item',
+                        icon: 'nav_update',
+                        page: '/update',
+                    },
+                    {
+                        text: 'About',
+                        nva_class: 'item',
+                        icon: 'nav_about',
+                        page: '/about',
+                    }
 
                 ],
             }
@@ -142,38 +142,6 @@
             }
         }
     }
-
-    /*.item:hover {*/
-    /*    height: 50px;*/
-    /*    display: flex;*/
-    /*    align-items: center;*/
-    /*    margin-left: 35px;*/
-    /*    margin-right: 35px;*/
-    /*    margin-top: 15px;*/
-    /*    padding-left: 20px;*/
-    /*    border-radius: 10px;*/
-    /*    background-color: #12155a;*/
-
-    /*    .icon {*/
-    /*        width: 24px;*/
-    /*        fill: #FFFFFF;*/
-    /*        height: 24px;*/
-    /*    }*/
-
-    /*    .text {*/
-    /*        margin-left: 15px;*/
-    /*        color: #FFFFFF;*/
-    /*        font-size: 15px;*/
-    /*        font-weight: 400;*/
-    /*        line-height: 17px;*/
-    /*        letter-spacing: 1px;*/
-    /*        opacity: 1;*/
-    /*    }*/
-
-    /*    !*&.router-link-exact-active {*!*/
-    /*    !*    color: #b9181b;*!*/
-    /*    !*}*!*/
-    /*}*/
 
 
 </style>

@@ -1,20 +1,38 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HomePage from "../pages/HomePage";
-import LoginPage from "../pages/LoginPage";
+import MarketPage from "../pages/MarketPage";
+import PrivatePage from "../pages/PrivatePage";
+import ParticipatePage from "../pages/ParticipatePage";
+import UpdatePage from "../pages/UpdatePage";
+import AboutPage from "../pages/AboutPage";
 
 Vue.use(Router);
 export default new Router({
     routes: [
         {
             path: '/',
-            name: 'HomePage',
-            component: HomePage
+            name: 'MarketPage',
+            component: MarketPage
         },
         {
-            path: '/login',
-            name: 'LoginPage',
-            component: LoginPage
+            path: '/private',
+            name: 'PrivatePage',
+            component: PrivatePage
+        },
+        {
+            path: '/participate',
+            name: 'ParticipatePage',
+            component: ParticipatePage
+        },
+        {
+            path: '/update',
+            name: 'UpdatePage',
+            component: UpdatePage
+        },
+        {
+            path: '/about',
+            name: 'AboutPage',
+            component: AboutPage
         }
     ]
 });
