@@ -2,18 +2,18 @@
     <div id="app">
         <div class="group">
             <el-container>
-                <el-aside width="272px"><navigation></navigation></el-aside>
-                <el-main>
-                    <div class="outer-container">
-                        <div class="inner-container">
-                            <div class="content">
-                                <router-view></router-view>
-                            </div>
-                        </div>
-                    </div>
+<!--                <el-aside width="272px"><navigation></navigation></el-aside>-->
+<!--                <el-main>-->
+<!--                    <div class="outer-container">-->
+<!--                        <div class="inner-container">-->
+<!--                            <div class="content">-->
+<!--                                <router-view></router-view>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
 
 
-                </el-main>
+<!--                </el-main>-->
                 <el-aside width="306px">
                     <Wallet></Wallet>
                 </el-aside>
@@ -29,13 +29,13 @@
     // import Navigation from "./components/Navigation";
     // import Wallet from "./components/Wallet";
 
-    import Navigation from "./components/Navigation";
-    import Wallet from "./components/Wallet";
+    // import Navigation from "./components/Navigation";
+    import Wallet from "./components/wallet/Wallet";
     export default {
         name: 'App',
         components: {
             Wallet,
-            Navigation
+            // Navigation
             // Wallet,
             // Navigation
             // HelloWorld
