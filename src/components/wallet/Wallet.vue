@@ -3,11 +3,7 @@
         <div>
             <Search></Search>
         </div>
-        <WalletSelect></WalletSelect>
-        <!--        <component :is="currentTab"></component>-->
-        <!--        <button class="tab" @click="toggleTab('WalletSelect')"><a>小王子</a></button>-->
-        <!--        <button class="tab" @click="toggleTab('PrivatePage')"><a>小玫瑰</a></button>-->
-        <!--            {{ tab }}-->
+        <component :is="this.$store.state.walletPage"></component>
     </div>
 </template>
 
@@ -15,23 +11,20 @@
 <script>
     import Search from "./Search";
     import WalletSelect from "./WalletSelect";
+    import WalletMnemonicLogin from "./WalletMnemonicLogin";
+    import WalletMnemonicCreate from "./WalletMnemonicCreate";
 
     export default {
-        components: {WalletSelect, Search},
+        components: {WalletSelect, WalletMnemonicLogin, WalletMnemonicCreate, Search},
         name: 'Wallet',
         props: {
             msg: String
         },
         data() {
             return {
-                currentTab: "WalletSelect",
+                currentTab: this.$store.state.walletPage,
             }
         },
-        methods: {
-            toggleTab: function (tab) {
-                this.currentTab = tab; // tab 为当前触发标签页的组件名
-            }
-        }
     }
 </script>
 

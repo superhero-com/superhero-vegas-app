@@ -1,20 +1,33 @@
 import Vue from 'vue'
+import Vuex from 'vuex'
 import App from './App.vue'
 import router from './router'
 import ElementUI from 'element-ui';
+import SvgIcon from './components/SvgIcon.vue'
 import 'element-ui/lib/theme-chalk/index.css';
 import './assets/styles/reset.css'
-import SvgIcon from './components/SvgIcon.vue'
-
 import './style/theme/index.css'
+
 Vue.config.productionTip = false;
 
-
-//全局注册icon-svg
 Vue.component('SvgIcon', SvgIcon);
-
 Vue.use(ElementUI);
+Vue.use(Vuex);
+
+
+const store = new Vuex.Store({
+    state: {
+        walletPage: "WalletSelect"
+    },
+    mutations: {
+        increment(state,page) {
+            state.walletPage = page;
+        }
+    }
+});
+
 new Vue({
-  router,
-  render: h => h(App),
+    router,
+    store,
+    render: h => h(App),
 }).$mount('#app');

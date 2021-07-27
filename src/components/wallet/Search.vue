@@ -3,7 +3,7 @@
         <!--        <input type="text" placeholder="Search Address">-->
         <el-row>
             <div class="input">
-                <el-input v-model="input" placeholder="请输入内容"></el-input>
+                <el-input v-model="input" placeholder="输入要查找的预测"></el-input>
             </div>
 
         </el-row>

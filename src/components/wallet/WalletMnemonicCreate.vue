@@ -1,6 +1,6 @@
 <template>
     <div class="wallet">
-        wallet login
+        wallet create
     </div>
 </template>
 
