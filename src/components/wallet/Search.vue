@@ -1,6 +1,13 @@
 <template>
     <div class="search">
-        <input type="text" placeholder="Search Address">
+        <!--        <input type="text" placeholder="Search Address">-->
+        <el-row>
+            <div class="input">
+                <el-input v-model="input" placeholder="请输入内容"></el-input>
+            </div>
+
+        </el-row>
+
     </div>
 
 </template>
@@ -17,6 +24,7 @@
         data() {
             return {
                 currentTab: "AboutPage",
+                input: ''
             }
         },
         methods: {
@@ -34,23 +42,13 @@
         width: 306px;
         height: 80px;
         line-height: 80px;
+        text-align: center;
     }
 
-    input {
-        outline-style: none;
-        border: 1px solid #ccc;
-        border-radius: 30px;
-        padding: 13px 14px;
-        color: #cccccc;
-        width: 256px;
-        background-color: #08091D;
-        font-size: 14px;
+    .input {
+        margin: 0 auto;
+        width: 255px;
     }
 
-    input:focus {
-        border-color: #66afe9;
-        outline: 0;
-        -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6);
-        box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6)
-    }
+
 </style>

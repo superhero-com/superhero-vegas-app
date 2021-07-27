@@ -5,6 +5,8 @@ import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import './assets/styles/reset.css'
 import SvgIcon from './components/SvgIcon.vue'
+
+import './style/theme/index.css'
 Vue.config.productionTip = false;
 
 

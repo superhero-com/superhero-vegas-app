@@ -1,11 +1,21 @@
 <template>
     <div class="wallet-select">
-        <a href="#">
-            Generate New Wallet
-        </a>
-        <a href="#">
-            Retrieve Existing Account
-        </a>
+        <el-row>
+            钱包
+        </el-row>
+        <el-row>
+            选择你的登录方式
+        </el-row>
+        <el-row>
+            <el-button type="primary">助记词登录</el-button>
+        </el-row>
+
+        <el-row>
+            或者
+        </el-row>
+        <el-row>
+        <el-button type="primary">连接超级英雄钱包</el-button>
+        </el-row>
     </div>
 </template>
 
@@ -34,25 +44,8 @@
 <style lang="scss" scoped>
     .wallet-select {
         width: 306px;
-    }
-    a {
-        /* Green */
-        border: none;
-        width: 261px;
-        height: 51px;
         text-align: center;
-        line-height: 51px;
-        margin-top: 20px;
-        text-decoration: none;
-        border-radius: 10px;
-        display: inline-block;
-        background: #0F4CD9 linear-gradient(90deg, #0F4CD9 0%, #DE4AD0 100%);
-        font-size: 17px;
-        color: #FFFFFF;
     }
 
-    a:hover {
-        background-color: #3e8e41;
-    }
 
 </style>
