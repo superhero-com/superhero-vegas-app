@@ -3,18 +3,18 @@
         <el-row>
             钱包
         </el-row>
-        <el-row>
-            选择你的登录方式
-        </el-row>
-        <el-row>
-            <el-button type="primary" @click='mnemonic()'>助记词登录</el-button>
-        </el-row>
+<!--        <el-row>-->
+<!--            选择你的登录方式-->
+<!--        </el-row>-->
+<!--        <el-row>-->
+<!--            <el-button type="primary" @click='mnemonic()'>助记词登录</el-button>-->
+<!--        </el-row>-->
 
         <el-row>
-            或者
+            当前未连接到钱包
         </el-row>
         <el-row>
-            <el-button type="primary" @click='superHero()' :loading="loading">连接超级英雄钱包</el-button>
+            <el-button  @click='superHero()' :loading="loading">连接超级英雄钱包</el-button>
         </el-row>
     </div>
 </template>
@@ -42,6 +42,8 @@
                     confirmButtonText: '确定',
                     callback: action => {
                         this.loading = false;
+
+                        this.$store.commit('increment', "WalletAccount");
                         this.$message({
                             type: 'info',
                             message: `action: ${ action }`

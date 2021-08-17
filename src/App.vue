@@ -2,18 +2,18 @@
     <div id="app">
         <div class="group">
             <el-container>
-<!--                <el-aside width="272px"><navigation></navigation></el-aside>-->
-<!--                <el-main>-->
-<!--                    <div class="outer-container">-->
-<!--                        <div class="inner-container">-->
-<!--                            <div class="content">-->
-<!--                                <router-view></router-view>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
+                <el-aside width="272px"><navigation></navigation></el-aside>
+                <el-main>
+                    <div class="outer-container">
+                        <div class="inner-container">
+                            <div class="content">
+                                <router-view></router-view>
+                            </div>
+                        </div>
+                    </div>
 
 
-<!--                </el-main>-->
+                </el-main>
                 <el-aside width="306px">
                     <Wallet></Wallet>
                 </el-aside>
@@ -28,13 +28,13 @@
 
     // import Navigation from "./components/Navigation";
     // import Wallet from "./components/Wallet";
-
-    // import Navigation from "./components/Navigation";
+    //
+    import Navigation from "./components/Navigation";
     import Wallet from "./components/wallet/Wallet";
     export default {
         name: 'App',
         components: {
-            Wallet,
+            Wallet,Navigation,
             // Navigation
             // Wallet,
             // Navigation
@@ -58,7 +58,7 @@
     }
 
     .group {
-        width: 1440px;
+        width: 1200px;
         text-align: center;
         margin: 0 auto;
         min-height: 100vh;
@@ -67,21 +67,21 @@
     }
 
     .el-header, .el-footer {
-        background-color: #B3C0D1;
-        color: #333;
+        /*background-color: #B3C0D1;*/
+        /*color: #333;*/
         text-align: center;
         line-height: 80px;
     }
 
     .el-aside {
-        background-color: #08091D;
-        color: #333;
+        /*background-color: #08091D;*/
+        /*color: #333;*/
         text-align: center;
     }
 
     .el-main {
-        background-color: #E9EEF3;
-        color: #333;
+        /*background-color: #E9EEF3;*/
+        /*color: #333;*/
         text-align: center;
         height: 100vh;
         padding: 0;

@@ -1,1 +1,16 @@
-{"global":{"$--color-primary":"#252424","$--color-success":"#2D2D2D"},"local":{}}
+{
+  "global": {
+    "$--color-primary": "#0F4CD9",
+    "$--color-success": "#67C23A",
+    "$--color-danger": "#FF0000",
+    "$--color-white": "#2B2C4A",
+    "$--background-color-base": "#0F1132",
+    "$--color-text-primary": "#FFFFFF",
+    "$--color-text-regular": "#77787D",
+    "$--border-color-extra-light": "#DCDCDC",
+    "$--border-color-light": "#7A7A7A",
+    "$--border-color-lighter": "#454545",
+    "$--border-color-base": "#646C80"
+  },
+  "local": {}
+}

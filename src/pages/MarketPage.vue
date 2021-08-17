@@ -1,26 +1,24 @@
 <template>
     <!--        <RouterLink to="login">Home</RouterLink>-->
     <!--        <img src="../assets/logo.png" alt="">-->
-    <div>
-        <el-radio-group v-model="direction">
-            <el-radio label="ltr">从左往右开</el-radio>
-            <el-radio label="rtl">从右往左开</el-radio>
-            <el-radio label="ttb">从上往下开</el-radio>
-            <el-radio label="btt">从下往上开</el-radio>
-        </el-radio-group>
+    <div  class="" style="overflow:auto">
+        <ul
+                class="list"
+                v-infinite-scroll="load"
+                infinite-scroll-disabled="disabled">
 
-        <el-button @click="drawer = true" type="primary" style="margin-left: 16px;">
-            点我打开
-        </el-button>
-
-        <el-drawer
-                title="我是标题"
-                :visible.sync="drawer"
-                :direction="direction"
-                :before-close="handleClose">
-            <span>我来啦!</span>
-        </el-drawer>
-
+            <el-card v-for="i in count" :key="i" :body-style="{ padding: '0px' }">
+                <div style="padding: 14px;">
+                    <span>好吃的汉堡{{i}}</span>
+                    <div class="bottom clearfix">
+                        <time class="time">{{ currentDate }}</time>
+                        <el-button type="text" class="button">操作按钮</el-button>
+                    </div>
+                </div>
+            </el-card>
+        </ul>
+<!--        <p v-if="loading">加载中...</p>-->
+<!--        <p v-if="noMore">没有更多了</p>-->
     </div>
 
 
@@ -35,13 +33,25 @@
         },
         data() {
             return {
-                drawer: false,
-                direction: 'rtl',
-            };
+                count: 10,
+                loading: false
+            }
+        },
+        computed: {
+            noMore() {
+                return this.count >= 20
+            },
+            disabled() {
+                return this.loading || this.noMore
+            }
         },
         methods: {
-            handleClose(){
-               this.done();
+            load() {
+                this.loading = true
+                setTimeout(() => {
+                    // this.count += 2
+                    this.loading = false
+                }, 2000)
             }
         }
     };
@@ -58,10 +68,6 @@
     li {
         line-height: 50px;
         background-color: #12155a;
-        margin-bottom: 10px;
-        margin-left: 10px;
-        margin-right: 10px;
-        margin-top: 10px;
         color: #FFFFFF;
     }
 

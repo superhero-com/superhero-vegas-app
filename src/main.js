@@ -8,10 +8,13 @@ import 'element-ui/lib/theme-chalk/index.css';
 import './assets/styles/reset.css'
 import './style/theme/index.css'
 
-Vue.config.productionTip = false;
+Vue.config.productionTip = true;
 
+//use SvgIcon
 Vue.component('SvgIcon', SvgIcon);
+//use Ele UI
 Vue.use(ElementUI);
+//use Vuex Store
 Vue.use(Vuex);
 
 
@@ -20,7 +23,7 @@ const store = new Vuex.Store({
         walletPage: "WalletSelect"
     },
     mutations: {
-        increment(state,page) {
+        increment(state, page) {
             state.walletPage = page;
         }
     }
@@ -31,3 +34,17 @@ new Vue({
     store,
     render: h => h(App),
 }).$mount('#app');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
