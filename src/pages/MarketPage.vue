@@ -2,20 +2,39 @@
     <!--        <RouterLink to="login">Home</RouterLink>-->
     <!--        <img src="../assets/logo.png" alt="">-->
     <div  class="" style="overflow:auto">
+        <div><span>选择项目进行竞猜，竞猜开奖时间结束后会进行开奖，部分项目为手动开奖</span></div>
         <ul
                 class="list"
                 v-infinite-scroll="load"
                 infinite-scroll-disabled="disabled">
 
+
+
             <el-card v-for="i in count" :key="i" :body-style="{ padding: '0px' }">
-                <div style="padding: 14px;">
-                    <span>好吃的汉堡{{i}}</span>
-                    <div class="bottom clearfix">
-                        <time class="time">{{ currentDate }}</time>
-                        <el-button type="text" class="button">操作按钮</el-button>
-                    </div>
-                </div>
+
+                <router-link to='/mark_detail'>
+                        <div style="padding: 14px;">
+                            <div><span>#{{i}}问题：2022年卡塔尔世界杯谁会获得总冠军？</span></div>
+                            <div><span>总投注：1202.00AE</span></div>
+                            <div><span>预测截止时间：2022年06月18日09:41</span></div>
+                            <div><span>预测开奖时间：2022年08月18日09:41</span></div>
+                            <div><span>预言机类型：手动/自动</span></div>
+                            <div><span>数据来源：https://www.baidu.com</span></div>
+                            <div>  <el-button  class="button">德国（30人投票）</el-button></div>
+                            <div>  <el-button  class="button">巴西（3人投票）</el-button></div>
+                            <div>  <el-button  class="button">美国（31人投票）</el-button></div>
+                            <div>  <el-button  class="button">澳大利亚（0人投票）</el-button></div>
+                            <div>  <el-button  class="button">其他国家（3人投票）</el-button></div>
+<!--                            <div class="bottom clearfix">-->
+<!--                                <time class="time">{{ currentDate }}</time>-->
+<!--                                <el-button type="text" class="button">操作按钮</el-button>-->
+<!--                            </div>-->
+                        </div>
+                </router-link>
             </el-card>
+
+
+
         </ul>
 <!--        <p v-if="loading">加载中...</p>-->
 <!--        <p v-if="noMore">没有更多了</p>-->
@@ -33,7 +52,7 @@
         },
         data() {
             return {
-                count: 10,
+                count: 2,
                 loading: false
             }
         },
@@ -63,6 +82,9 @@
 
         overflow: auto;;
 
+    }
+    span{
+        color: #FFFFFF;
     }
 
     li {

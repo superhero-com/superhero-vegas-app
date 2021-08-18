@@ -6,7 +6,8 @@
             当前地址
         </el-row>
         <el-row>
-            ak_idkx6m3bgRr7WiKXuB8EBYBoRqVsaSc6qo4dsd23HKgj3qiCF
+            <span>ak_idkx6m3bgRr7WiKXuB8EBYBoRqVsaSc6qo4dsd23HKgj3qiCF</span>
+
         </el-row>
 
         <el-row>
@@ -43,6 +44,14 @@
 </script>
 
 <style lang="scss" scoped>
+    .wallet {
+        width: 306px;
+        word-wrap:break-word;
+        word-break:break-all;
+        overflow: hidden;
 
+        color: #FFFFFF;
+        padding-bottom: 20px;
+    }
 
 </style>

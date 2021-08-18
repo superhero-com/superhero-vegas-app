@@ -1,7 +1,7 @@
 <template>
     <div class="wallet">
         <div>
-            <Search></Search>
+<!--            <Search></Search>-->
         </div>
         <component :is="this.$store.state.walletPage"></component>
     </div>
@@ -33,6 +33,8 @@
     .wallet {
         width: 306px;
         /*background-color: #001630;*/
+        align-items: center; /*定义body的元素垂直居中*/
+        justify-content: center; /*定义body的里的元素水平居中*/
         color: #FFFFFF;
         padding-bottom: 20px;
     }

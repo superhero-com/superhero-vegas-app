@@ -5,6 +5,7 @@ import PrivatePage from "../pages/PrivatePage";
 import ParticipatePage from "../pages/ParticipatePage";
 import UpdatePage from "../pages/UpdatePage";
 import AboutPage from "../pages/AboutPage";
+import MarketDetailPage from "../pages/MarketDetailPage";
 
 Vue.use(Router);
 export default new Router({
@@ -13,6 +14,10 @@ export default new Router({
             path: '/',
             name: 'MarketPage',
             component: MarketPage
+        }, {
+            path: '/mark_detail',
+            name: 'MarketDetailPage',
+            component: MarketDetailPage
         },
         {
             path: '/private',
