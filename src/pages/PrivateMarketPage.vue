@@ -2,7 +2,8 @@
     <!--        <RouterLink to="login">Home</RouterLink>-->
     <!--        <img src="../assets/logo.png" alt="">-->
     <div  class="" style="overflow:auto">
-        <div><span>选择项目进行竞猜，竞猜开奖时间结束后会进行开奖，部分项目为手动开奖，国际竞猜为社区发起，手续费为2%用于平台运营</span></div>
+        <el-button class="button"  @click='goBlack()'>返回</el-button>
+        <div><span>ak_QyFYYpgJ1vUGk1Lnk8d79WJEVcAtcfuNHqquuP2ADfxsL6yKx发起的预测</span></div>
         <ul
                 class="list"
                 v-infinite-scroll="load"
@@ -42,7 +43,7 @@
 <script>
 
     export default {
-        name: 'MarketPage',
+        name: 'PrivateMarketPage',
         props: {
             msg: String
         },
@@ -67,6 +68,10 @@
                     // this.count += 2
                     this.loading = false
                 }, 2000)
+            },
+            goBlack() {
+                this.$router.back();
+                // this.$router.go(-1)
             }
         }
     };

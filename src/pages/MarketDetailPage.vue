@@ -12,12 +12,13 @@
             <el-card  :body-style="{ padding: '0px' }">
 
                 <div style="padding: 14px;">
-                    <div><span>#MarketDetailPage 问题：2022年卡塔尔世界杯谁会获得总冠军？</span></div>
-                    <div><span>总投注：1202.00AE</span></div>
+                    <div><span>#{{i}}问题：2022年卡塔尔世界杯谁会获得总冠军？</span></div>
                     <div><span>预测截止时间：2022年06月18日09:41</span></div>
                     <div><span>预测开奖时间：2022年08月18日09:41</span></div>
                     <div><span>预言机类型：手动/自动</span></div>
                     <div><span>数据来源：https://www.baidu.com</span></div>
+                    <div><span>100AE/1次</span></div>
+                    <div><span>总奖池：1202.00AE</span></div>
                     <div>  <el-button  class="button">德国（30人投票）</el-button></div>
                     <div>  <el-button  class="button">巴西（3人投票）</el-button></div>
                     <div>  <el-button  class="button">美国（31人投票）</el-button></div>
