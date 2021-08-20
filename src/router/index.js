@@ -7,6 +7,7 @@ import UpdatePage from "../pages/UpdatePage";
 import AboutPage from "../pages/AboutPage";
 import MarketDetailPage from "../pages/MarketDetailPage";
 import PrivateMarketPage from "../pages/PrivateMarketPage";
+import CreateMarketPage from "../pages/CreateMarketPage";
 
 Vue.use(Router);
 export default new Router({
@@ -25,6 +26,10 @@ export default new Router({
             path: '/private_market',
             name: 'PrivateMarketPage',
             component: PrivateMarketPage
+        }, {
+            path: '/create_market',
+            name: 'CreateMarketPage',
+            component: CreateMarketPage
         },
         {
             path: '/private',

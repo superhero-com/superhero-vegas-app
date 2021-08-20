@@ -3,15 +3,19 @@ import Vuex from 'vuex'
 import App from './App.vue'
 import router from './router'
 import ElementUI from 'element-ui';
+import './assets/icons/index.js';
 import SvgIcon from './components/SvgIcon.vue'
 import 'element-ui/lib/theme-chalk/index.css';
 import './assets/styles/reset.css'
 import './style/theme/index.css'
+import './assets/icons'
 
 Vue.config.productionTip = true;
 
 //use SvgIcon
-Vue.component('SvgIcon', SvgIcon);
+Vue.component('svg-icon', SvgIcon);
+
+
 //use Ele UI
 Vue.use(ElementUI);
 //use Vuex Store

@@ -10,12 +10,12 @@
         </div>
 
         <router-link to='/private_market'>
-            <el-button >搜索</el-button>
+            <el-button>搜索</el-button>
         </router-link>
         <div><span>想当庄家？我也发起预测</span></div>
-        <div class="input">
+        <router-link to='/create_market'>
             <el-button>发起预测</el-button>
-        </div>
+        </router-link>
 
 
     </div>
