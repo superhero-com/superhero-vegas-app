@@ -14,7 +14,7 @@
             当前未连接到钱包
         </el-row>
         <el-row>
-            <el-button  @click='superHero()' :loading="loading">连接超级英雄钱包</el-button>
+            <el-button type="primary" @click='superHero()' :loading="loading" round>连接超级英雄钱包</el-button>
         </el-row>
     </div>
 </template>

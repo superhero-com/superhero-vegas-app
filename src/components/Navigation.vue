@@ -124,7 +124,7 @@
     .router-link-exact-active {
         .item {
             border-radius: 100px;
-            background-color: rgba(255, 39, 114, 0.1);
+            background-color: rgba(0, 0, 0, 0.06);
 
             .icon {
                 fill: #000000;

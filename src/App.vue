@@ -60,10 +60,12 @@
     .divider{
         min-height: 100vh;
         width: 1px;
+        padding: 0px;
+        margin: 0px;
     }
 
     .group {
-        width: 1440px;
+        width: 1200px;
         text-align: center;
         margin: 0 auto;
         min-height: 100vh;
@@ -107,7 +109,7 @@
     .element::-webkit-scrollbar {display:none}
 
     .outer-container,.content {
-        width: 862px;
+        width: 660px;
         height: 100vh;
     }
     .outer-container {
