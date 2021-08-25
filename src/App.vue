@@ -2,7 +2,8 @@
     <div id="app">
         <div class="group">
             <el-container>
-                <el-aside width="272px"><navigation></navigation></el-aside>
+                <el-aside width="255px"><navigation></navigation></el-aside>
+                <el-divider class="divider" direction="vertical"></el-divider>
                 <el-main>
                     <div class="outer-container">
                         <div class="inner-container">
@@ -11,10 +12,9 @@
                             </div>
                         </div>
                     </div>
-
-
                 </el-main>
-                <el-aside width="306px">
+                <el-divider class="divider" direction="vertical"></el-divider>
+                <el-aside width="289px">
                     <Wallet></Wallet>
                 </el-aside>
             </el-container>
@@ -55,6 +55,11 @@
         align-items: center; /*定义body的元素垂直居中*/
         justify-content: center; /*定义body的里的元素水平居中*/
         text-align: center;
+    }
+
+    .divider{
+        min-height: 100vh;
+        width: 1px;
     }
 
     .group {

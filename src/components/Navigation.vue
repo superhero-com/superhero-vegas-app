@@ -2,7 +2,7 @@
     <div class="sidebar">
 
         <div class="logo">
-            <img style="width: 200px" src="../assets/icons/nve_logo.png" alt=""/>
+            <img style="width: 200px" src="../assets/icons/nav_logo.png" alt=""/>
         </div>
         <ul class="nav-list">
             <li v-for="(item,index) in nva_list" :key="index">
@@ -66,12 +66,7 @@
                 ],
             }
         },
-        methods: {
-
-
-
-
-        }
+        methods: {}
     }
 
 </script>
@@ -102,23 +97,22 @@
         margin-left: 35px;
         margin-right: 35px;
         margin-top: 15px;
-        padding-left: 20px;
+        padding-left: 22px;
 
         .icon {
-            width: 24px;
-            fill: #535361;
-            height: 24px;
+            width: 26px;
+            fill: #000000;
+            height: 26px;
         }
 
         .text {
             margin-left: 15px;
-            color: #FFFFFF;
+            color: #000000;
             font-size: 15px;
             font-family: Arial, serif;
-            font-weight: 400;
-            line-height: 17px;
+            font-weight: 500;
+            line-height: 18px;
             letter-spacing: 1px;
-            opacity: 0.3;
         }
     }
 
@@ -129,15 +123,15 @@
 
     .router-link-exact-active {
         .item {
-            border-radius: 10px;
-            background-color: #12155a;
+            border-radius: 100px;
+            background-color: rgba(255, 39, 114, 0.1);
 
             .icon {
-                fill: #FFFFFF;
+                fill: #000000;
             }
 
             .text {
-                color: #FFFFFF;
+                color: #000000;
                 opacity: 1;
             }
         }

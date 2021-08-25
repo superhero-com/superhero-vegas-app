@@ -3,9 +3,10 @@
     <!--        <img src="../assets/logo.png" alt="">-->
     <div class="" style="overflow:auto">
         <div class="carousel">
-            <el-carousel :interval="5000" height="150px" arrow="always">
-                <el-carousel-item v-for="item in 4" :key="item">
-                    <div><span>选择项目进行竞猜，竞猜开奖时间结束后会进行开奖，部分项目为手动开奖，国际竞猜为社区发起，手续费为2%用于平台运营</span></div>
+            <el-carousel :interval="5000" arrow="always">
+                <el-carousel-item class="carousel-item" v-for="item in 1" :key="item">
+                    <!--                    <div><span>选择项目进行竞猜，竞猜开奖时间结束后会进行开奖，部分项目为手动开奖，国际竞猜为社区发起，手续费为2%用于平台运营</span></div>-->
+                    <img style="width: 100%" src="../assets/icons/1910.jpg" alt=""/>
                 </el-carousel-item>
             </el-carousel>
 
@@ -18,7 +19,7 @@
                     infinite-scroll-disabled="disabled">
 
 
-                <el-card v-for="i in count" :key="i" :body-style="{ padding: '0px' }">
+                <el-card class="card-item" v-for="i in count" :key="i" :body-style="{ padding: '0px' }">
 
                     <router-link to='/mark_detail'>
                         <div style="padding: 14px;">
@@ -90,28 +91,46 @@
     }
 
     span {
-        color: #FFFFFF;
+        color: #000000;
     }
 
     li {
         line-height: 50px;
         background-color: #12155a;
-        color: #FFFFFF;
+        color: #000000;
     }
 
 
-    .list-group{
-        background-color: #12155a;
+    .list-group {
+        /*background-color: #12155a;*/
+        /*border-radius: 20px;*/
+
+    }
+
+    .carousel {
+        margin-top: 12px;
+        border-radius: 12px;
+padding-left: 17px;
+        padding-right: 17px;
+    }
+
+    .carousel-item {
+        border-radius: 12px;
+
+
+    }
+
+    .card-item {
         margin-top: 17px;
-        border-radius: 20px;
-        padding: 17px;
+        margin-left: 17px;
+        margin-right: 17px;
     }
 
     .el-carousel__item h3 {
         color: #475669;
         font-size: 18px;
         opacity: 0.75;
-        line-height: 100px;
+        line-height: 200px;
         margin: 0;
     }
 
