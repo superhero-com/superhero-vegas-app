@@ -2,19 +2,16 @@
     <div id="app">
         <div class="group">
             <el-container>
-                <el-aside width="255px"><navigation></navigation></el-aside>
+                <el-aside class="el-aside-left" width="255px">
+                    <navigation></navigation>
+                </el-aside>
                 <el-divider class="divider" direction="vertical"></el-divider>
                 <el-main>
-                    <div class="outer-container">
-                        <div class="inner-container">
-                            <div class="content">
-                                <router-view></router-view>
-                            </div>
-                        </div>
-                    </div>
+                    <router-view></router-view>
+
                 </el-main>
                 <el-divider class="divider" direction="vertical"></el-divider>
-                <el-aside width="289px">
+                <el-aside class="el-aside-right" width="289px">
                     <Wallet></Wallet>
                 </el-aside>
             </el-container>
@@ -31,10 +28,11 @@
     //
     import Navigation from "./components/Navigation";
     import Wallet from "./components/wallet/Wallet";
+
     export default {
         name: 'App',
         components: {
-            Wallet,Navigation,
+            Wallet, Navigation,
             // Navigation
             // Wallet,
             // Navigation
@@ -51,13 +49,13 @@
     #app {
         margin: 0 auto;
         min-height: 100vh;
-        background-color: #FFFFFF;
+        background-color: #f5f5f5;
         align-items: center; /*定义body的元素垂直居中*/
         justify-content: center; /*定义body的里的元素水平居中*/
         text-align: center;
     }
 
-    .divider{
+    .divider {
         min-height: 100vh;
         width: 1px;
         padding: 0px;
@@ -78,16 +76,29 @@
         /*color: #333;*/
         text-align: center;
         line-height: 80px;
+
     }
 
-    .el-aside {
-        /*background-color: #08091D;*/
+    .el-aside-left {
+        background-color: #ffffff;
         /*color: #333;*/
         text-align: center;
+        border-top-left-radius: 20px;
+        border-bottom-left-radius: 20px;
+    }
+
+
+    .el-aside-right {
+        background-color: #ffffff;
+        /*color: #333;*/
+        text-align: center;
+        border-top-right-radius: 20px;
+        border-bottom-right-radius: 20px;
     }
 
     .el-main {
-        /*background-color: #E9EEF3;*/
+        /*background-color: #ffffff;*/
+        background-color: #f5f5f5;
         /*color: #333;*/
         text-align: center;
         height: 100vh;
@@ -106,24 +117,10 @@
     .el-container:nth-child(7) .el-aside {
         line-height: 320px;
     }
-    .element::-webkit-scrollbar {display:none}
 
-    .outer-container,.content {
-        width: 660px;
-        height: 100vh;
+    .element::-webkit-scrollbar {
+        display: none
     }
-    .outer-container {
-        position: relative;
-        overflow: hidden;
-    }
-    .inner-container {
-        position: absolute;
-        left: 0;
-        overflow-x: hidden;
-        overflow-y: scroll;
-    }
-    /* for Chrome */
-    .inner-container::-webkit-scrollbar {
-        display: none;
-    }
+
+
 </style>

@@ -109,10 +109,9 @@
             margin-left: 15px;
             color: #000000;
             font-size: 15px;
-            font-family: Arial, serif;
             font-weight: 500;
             line-height: 18px;
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
         }
     }
 
