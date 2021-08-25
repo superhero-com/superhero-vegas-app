@@ -1,18 +1,26 @@
 <template>
     <!--        <RouterLink to="login">Home</RouterLink>-->
     <!--        <img src="../assets/logo.png" alt="">-->
-    <div  class="" style="overflow:auto">
-        <div><span>选择项目进行竞猜，竞猜开奖时间结束后会进行开奖，部分项目为手动开奖，国际竞猜为社区发起，手续费为2%用于平台运营</span></div>
-        <ul
-                class="list"
-                v-infinite-scroll="load"
-                infinite-scroll-disabled="disabled">
+    <div class="" style="overflow:auto">
+        <div class="carousel">
+            <el-carousel :interval="5000" height="150px" arrow="always">
+                <el-carousel-item v-for="item in 4" :key="item">
+                    <div><span>选择项目进行竞猜，竞猜开奖时间结束后会进行开奖，部分项目为手动开奖，国际竞猜为社区发起，手续费为2%用于平台运营</span></div>
+                </el-carousel-item>
+            </el-carousel>
+
+        </div>
+
+        <div class="list-group">
+            <ul
+                    class="list"
+                    v-infinite-scroll="load"
+                    infinite-scroll-disabled="disabled">
 
 
+                <el-card v-for="i in count" :key="i" :body-style="{ padding: '0px' }">
 
-            <el-card v-for="i in count" :key="i" :body-style="{ padding: '0px' }">
-
-                <router-link to='/mark_detail'>
+                    <router-link to='/mark_detail'>
                         <div style="padding: 14px;">
                             <div><span>#{{i}}问题：2022年卡塔尔世界杯谁会获得总冠军？</span></div>
                             <div><span>预测截止时间：2022年06月18日09:41</span></div>
@@ -21,19 +29,20 @@
                             <div><span>数据来源：https://www.baidu.com</span></div>
                             <div><span>100AE/1次</span></div>
                             <div><span>总奖池：1202.00AE</span></div>
-<!--                            <div class="bottom clearfix">-->
-<!--                                <time class="time">{{ currentDate }}</time>-->
-<!--                                <el-button type="text" class="button">操作按钮</el-button>-->
-<!--                            </div>-->
+                            <!--                            <div class="bottom clearfix">-->
+                            <!--                                <time class="time">{{ currentDate }}</time>-->
+                            <!--                                <el-button type="text" class="button">操作按钮</el-button>-->
+                            <!--                            </div>-->
                         </div>
-                </router-link>
-            </el-card>
+                    </router-link>
+                </el-card>
 
 
+            </ul>
+        </div>
 
-        </ul>
-<!--        <p v-if="loading">加载中...</p>-->
-<!--        <p v-if="noMore">没有更多了</p>-->
+        <!--        <p v-if="loading">加载中...</p>-->
+        <!--        <p v-if="noMore">没有更多了</p>-->
     </div>
 
 
@@ -48,7 +57,7 @@
         },
         data() {
             return {
-                count: 2,
+                count: 20,
                 loading: false
             }
         },
@@ -79,7 +88,8 @@
         overflow: auto;;
 
     }
-    span{
+
+    span {
         color: #FFFFFF;
     }
 
@@ -90,4 +100,26 @@
     }
 
 
+    .list-group{
+        background-color: #12155a;
+        margin-top: 17px;
+        border-radius: 20px;
+        padding: 17px;
+    }
+
+    .el-carousel__item h3 {
+        color: #475669;
+        font-size: 18px;
+        opacity: 0.75;
+        line-height: 100px;
+        margin: 0;
+    }
+
+    .el-carousel__item:nth-child(2n) {
+        background-color: #99a9bf;
+    }
+
+    .el-carousel__item:nth-child(2n+1) {
+        background-color: #d3dce6;
+    }
 </style>

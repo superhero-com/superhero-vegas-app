@@ -51,7 +51,7 @@
     #app {
         margin: 0 auto;
         min-height: 100vh;
-        background-color: #08091D;
+        background-color: #FFFFFF;
         align-items: center; /*定义body的元素垂直居中*/
         justify-content: center; /*定义body的里的元素水平居中*/
         text-align: center;
