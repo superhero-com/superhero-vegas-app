@@ -31,7 +31,7 @@
 
 <style lang="scss" scoped>
     .wallet {
-        width: 289px;
+        width: 329px;
         /*background-color: #001630;*/
         align-items: center; /*定义body的元素垂直居中*/
         justify-content: center; /*定义body的里的元素水平居中*/

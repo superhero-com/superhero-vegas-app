@@ -1,20 +1,23 @@
 <template>
     <div class="wallet-select">
         <el-row>
-            钱包
+            <img style="margin-top: 50px;margin-bottom: 10px" width="80%" src="../../assets/icons/3588982.jpg" alt="">
+
         </el-row>
-<!--        <el-row>-->
-<!--            选择你的登录方式-->
-<!--        </el-row>-->
-<!--        <el-row>-->
-<!--            <el-button type="primary" @click='mnemonic()'>助记词登录</el-button>-->
-<!--        </el-row>-->
+        <!--        <el-row>-->
+        <!--            选择你的登录方式-->
+        <!--        </el-row>-->
+        <!--        <el-row>-->
+        <!--            <el-button type="primary" @click='mnemonic()'>助记词登录</el-button>-->
+        <!--        </el-row>-->
 
         <el-row>
-            当前未连接到钱包
+            <span style="margin-left: 18px;margin-right: 18px;line-height: 20px;font-size: 16px;padding-top: 20px">The wallet is not currently connected</span>
         </el-row>
         <el-row>
-            <el-button type="primary" @click='superHero()' :loading="loading" round>连接超级英雄钱包</el-button>
+            <el-button style="margin-top: 25px" type="primary" @click='superHero()' :loading="loading" round>Connect to
+                a wallet
+            </el-button>
         </el-row>
     </div>
 </template>
@@ -29,7 +32,7 @@
             msg: String
         },
         data() {
-            return {loading:false}
+            return {loading: false}
         },
         methods: {
             mnemonic: function () {
@@ -46,7 +49,7 @@
                         this.$store.commit('increment', "WalletAccount");
                         this.$message({
                             type: 'info',
-                            message: `action: ${ action }`
+                            message: `action: ${action}`
                         });
                     }
                 });
@@ -57,7 +60,7 @@
 
 <style lang="scss" scoped>
     .wallet-select {
-        width: 306px;
+        /*width: 306px;*/
         text-align: center;
     }
 

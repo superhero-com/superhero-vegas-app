@@ -2,16 +2,16 @@
     <div id="app">
         <div class="group">
             <el-container>
-                <el-aside class="el-aside-left" width="255px">
+                <el-aside class="el-aside-left" width="256px">
                     <navigation></navigation>
                 </el-aside>
-                <el-divider class="divider" direction="vertical"></el-divider>
+<!--                <el-divider class="divider" direction="vertical"></el-divider>-->
                 <el-main>
                     <router-view></router-view>
 
                 </el-main>
-                <el-divider class="divider" direction="vertical"></el-divider>
-                <el-aside class="el-aside-right" width="289px">
+<!--                <el-divider class="divider" direction="vertical"></el-divider>-->
+                <el-aside class="el-aside-right" width="330px">
                     <Wallet></Wallet>
                 </el-aside>
             </el-container>
@@ -49,7 +49,7 @@
     #app {
         margin: 0 auto;
         min-height: 100vh;
-        background-color: #f5f5f5;
+        background-color: #edf3f7;
         align-items: center; /*定义body的元素垂直居中*/
         justify-content: center; /*定义body的里的元素水平居中*/
         text-align: center;
@@ -85,6 +85,9 @@
         text-align: center;
         border-top-left-radius: 20px;
         border-bottom-left-radius: 20px;
+        border-style:solid;
+        border-width:1px;
+        border-color: #dcdfe6;
     }
 
 
@@ -94,11 +97,15 @@
         text-align: center;
         border-top-right-radius: 20px;
         border-bottom-right-radius: 20px;
+        border-style:solid;
+        border-width:1px;
+        border-color: #dcdfe6;
+
     }
 
     .el-main {
         /*background-color: #ffffff;*/
-        background-color: #f5f5f5;
+        background-color: #edf3f7;
         /*color: #333;*/
         text-align: center;
         height: 100vh;

@@ -6,10 +6,15 @@ html, body, div, span, applet, object, h1, h2, h3, h4, h5, h6, p, blockquote, pr
     font: inherit;
     font-weight: normal;
     vertical-align: baseline;
+    font-family: "Ubuntu";
 }
 
+@font-face {
+    font-family: 'Ubuntu';
+    src: url("../fonts/Ubuntu-Regular.ttf");
+}
 *{
-    font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
+    font-family: "Ubuntu";
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {

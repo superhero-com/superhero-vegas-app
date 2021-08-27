@@ -72,12 +72,6 @@
 </script>
 
 <style lang="scss" scoped>
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: "Poppins", sans-serif;
-    }
 
     .sidebar {
         margin-bottom: 10px;
@@ -94,8 +88,8 @@
         height: 50px;
         display: flex;
         align-items: center;
-        margin-left: 35px;
-        margin-right: 35px;
+        margin-left: 25px;
+        margin-right: 25px;
         margin-top: 15px;
         padding-left: 22px;
 
@@ -106,12 +100,11 @@
         }
 
         .text {
-            margin-left: 15px;
+            margin-left: 12px;
             color: #000000;
             font-size: 15px;
             font-weight: 500;
             line-height: 18px;
-            letter-spacing: 0.5px;
         }
     }
 
@@ -123,14 +116,14 @@
     .router-link-exact-active {
         .item {
             border-radius: 100px;
-            background-color: rgba(0, 0, 0, 0.06);
+            background-color: #feeaf1;
 
             .icon {
-                fill: #000000;
+                fill: #ff2772;
             }
 
             .text {
-                color: #000000;
+                color: #ff2772;
                 opacity: 1;
             }
         }

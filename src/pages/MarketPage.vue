@@ -38,41 +38,109 @@
                                              :body-style="{ padding: '0px' }">
 
                                         <div class="title-group">
-                                            <span class="number">#{{i}}</span>
-                                            <div class="title">Who will win the 2022 World Cup in Qatar？
-                                                Who will win the 2022 World Cup in Qatar？
-                                            </div>
+
+
+                                        </div>
+
+<!--                                        <div style="width: 100%;position: absolute">-->
+<!--                                            <div class="number">#{{i}}</div>-->
+<!--                                        </div>-->
+
+                                        <div class="title">#1 Wu Yifan incident in prison will be sentenced to several
+                                            years？
                                         </div>
                                         <el-divider class="divider-content"></el-divider>
-                                        <div style="display: flex;justify-content:space-around;margin-top: 17px">
 
-                                            <div>
-                                                <div><span style="font-weight: bold">Oracle Type</span></div>
-                                                <el-popover
-                                                        placement="top-start"
-                                                        title="Hint"
-                                                        width="200"
-                                                        trigger="hover"
-                                                        content="Manual types are confirmed by the publisher, so be cautious in your predictions">
 
-                                                    <el-button style="margin-top: 10px" type="primary" size="mini"
-                                                               slot="reference"
-                                                               icon="el-icon-warning" round>
-                                                        Manual
-                                                    </el-button>
-                                                </el-popover>
+                                        <div style="display: flex;margin-top: 27px">
+
+                                            <!--                                            <div>-->
+                                            <!--                                                <div><span style="font-weight: 400">Oracle Type</span></div>-->
+                                            <!--                                                <el-popover-->
+                                            <!--                                                        placement="top-start"-->
+                                            <!--                                                        title="Hint"-->
+                                            <!--                                                        width="200"-->
+                                            <!--                                                        trigger="hover"-->
+                                            <!--                                                        content="Manual types are confirmed by the publisher, so be cautious in your predictions">-->
+
+                                            <!--                                                    <el-button style="margin-top: 10px" type="primary" size="mini"-->
+                                            <!--                                                               slot="reference"-->
+                                            <!--                                                               icon="el-icon-warning" round>-->
+                                            <!--                                                        Manual-->
+                                            <!--                                                    </el-button>-->
+                                            <!--                                                </el-popover>-->
+
+                                            <!--                                            </div>-->
+
+
+                                            <!--                                            <el-divider direction="vertical" style="height: 40px"></el-divider>-->
+                                            <div style="text-align:left;width: 100%;padding-left: 30px;padding-right: 30px">
+                                                <span class="card-item-content-title">Total pledge：</span>
+                                                <span class="card-item-content" style="color: #de2563;">1010.00 (AE)</span>
+
 
                                             </div>
 
-                                            <div>
-                                                <div><span style="font-weight: bold;font-size: 16px">Minimum pledge(AE)</span></div>
-                                                <div class="card-item-content">10 / Number
-                                                </div>
+
+                                        </div>
+                                        <div style="display: flex;margin-top: 22px">
+
+                                            <!--                                            <div>-->
+                                            <!--                                                <div><span style="font-weight: 400">Oracle Type</span></div>-->
+                                            <!--                                                <el-popover-->
+                                            <!--                                                        placement="top-start"-->
+                                            <!--                                                        title="Hint"-->
+                                            <!--                                                        width="200"-->
+                                            <!--                                                        trigger="hover"-->
+                                            <!--                                                        content="Manual types are confirmed by the publisher, so be cautious in your predictions">-->
+
+                                            <!--                                                    <el-button style="margin-top: 10px" type="primary" size="mini"-->
+                                            <!--                                                               slot="reference"-->
+                                            <!--                                                               icon="el-icon-warning" round>-->
+                                            <!--                                                        Manual-->
+                                            <!--                                                    </el-button>-->
+                                            <!--                                                </el-popover>-->
+
+                                            <!--                                            </div>-->
+
+
+                                            <!--                                            <el-divider direction="vertical" style="height: 40px"></el-divider>-->
+                                            <div style="text-align:left;width: 100%;padding-left: 30px;padding-right: 30px">
+                                                <span class="card-item-content-title">End time：</span>
+                                                <span class="card-item-content">2021-08-26 16:48</span>
+
 
                                             </div>
-                                            <div>
-                                                <div><span style="font-weight: bold">Total pledge(AE)</span></div>
-                                                <div class="card-item-content">1010.00</div>
+
+
+                                        </div>
+                                        <div style="display: flex;margin-top: 22px">
+
+                                            <!--                                            <div>-->
+                                            <!--                                                <div><span style="font-weight: 400">Oracle Type</span></div>-->
+                                            <!--                                                <el-popover-->
+                                            <!--                                                        placement="top-start"-->
+                                            <!--                                                        title="Hint"-->
+                                            <!--                                                        width="200"-->
+                                            <!--                                                        trigger="hover"-->
+                                            <!--                                                        content="Manual types are confirmed by the publisher, so be cautious in your predictions">-->
+
+                                            <!--                                                    <el-button style="margin-top: 10px" type="primary" size="mini"-->
+                                            <!--                                                               slot="reference"-->
+                                            <!--                                                               icon="el-icon-warning" round>-->
+                                            <!--                                                        Manual-->
+                                            <!--                                                    </el-button>-->
+                                            <!--                                                </el-popover>-->
+
+                                            <!--                                            </div>-->
+
+
+                                            <!--                                            <el-divider direction="vertical" style="height: 40px"></el-divider>-->
+                                            <div style="text-align:left;width: 100%;padding-left: 30px;padding-right: 30px">
+                                                <span class="card-item-content-title">Data source：</span>
+                                                <el-link class="card-item-content" type="primary">
+                                                    https://www.baidu.com
+                                                </el-link>
 
                                             </div>
 
@@ -80,40 +148,31 @@
                                         </div>
 
 
-                                        <div style="padding-right: 25px;padding-left: 25px;margin-top: 20px">
-                                            <el-button type="primary" :span="1" round plain style="width: 100% ;">Brazil
+                                        <!--                                        <div class="card-item-answer">-->
+                                        <!--                                            <el-button type="primary" :span="1" round plain style="width: 100% ;">Brazil-->
+                                        <!--                                            </el-button>-->
+                                        <!--                                        </div>-->
+                                        <!--                                        <div class="card-item-answer">-->
+                                        <!--                                            <el-button type="primary" :span="1" round plain style="width: 100% ;">The-->
+                                        <!--                                                United States-->
+                                        <!--                                            </el-button>-->
+                                        <!--                                        </div>-->
+                                        <!--                                        <div class="card-item-answer">-->
+                                        <!--                                            <el-button type="primary" :span="1" round plain style="width: 100% ;">-->
+                                        <!--                                                Germany-->
+                                        <!--                                            </el-button>-->
+                                        <!--                                        </div>-->
+                                        <!--                                        <div class="card-item-answer">-->
+                                        <!--                                            <el-button type="primary" :span="1" round plain style="width: 100% ;">More-->
+                                        <!--                                                Countries-->
+                                        <!--                                            </el-button>-->
+                                        <!--                                        </div>-->
+
+
+                                        <div style="padding-bottom: 30px;margin-top: 10px;text-align: right;margin-right: 30px">
+                                            <el-button style="margin-top: 15px" type="primary" plain round>Start
+                                                prediction (100AE/ time)
                                             </el-button>
-                                        </div>
-                                        <div style="padding-right: 25px;padding-left: 25px;margin-top: 10px">
-                                            <el-button type="primary" :span="1" round plain style="width: 100% ;">The United States
-                                            </el-button>
-                                        </div>
-                                        <div style="padding-right: 25px;padding-left: 25px;margin-top: 10px">
-                                            <el-button type="primary" :span="1" round plain style="width: 100% ;">Germany
-                                            </el-button>
-                                        </div>
-                                        <div style="padding-right: 25px;padding-left: 25px;margin-top: 10px">
-                                            <el-button type="primary" :span="1" round plain style="width: 100% ;">More Countries
-                                            </el-button>
-                                        </div>
-
-
-                                        <div style="display: flex;justify-content:space-around;margin-top: 10px">
-                                            <div><span
-                                                    style="color: #666666;font-size: 14px">End Time：2021-08-25 18:04</span>
-                                            </div>
-                                            <div><span
-                                                    style="color: #666666;font-size: 14px">Over Time：2021-08-25 18:04</span>
-                                            </div>
-
-                                        </div>
-
-
-                                        <div style="padding-bottom: 10px;margin-top: 10px">
-                                            <span style="color: #666666;font-size: 14px">Data Source：</span>
-                                            <el-link href="https://www.aeternity.com" target="_blank" type="primary">
-                                                http://www.aeternity.com
-                                            </el-link>
                                         </div>
                                         <!--                            <div class="bottom clearfix">-->
                                         <!--                                <time class="time">{{ currentDate }}</time>-->
@@ -146,7 +205,7 @@
         },
         data() {
             return {
-                count: 1,
+                count: 10,
                 loading: false
             }
         },
@@ -198,21 +257,35 @@
     }
 
     .title-group {
-        display: flex;
-
+        color: #ffffff;
+        background: #F7296E;
+        font-weight: 500;
+        width: 90%;
+        border-bottom-right-radius: 10px;
+        border-bottom-left-radius: 10px;
+        /*margin-right: 10px;*/
+        height: 5px;
+        text-align: center;
+        margin: 0 auto;
+        /*line-height: 40px;*/
+        /*padding-left: 10px;*/
+        /*padding-right: 10px;*/
     }
 
     .number {
         color: #ffffff;
         background: #F7296E;
         font-weight: 500;
-        border-bottom-right-radius: 10px;
-        border-top-left-radius: 10px;
-        margin-right: 10px;
-        height: 40px;
-        line-height: 40px;
-        padding-left: 10px;
-        padding-right: 10px;
+        position: absolute;
+        /*width: 50%;*/
+        bottom: 22px;
+        border-bottom-left-radius: 10px;
+        border-top-right-radius: 10px;
+        padding: 10px;
+        /*margin-right: 10px;*/
+        /*line-height: 40px;*/
+        /*padding-left: 10px;*/
+        /*padding-right: 10px;*/
 
     }
 
@@ -222,19 +295,28 @@
     }
 
     .title {
-        text-align: left;
         line-height: 30px;
-        font-size: 18px;
+        font-size: 20px;
         padding-top: 18px;
+        border-bottom: 18px;
         color: #000000;
-        font-weight: bold;
+        font-weight: 400;
+        padding-left: 30px;
+        text-align: left;
+        padding-right: 30px;
 
     }
 
+    .card-item-content-title {
+        font-size: 17px;
+        color: #666666;
+        float: left;
+    }
+
     .card-item-content {
-        margin-top: 10px;
-        font-size: 14px;
-        color: #676767;
+        font-size: 18px;
+        float: right;
+        color: #333333;
     }
 
     .carousel {
@@ -242,6 +324,12 @@
         border-radius: 12px;
         padding-left: 17px;
         padding-right: 17px;
+    }
+
+    .card-item-answer {
+        padding-right: 45px;
+        padding-left: 45px;
+        margin-top: 15px;
     }
 
     .carousel-item {
@@ -280,7 +368,7 @@
 
 
     .outer-container, .content {
-        width: 654px;
+        width: 614px;
         height: 100vh;
     }
 
