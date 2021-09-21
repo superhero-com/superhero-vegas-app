@@ -116,14 +116,14 @@
     .router-link-exact-active {
         .item {
             border-radius: 100px;
-            background-color: #feeaf1;
+            background-color: rgba(0, 0, 0, 0.07);
 
             .icon {
-                fill: #ff2772;
+                fill: #000000;
             }
 
             .text {
-                color: #ff2772;
+                color: #000000;
                 opacity: 1;
             }
         }

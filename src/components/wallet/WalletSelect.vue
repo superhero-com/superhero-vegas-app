@@ -1,7 +1,7 @@
 <template>
     <div class="wallet-select">
         <el-row>
-            <img style="margin-top: 50px;margin-bottom: 10px" width="80%" src="../../assets/icons/3588982.jpg" alt="">
+            <img style="margin-top: 50px;margin-bottom: 10px" width="80%" src="../../assets/icons/wallet_logo.jpg" alt="">
 
         </el-row>
         <!--        <el-row>-->

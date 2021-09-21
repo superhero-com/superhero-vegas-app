@@ -33,160 +33,54 @@
                                     infinite-scroll-disabled="disabled">
 
                                 <router-link to='/mark_detail'>
-
                                     <el-card class="card-item" shadow="never" v-for="i in count" :key="i"
                                              :body-style="{ padding: '0px' }">
-
-                                        <div class="title-group">
-
-
-                                        </div>
-
-<!--                                        <div style="width: 100%;position: absolute">-->
-<!--                                            <div class="number">#{{i}}</div>-->
-<!--                                        </div>-->
-
-                                        <div class="title">#1 Wu Yifan incident in prison will be sentenced to several
-                                            years？
-                                        </div>
-                                        <el-divider class="divider-content"></el-divider>
-
-
-                                        <div style="display: flex;margin-top: 27px">
-
-                                            <!--                                            <div>-->
-                                            <!--                                                <div><span style="font-weight: 400">Oracle Type</span></div>-->
-                                            <!--                                                <el-popover-->
-                                            <!--                                                        placement="top-start"-->
-                                            <!--                                                        title="Hint"-->
-                                            <!--                                                        width="200"-->
-                                            <!--                                                        trigger="hover"-->
-                                            <!--                                                        content="Manual types are confirmed by the publisher, so be cautious in your predictions">-->
-
-                                            <!--                                                    <el-button style="margin-top: 10px" type="primary" size="mini"-->
-                                            <!--                                                               slot="reference"-->
-                                            <!--                                                               icon="el-icon-warning" round>-->
-                                            <!--                                                        Manual-->
-                                            <!--                                                    </el-button>-->
-                                            <!--                                                </el-popover>-->
-
-                                            <!--                                            </div>-->
-
-
-                                            <!--                                            <el-divider direction="vertical" style="height: 40px"></el-divider>-->
-                                            <div style="text-align:left;width: 100%;padding-left: 30px;padding-right: 30px">
-                                                <span class="card-item-content-title">Total pledge：</span>
-                                                <span class="card-item-content" style="color: #de2563;">1010.00 (AE)</span>
-
+                                        <div style="color: #cccccc;background: #f5f5f5;margin: 5px;border-radius: 10px;height: 40px;line-height: 40px">
+                                            <div style="color:#ffffff;background: #F7296E;display: inline-block;height: 40px;float: left;border-radius:6px;text-align: center;line-height: 40px;padding-left: 10px;padding-right: 10px;">
+                                                <span>#1</span>
 
                                             </div>
 
-
-                                        </div>
-                                        <div style="display: flex;margin-top: 22px">
-
-                                            <!--                                            <div>-->
-                                            <!--                                                <div><span style="font-weight: 400">Oracle Type</span></div>-->
-                                            <!--                                                <el-popover-->
-                                            <!--                                                        placement="top-start"-->
-                                            <!--                                                        title="Hint"-->
-                                            <!--                                                        width="200"-->
-                                            <!--                                                        trigger="hover"-->
-                                            <!--                                                        content="Manual types are confirmed by the publisher, so be cautious in your predictions">-->
-
-                                            <!--                                                    <el-button style="margin-top: 10px" type="primary" size="mini"-->
-                                            <!--                                                               slot="reference"-->
-                                            <!--                                                               icon="el-icon-warning" round>-->
-                                            <!--                                                        Manual-->
-                                            <!--                                                    </el-button>-->
-                                            <!--                                                </el-popover>-->
-
-                                            <!--                                            </div>-->
-
-
-                                            <!--                                            <el-divider direction="vertical" style="height: 40px"></el-divider>-->
-                                            <div style="text-align:left;width: 100%;padding-left: 30px;padding-right: 30px">
-                                                <span class="card-item-content-title">End time：</span>
-                                                <span class="card-item-content">2021-08-26 16:48</span>
-
-
+                                            <div style="font-size:14px;text-align: center;line-height: 40px;float: left;color: black;margin-left: 10px">
+                                                <span>EndTime : 2021-09-20 11:19:02</span>
                                             </div>
-
-
+                                            <div style="font-size:14px;padding-left:30px;padding-right:30px;text-align: center;float: right;border-radius: 100px;background: #ff5945;margin: 5px 10px;height: 30px;line-height: 30px;color: #ffffff">
+                                                <span>Manual</span>
+                                            </div>
                                         </div>
-                                        <div style="display: flex;margin-top: 22px">
 
-                                            <!--                                            <div>-->
-                                            <!--                                                <div><span style="font-weight: 400">Oracle Type</span></div>-->
-                                            <!--                                                <el-popover-->
-                                            <!--                                                        placement="top-start"-->
-                                            <!--                                                        title="Hint"-->
-                                            <!--                                                        width="200"-->
-                                            <!--                                                        trigger="hover"-->
-                                            <!--                                                        content="Manual types are confirmed by the publisher, so be cautious in your predictions">-->
-
-                                            <!--                                                    <el-button style="margin-top: 10px" type="primary" size="mini"-->
-                                            <!--                                                               slot="reference"-->
-                                            <!--                                                               icon="el-icon-warning" round>-->
-                                            <!--                                                        Manual-->
-                                            <!--                                                    </el-button>-->
-                                            <!--                                                </el-popover>-->
-
-                                            <!--                                            </div>-->
-
-
-                                            <!--                                            <el-divider direction="vertical" style="height: 40px"></el-divider>-->
+                                        <div style="text-align: left;padding-left: 30px;padding-right:30px;padding-top:15px;padding-bottom:15px;font-size: 20px;line-height: 30px;font-weight: bold">
+                                            <span>The 2022 World Cup in Qatar, to predict who will be the winner?</span>
+                                        </div>
+                                        <div style="display: flex;">
                                             <div style="text-align:left;width: 100%;padding-left: 30px;padding-right: 30px">
                                                 <span class="card-item-content-title">Data source：</span>
                                                 <el-link class="card-item-content" type="primary">
                                                     https://www.baidu.com
                                                 </el-link>
-
                                             </div>
-
-
                                         </div>
+                                        <div style="margin: 15px;color: #cccccc;background: #edf3f7;border-radius: 6px;height: 40px;text-align: center">
+                                            <div style="text-align:left;padding-left: 15px;padding-right: 15px;float: left;display: inline-block;line-height: 40px">
+                                                <span class="card-item-content-title">Total pledge：</span>
+                                                <span class="card-item-content" style="color: #de2563;">1000 AE</span>
+                                            </div>
+                                            <div style="text-align:left;float: right;display: flex;  border:1px solid #cccccc;background: #ffffff;height:30px;border-radius: 5px;margin-top: 5px;margin-right: 10px">
+                                                <div style="background: #F7296E;  height: 26px;margin: 2px;line-height: 26px;color: #ffffff;border-radius: 3px;display: inline">
+                                                    <svg-icon class="icon" style="margin: 3px;display: inline-block;margin-left: 5px;float: left" name='icon_dice'></svg-icon>
+                                                    <span style="font-size: 14px;display: inline;padding-left: 5px;padding-right: 10px;height: 26px">Start Prediction</span>
+                                                </div>
+                                                <div style="background: #ffffff;  height: 26px;margin: 2px;line-height: 26px;color: #000000;border-radius: 3px;display: inline">
 
-
-                                        <!--                                        <div class="card-item-answer">-->
-                                        <!--                                            <el-button type="primary" :span="1" round plain style="width: 100% ;">Brazil-->
-                                        <!--                                            </el-button>-->
-                                        <!--                                        </div>-->
-                                        <!--                                        <div class="card-item-answer">-->
-                                        <!--                                            <el-button type="primary" :span="1" round plain style="width: 100% ;">The-->
-                                        <!--                                                United States-->
-                                        <!--                                            </el-button>-->
-                                        <!--                                        </div>-->
-                                        <!--                                        <div class="card-item-answer">-->
-                                        <!--                                            <el-button type="primary" :span="1" round plain style="width: 100% ;">-->
-                                        <!--                                                Germany-->
-                                        <!--                                            </el-button>-->
-                                        <!--                                        </div>-->
-                                        <!--                                        <div class="card-item-answer">-->
-                                        <!--                                            <el-button type="primary" :span="1" round plain style="width: 100% ;">More-->
-                                        <!--                                                Countries-->
-                                        <!--                                            </el-button>-->
-                                        <!--                                        </div>-->
-
-
-                                        <div style="padding-bottom: 30px;margin-top: 10px;text-align: right;margin-right: 30px">
-                                            <el-button style="margin-top: 15px" type="primary" plain round>Start
-                                                prediction (100AE/ time)
-                                            </el-button>
+                                                    <span style="font-size: 14px;display: inline;padding-left: 5px;padding-right: 0px;height: 26px">100AE/At a time</span>
+                                                    <svg-icon class="icon" style="margin: 3px;display: inline-block;margin-right:10px;margin-left: 5px;float: right;fill: #F7296E" name='icon_ae'></svg-icon>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <!--                            <div class="bottom clearfix">-->
-                                        <!--                                <time class="time">{{ currentDate }}</time>-->
-                                        <!--                                <el-button type="text" class="button">操作按钮</el-button>-->
-                                        <!--                            </div>-->
-
                                     </el-card>
                                 </router-link>
-
                             </ul>
                         </div>
-
-                        <!--        <p v-if="loading">加载中...</p>-->
-                        <!--        <p v-if="noMore">没有更多了</p>-->
                     </div>
                 </div>
             </div>
@@ -205,7 +99,7 @@
         },
         data() {
             return {
-                count: 10,
+                count: 5,
                 loading: false
             }
         },
@@ -230,6 +124,13 @@
 </script>
 
 <style scoped>
+
+
+    .icon {
+        width: 20px;
+        fill: #ffffff;
+        height: 20px;
+    }
 
     ul {
 
@@ -308,14 +209,12 @@
     }
 
     .card-item-content-title {
-        font-size: 17px;
+        font-size: 14px;
         color: #666666;
-        float: left;
     }
 
     .card-item-content {
-        font-size: 18px;
-        float: right;
+        font-size: 14px;
         color: #333333;
     }
 
