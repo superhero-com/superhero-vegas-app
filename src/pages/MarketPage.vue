@@ -99,7 +99,7 @@
         },
         data() {
             return {
-                count: 5,
+                count: 1,
                 loading: false
             }
         },

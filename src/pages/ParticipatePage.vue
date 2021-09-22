@@ -1,8 +1,8 @@
 <template>
     <div class="hello">
-        <el-tabs v-model="activeName" type="card" @tab-click="handleClick">
-            <el-tab-pane label="我正在参与的" name="first">我正在参与的</el-tab-pane>
-            <el-tab-pane label="已经结束的" name="second">已经结束的</el-tab-pane>
+        <el-tabs v-model="activeName" type="card" @tab-click="handleClick" style="background: #ffffff">
+            <el-tab-pane label="Participate in the" name="first" style="padding-bottom: 200px">无</el-tab-pane>
+            <el-tab-pane label="The end of the" name="second" style="padding-bottom: 200px">无</el-tab-pane>
         </el-tabs>
     </div>
 </template>
