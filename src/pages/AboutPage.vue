@@ -32,8 +32,8 @@
 
             <div style="background: #ffffff;width: 100%;height: 350px;text-align: center;  display: flex;align-items: center;            justify-content: center;">
 
-                <div style="float: left;width: 50%;margin-right: 15px">
-                    <img style="width: 100%;" src="../assets/icons/about_item_1.png" alt="">
+                <div style="float: left;width: 50%;margin-left: 15px">
+                    <img style="width: 100%;" src="../assets/icons/about_item_2.png" alt="">
                 </div>
                 <div style="float:right;width: 50%;">
                     <div style="color: #F7296E;font-size: 20px">What is AEVegas?</div>
@@ -59,7 +59,7 @@
                     </div>
                 </div>
                 <div style="float: right;width: 50%;margin-right: 15px">
-                    <img style="width: 100%;" src="../assets/icons/about_item_1.png" alt="">
+                    <img style="width: 100%;" src="../assets/icons/about_item_3.png" alt="">
                 </div>
 
             </div>

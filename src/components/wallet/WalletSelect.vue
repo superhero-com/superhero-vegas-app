@@ -1,18 +1,10 @@
 <template>
     <div class="wallet-select">
         <el-row>
-            <img style="margin-top: 50px;margin-bottom: 10px" width="80%" src="../../assets/icons/wallet_logo.jpg" alt="">
-
+            <img style="margin-top: 50px;margin-bottom: 50px" width="80%" src="../../assets/icons/wallet_logo.jpg" alt="">
         </el-row>
-        <!--        <el-row>-->
-        <!--            选择你的登录方式-->
-        <!--        </el-row>-->
-        <!--        <el-row>-->
-        <!--            <el-button type="primary" @click='mnemonic()'>助记词登录</el-button>-->
-        <!--        </el-row>-->
-
         <el-row>
-            <span style="margin-left: 18px;margin-right: 18px;line-height: 20px;font-size: 16px;padding-top: 20px">The wallet is not currently connected</span>
+            <span style="margin-left: 18px;margin-right: 18px;line-height: 20px;font-size: 16px;padding-top: 20px;margin-top: 10px">The wallet is not currently connected</span>
         </el-row>
         <el-row>
             <el-button style="margin-top: 25px" type="primary" @click='superHero()' :loading="loading" round>Connect to

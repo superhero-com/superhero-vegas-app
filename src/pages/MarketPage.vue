@@ -14,18 +14,6 @@
 
                     <div style="overflow:auto">
 
-
-                        <!--        <el-carousel :interval="5000" height="200px" arrow="always">-->
-                        <!--            <el-carousel-item class="carousel-item" v-for="item in 2" :key="item">-->
-
-                        <!--                <div class="carousel-item-content">-->
-                        <!--                    <img style="width: 100%" src="../assets/icons/1910.jpg" alt=""/>-->
-                        <!--                </div>-->
-
-                        <!--            </el-carousel-item>-->
-                        <!--        </el-carousel>-->
-
-
                         <div class="list-group">
                             <ul
                                     class="list"
@@ -35,8 +23,8 @@
                                 <router-link to='/mark_detail'>
                                     <el-card class="card-item" shadow="never" v-for="i in count" :key="i"
                                              :body-style="{ padding: '0px' }">
-                                        <div style="color: #cccccc;background: #f5f5f5;margin: 5px;border-radius: 10px;height: 40px;line-height: 40px">
-                                            <div style="color:#ffffff;background: #F7296E;display: inline-block;height: 40px;float: left;border-radius:6px;text-align: center;line-height: 40px;padding-left: 10px;padding-right: 10px;">
+                                        <div style="color: #cccccc;border-radius: 10px;height: 40px;line-height: 40px">
+                                            <div style="color:#ffffff;background: #F7296E;display: inline-block;height: 40px;float: left;border-radius:6px;border-top-right-radius:30px;border-bottom-right-radius:30px;text-align: center;line-height: 40px;padding-left: 10px;padding-right: 10px;">
                                                 <span>#1</span>
 
                                             </div>
@@ -44,12 +32,13 @@
                                             <div style="font-size:14px;text-align: center;line-height: 40px;float: left;color: black;margin-left: 10px">
                                                 <span>EndTime : 2021-09-20 11:19:02</span>
                                             </div>
-                                            <div style="font-size:14px;padding-left:30px;padding-right:30px;text-align: center;float: right;border-radius: 100px;background: #ff5945;margin: 5px 10px;height: 30px;line-height: 30px;color: #ffffff">
+                                            <div style="font-size:14px;padding-left:10px;padding-right:10px;text-align: center;float: right;border-radius: 100px;background: #ff5945;margin: 5px 10px;height: 30px;line-height: 30px;color: #ffffff">
+                                                <svg-icon style="width:13px;height:13px;margin-top: 8px;display: inline; fill: #ffffff;margin-left: 5px;float: left;margin-right: 5px" name='icon_hint'></svg-icon>
                                                 <span>Manual</span>
                                             </div>
                                         </div>
 
-                                        <div style="text-align: left;padding-left: 30px;padding-right:30px;padding-top:15px;padding-bottom:15px;font-size: 20px;line-height: 30px;font-weight: bold">
+                                        <div style="text-align: left;padding-left: 30px;padding-right:30px;padding-top:15px;padding-bottom:15px;font-size: 18px;line-height: 30px;font-weight: bold">
                                             <span>The 2022 World Cup in Qatar, to predict who will be the winner?</span>
                                         </div>
                                         <div style="display: flex;">
@@ -238,7 +227,7 @@
     }
 
     .card-item {
-        margin: 15px;
+        margin: 8px;
         background-color: #FFFFFF;
         border-radius: 10px;
 
