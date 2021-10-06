@@ -26,10 +26,9 @@
                                     <div style="float:left;width: 50%;">
                                         <div style="color: #F7296E;font-size: 20px">What is AEVegas?</div>
                                         <div style="margin-top: 10px;font-size: 14px;margin-left: 15px;margin-right: 15px;line-height: 20px">
-                                            Good, we've achieved horizontal center! Now it's time for the big boss -- vertical center.
-                                            Before we do that, we need to set the height of the HTML and body elements that are the
-                                            ancestors of the div element to 100% (because they default to 0), and clear the default styles,
-                                            i.e. margin and padding, to 0.
+                                            In the traditional Internet, people can use legal tender to prediction market, such as the World Cup, lottery, etc. In the blockchain world, we can use smart contracts and oracle to reform the prediction market industry and promote the 2.0 development of the entire prediction market industry
+
+
                                         </div>
                                     </div>
                                     <div style="float: right;width: 50%;margin-right: 15px">
@@ -44,12 +43,9 @@
                                         <img style="width: 100%;" src="../assets/icons/about_item_2.png" alt="">
                                     </div>
                                     <div style="float:right;width: 50%;">
-                                        <div style="color: #F7296E;font-size: 20px">What is AEVegas?</div>
+                                        <div style="color: #F7296E;font-size: 20px">What can Vegas do??</div>
                                         <div style="margin-top: 10px;font-size: 14px;margin-left: 15px;margin-right: 15px;line-height: 20px">
-                                            Good, we've achieved horizontal center! Now it's time for the big boss -- vertical center.
-                                            Before we do that, we need to set the height of the HTML and body elements that are the
-                                            ancestors of the div element to 100% (because they default to 0), and clear the default styles,
-                                            i.e. margin and padding, to 0.
+                                            it app is a prediction market, the content is more than just a football or lottery, is the whole world, such as the Olympic Games gold medal number, the World Cup, the NBA championship, even AE price forecasting, etc., is a prediction market software and content from various aspects, use aetericty chain technology always run in the aeternity in the chain, it will be a good example and viral applications. It also contributes to the ecological development of Aeterinty. Winners share the prize pool and pay part of the fees to Oracle vendors, which is a win-win in many ways.
                                         </div>
                                     </div>
 

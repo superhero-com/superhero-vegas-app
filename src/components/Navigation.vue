@@ -95,13 +95,13 @@
 
         .icon {
             width: 26px;
-            fill: #000000;
+            fill: #ffffff;
             height: 26px;
         }
 
         .text {
             margin-left: 12px;
-            color: #000000;
+            color: #ffffff;
             font-size: 15px;
             font-weight: 500;
             line-height: 18px;
@@ -116,14 +116,13 @@
     .router-link-exact-active {
         .item {
             border-radius: 100px;
-            background-color: rgba(0, 0, 0, 0.07);
-
+            background-color: rgba(0,255,157,.1);
             .icon {
-                fill: #000000;
+                fill: #00ff9d;
             }
 
             .text {
-                color: #000000;
+                color: #00ff9d;
                 opacity: 1;
             }
         }

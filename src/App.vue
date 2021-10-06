@@ -49,7 +49,7 @@
     #app {
         margin: 0 auto;
         min-height: 100vh;
-        background-color: #edf3f7;
+        background-color: #000000;
         align-items: center; /*定义body的元素垂直居中*/
         justify-content: center; /*定义body的里的元素水平居中*/
         text-align: center;
@@ -80,32 +80,32 @@
     }
 
     .el-aside-left {
-        background-color: #ffffff;
+        background-color: #000000;
         /*color: #333;*/
         text-align: center;
         border-top-left-radius: 20px;
         border-bottom-left-radius: 20px;
         border-style:solid;
-        border-width:1px;
+        /*border-width:1px;*/
         border-color: #dcdfe6;
     }
 
 
     .el-aside-right {
-        background-color: #ffffff;
+        background-color: #000000;
         /*color: #333;*/
         text-align: center;
         border-top-right-radius: 20px;
         border-bottom-right-radius: 20px;
         border-style:solid;
-        border-width:1px;
+        /*border-width:1px;*/
         border-color: #dcdfe6;
 
     }
 
     .el-main {
         /*background-color: #ffffff;*/
-        background-color: #edf3f7;
+        background-color: #000000;
         /*color: #333;*/
         text-align: center;
         height: 100vh;

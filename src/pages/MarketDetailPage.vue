@@ -4,7 +4,8 @@
 
     <div class="outer-container">
         <div style="height: 55px;text-align: left;background-color: #ffffff; ">
-            <el-button style="margin-left: 5px;border-color: #ffffff;" icon="el-icon-back" circle @click='goBlack()'></el-button>
+            <el-button style="margin-left: 5px;border-color: #ffffff;" icon="el-icon-back" circle
+                       @click='goBlack()'></el-button>
 
 
             <span
@@ -36,7 +37,9 @@
                                             <span>EndTime : 2021-09-20 11:19:02</span>
                                         </div>
                                         <div style="font-size:14px;padding-left:10px;padding-right:10px;text-align: center;float: right;border-radius: 100px;background: #ff5945;margin: 5px 10px;height: 30px;line-height: 30px;color: #ffffff">
-                                            <svg-icon style="width:13px;height:13px;margin-top: 8px;display: inline; fill: #ffffff;margin-left: 5px;float: left;margin-right: 5px" name='icon_hint'></svg-icon>
+                                            <svg-icon
+                                                    style="width:13px;height:13px;margin-top: 8px;display: inline; fill: #ffffff;margin-left: 5px;float: left;margin-right: 5px"
+                                                    name='icon_hint'></svg-icon>
                                             <span>Manual</span>
                                         </div>
                                     </div>
@@ -52,9 +55,6 @@
                                             </el-link>
                                         </div>
                                     </div>
-
-
-
 
 
                                     <el-row style="margin-top: 10px ; width: 100%">
@@ -78,13 +78,17 @@
                                         </div>
                                         <div style="text-align:left;float: right;display: flex;  border:1px solid #cccccc;background: #ffffff;height:30px;border-radius: 5px;margin-top: 5px;margin-right: 10px">
                                             <div style="background: #F7296E;  height: 26px;margin: 2px;line-height: 26px;color: #ffffff;border-radius: 3px;display: inline">
-                                                <svg-icon class="icon" style="margin: 3px;display: inline-block;margin-left: 5px;float: left" name='icon_dice'></svg-icon>
+                                                <svg-icon class="icon"
+                                                          style="margin: 3px;display: inline-block;margin-left: 5px;float: left"
+                                                          name='icon_dice'></svg-icon>
                                                 <span style="font-size: 14px;display: inline;padding-left: 5px;padding-right: 10px;height: 26px">Start Prediction</span>
                                             </div>
                                             <div style="background: #ffffff;  height: 26px;margin: 2px;line-height: 26px;color: #000000;border-radius: 3px;display: inline">
 
                                                 <span style="font-size: 14px;display: inline;padding-left: 5px;padding-right: 0px;height: 26px">100AE/At a time</span>
-                                                <svg-icon class="icon" style="margin: 3px;display: inline-block;margin-right:10px;margin-left: 5px;float: right;fill: #F7296E" name='icon_ae'></svg-icon>
+                                                <svg-icon class="icon"
+                                                          style="margin: 3px;display: inline-block;margin-right:10px;margin-left: 5px;float: right;fill: #F7296E"
+                                                          name='icon_ae'></svg-icon>
                                             </div>
                                         </div>
                                     </div>
@@ -96,7 +100,6 @@
             </div>
         </div>
     </div>
-
 
 
 </template>
@@ -151,7 +154,6 @@
         background-color: #12155a;
         color: #FFFFFF;
     }
-
 
 
     .icon {
@@ -238,7 +240,7 @@
 
     .card-item-content-title {
         font-size: 14px;
-        color: #666666;
+        color: #babac0;
     }
 
     .card-item-content {
