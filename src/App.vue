@@ -105,7 +105,8 @@
 
     .el-main {
         /*background-color: #ffffff;*/
-        background-color: #000000;
+        /*background-color: #1e1e1e;*/
+        background-color:rgb(30, 30, 30);
         /*color: #333;*/
         text-align: center;
         height: 100vh;

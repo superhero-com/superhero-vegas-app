@@ -2,7 +2,7 @@
     <div class="sidebar">
 
         <div class="logo">
-            <img style="width: 200px" src="../assets/icons/nav_logo.png" alt=""/>
+            <img style="width: 200px" src="../assets/icons/nav_logo.jpg" alt=""/>
         </div>
         <ul class="nav-list">
             <li v-for="(item,index) in nva_list" :key="index">
@@ -95,13 +95,13 @@
 
         .icon {
             width: 26px;
-            fill: #ffffff;
+            fill: #9D9D9D;
             height: 26px;
         }
 
         .text {
             margin-left: 12px;
-            color: #ffffff;
+            color: #9D9D9D;
             font-size: 15px;
             font-weight: 500;
             line-height: 18px;
@@ -116,13 +116,13 @@
     .router-link-exact-active {
         .item {
             border-radius: 100px;
-            background-color: rgba(0,255,157,.1);
+            background-color: rgb(30, 30, 30);
             .icon {
-                fill: #00ff9d;
+                fill: #1161FE;
             }
 
             .text {
-                color: #00ff9d;
+                color: #1161FE;
                 opacity: 1;
             }
         }
