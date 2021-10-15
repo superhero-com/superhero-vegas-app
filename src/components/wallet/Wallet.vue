@@ -23,7 +23,6 @@
         },
         data() {
             return {
-                currentTab: this.$store.state.walletPage,
             }
         },
     }

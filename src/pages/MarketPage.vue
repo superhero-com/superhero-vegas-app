@@ -3,15 +3,11 @@
     <!--        <img src="../assets/logo.png" alt="">-->
 
 
-    <div >
-        <div style="height: 55px;text-align: left;padding-left: 12px;background-color: #000000; color: #babac0; position: -webkit-sticky;
-  position: sticky;
-  top: 0;
-    z-index: 999;
-  "><span
+    <div>
+        <div style="height: 55px;text-align: left;padding-left: 12px;background-color: #000000; color: #babac0; position: -webkit-sticky;position: sticky;top: 0; z-index: 999;"><span
                 style="line-height: 55px;  font-weight: 500;">Public Market</span>
         </div>
-<!--        <el-divider class="divider"></el-divider>-->
+        <!--        <el-divider class="divider"></el-divider>-->
         <div class="list-group">
             <ul
                     class="list"
@@ -31,7 +27,9 @@
                                 <span>EndTime : 2021-09-20 11:19:02</span>
                             </div>
                             <div style="font-size:14px;padding-left:10px;padding-right:10px;text-align: center;float: right;border-radius: 100px;background: #EA034F;margin: 5px 10px;height: 26px;line-height: 26px;color: #ffffff">
-                                <svg-icon style="width:13px;height:13px;margin-top: 7px;display: inline; fill: #ffffff;margin-left: 5px;float: left;margin-right: 5px" name='icon_hint'></svg-icon>
+                                <svg-icon
+                                        style="width:13px;height:13px;margin-top: 7px;display: inline; fill: #ffffff;margin-left: 5px;float: left;margin-right: 5px"
+                                        name='icon_hint'></svg-icon>
                                 <span>Manual</span>
                             </div>
                         </div>
@@ -42,7 +40,7 @@
                         <div style="display: flex;">
                             <div style="text-align:left;width: 100%;padding-left: 30px;padding-right: 30px">
                                 <span class="card-item-content-title">Data source：</span>
-                                <el-link class="card-item-content" style="color:#f7296e" >
+                                <el-link class="card-item-content" style="color:#f7296e">
                                     https://www.baidu.com
                                 </el-link>
                             </div>
@@ -54,13 +52,17 @@
                             </div>
                             <div style="text-align:left;float: right;display: flex;  border:1px solid #1E1E1E;background: rgba(247,41,110,0);height:30px;border-radius: 5px;margin-top: 5px;margin-right: 10px">
                                 <div style="background: rgb(49,91,247);  height: 26px;margin: 2px;line-height: 26px;color: #ffffff;border-radius: 3px;display: inline">
-                                    <svg-icon class="icon" style="margin: 3px;display: inline-block;margin-left: 5px;float: left" name='icon_dice'></svg-icon>
+                                    <svg-icon class="icon"
+                                              style="margin: 3px;display: inline-block;margin-left: 5px;float: left"
+                                              name='icon_dice'></svg-icon>
                                     <span style="font-size: 14px;display: inline;padding-left: 2px;padding-right: 10px;height: 26px">Start Prediction</span>
                                 </div>
                                 <div style="background: rgba(0,255,157,0);  height: 26px;margin: 2px;line-height: 26px;color: #ffffff;border-radius: 3px;display: inline">
 
                                     <span style="font-size: 14px;display: inline;padding-left: 5px;padding-right: 0px;height: 26px">100AE/At a time</span>
-                                    <svg-icon class="icon" style="margin: 3px;display: inline-block;margin-right:10px;margin-left: 5px;float: right;fill: #F7296E;border-radius: 50px" name='icon_ae'></svg-icon>
+                                    <svg-icon class="icon"
+                                              style="margin: 3px;display: inline-block;margin-right:10px;margin-left: 5px;float: right;fill: #F7296E;border-radius: 50px"
+                                              name='icon_ae'></svg-icon>
                                 </div>
                             </div>
                         </div>
@@ -82,7 +84,7 @@
         },
         data() {
             return {
-                count: 100,
+                count: 1,
                 loading: false
             }
         },
@@ -226,7 +228,7 @@
         border-radius: 10px;
         margin-left: 10px;
         margin-right: 10px;
-        border:0px solid #000000
+        border: 0px solid #000000
     }
 
     .card-item:hover {
@@ -253,7 +255,7 @@
     .outer-container, .content {
         width: 614px;
 
-        height:calc(100vh );
+        height: calc(100vh);
     }
 
     .outer-container {

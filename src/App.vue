@@ -125,7 +125,7 @@
         overflow: visible;
         margin-left: 256px;
         margin-right: 330px;
-
+        min-height: 100vh;
     }
 
     body > .el-container {

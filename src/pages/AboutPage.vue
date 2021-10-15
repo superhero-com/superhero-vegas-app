@@ -1,77 +1,64 @@
 <template>
 
 
-    <div class="outer-container">
-        <div style="height: 55px;text-align: left;padding-left: 12px;background-color: #ffffff; "><span
+    <div>
+        <div style="height: 55px;text-align: left;padding-left: 12px;background-color: #000000; color: #babac0; position: -webkit-sticky;position: sticky;top: 0; z-index: 999;"><span
                 style="line-height: 55px;  font-weight: 500;">About</span>
         </div>
-        <el-divider class="divider"></el-divider>
-        <div class="inner-container">
-            <div class="content">
+        <div class="list-group">
+            <ul
+                    class="list"
+                    v-infinite-scroll="load"
+                    infinite-scroll-disabled="disabled">
+
                 <div>
+                    <img style="width: 100%" src="../assets/icons/about_header.jpeg" alt="">
+                </div>
 
-                    <div style="overflow:auto">
-
-                        <div class="list-group">
-                            <ul
-                                    class="list"
-                                    v-infinite-scroll="load"
-                                    infinite-scroll-disabled="disabled">
-
-                                <div>
-                                    <img style="width: 100%" src="../assets/icons/about_header.jpeg" alt="">
-                                </div>
-
-                                <div style="background: #ffffff;width: 100%;height: 350px;text-align: center;  display: flex;align-items: center;            justify-content: center;">
-                                    <div style="float:left;width: 50%;">
-                                        <div style="color: #F7296E;font-size: 20px">What is AEVegas?</div>
-                                        <div style="margin-top: 10px;font-size: 14px;margin-left: 15px;margin-right: 15px;line-height: 20px">
-                                            In the traditional Internet, people can use legal tender to prediction market, such as the World Cup, lottery, etc. In the blockchain world, we can use smart contracts and oracle to reform the prediction market industry and promote the 2.0 development of the entire prediction market industry
-
-
-                                        </div>
-                                    </div>
-                                    <div style="float: right;width: 50%;margin-right: 15px">
-                                        <img style="width: 100%;" src="../assets/icons/about_item_1.png" alt="">
-                                    </div>
-
-                                </div>
-
-                                <div style="background: #ffffff;width: 100%;height: 350px;text-align: center;  display: flex;align-items: center;            justify-content: center;">
-
-                                    <div style="float: left;width: 50%;margin-left: 15px">
-                                        <img style="width: 100%;" src="../assets/icons/about_item_2.png" alt="">
-                                    </div>
-                                    <div style="float:right;width: 50%;">
-                                        <div style="color: #F7296E;font-size: 20px">What can Vegas do??</div>
-                                        <div style="margin-top: 10px;font-size: 14px;margin-left: 15px;margin-right: 15px;line-height: 20px">
-                                            it app is a prediction market, the content is more than just a football or lottery, is the whole world, such as the Olympic Games gold medal number, the World Cup, the NBA championship, even AE price forecasting, etc., is a prediction market software and content from various aspects, use aetericty chain technology always run in the aeternity in the chain, it will be a good example and viral applications. It also contributes to the ecological development of Aeterinty. Winners share the prize pool and pay part of the fees to Oracle vendors, which is a win-win in many ways.
-                                        </div>
-                                    </div>
-
-
-                                </div>
-
-                                <div style="background: #ffffff;width: 100%;height: 350px;text-align: center;  display: flex;align-items: center;            justify-content: center;">
-                                    <div style="float:left;width: 50%;">
-                                        <div style="color: #F7296E;font-size: 20px">What is AEVegas?</div>
-                                        <div style="margin-top: 10px;font-size: 14px;margin-left: 15px;margin-right: 15px;line-height: 20px">
-                                            Good, we've achieved horizontal center! Now it's time for the big boss -- vertical center.
-                                            Before we do that, we need to set the height of the HTML and body elements that are the
-                                            ancestors of the div element to 100% (because they default to 0), and clear the default styles,
-                                            i.e. margin and padding, to 0.
-                                        </div>
-                                    </div>
-                                    <div style="float: right;width: 50%;margin-right: 15px">
-                                        <img style="width: 100%;" src="../assets/icons/about_item_3.png" alt="">
-                                    </div>
-
-                                </div>
-                            </ul>
+                <div style="width: 100%;height: 350px;text-align: center;  display: flex;align-items: center;            justify-content: center;">
+                    <div style="float:left;width: 50%;">
+                        <div style="color: #F7296E;font-size: 20px">What is AEVegas?</div>
+                        <div style="margin-top: 10px;font-size: 16px;margin-left: 15px;margin-right: 15px;line-height: 22px;color: #9D9D9D">
+                            In the traditional Internet, people can use legal tender to prediction market, such as the World Cup, lottery, etc. In the blockchain world, we can use smart contracts and oracle to reform the prediction market industry and promote the 2.0 development of the entire prediction market industry
                         </div>
                     </div>
+                    <div style="float: right;width: 50%;margin-right: 15px">
+                        <img style="width: 100%;" src="../assets/icons/about_item_1.png" alt="">
+                    </div>
+
                 </div>
-            </div>
+
+                <div style="width: 100%;height: 350px;text-align: center;  display: flex;align-items: center;            justify-content: center;">
+
+                    <div style="float: left;width: 50%;margin-left: 15px">
+                        <img style="width: 100%;" src="../assets/icons/about_item_2.png" alt="">
+                    </div>
+                    <div style="float:right;width: 50%;">
+                        <div style="color: #F7296E;font-size: 20px">What can Vegas do??</div>
+                        <div style="margin-top: 10px;font-size: 16px;margin-left: 15px;margin-right: 15px;line-height: 22px;color: #9D9D9D">
+                            it app is a prediction market, the content is more than just a football or lottery, is the whole world, such as the Olympic Games gold medal number, the World Cup, the NBA championship, even AE price forecasting, etc., is a prediction market software and content from various aspects, use aetericty chain technology always run in the aeternity in the chain, it will be a good example and viral applications. It also contributes to the ecological development of Aeterinty. Winners share the prize pool and pay part of the fees to Oracle vendors, which is a win-win in many ways.
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <div style="width: 100%;height: 350px;text-align: center;  display: flex;align-items: center;            justify-content: center;">
+                    <div style="float:left;width: 50%;">
+                        <div style="color: #F7296E;font-size: 20px">What is AEVegas?</div>
+                        <div style="margin-top: 10px;font-size: 16px;margin-left: 15px;margin-right: 15px;line-height: 22px;color: #9D9D9D">
+                            Good, we've achieved horizontal center! Now it's time for the big boss -- vertical center.
+                            Before we do that, we need to set the height of the HTML and body elements that are the
+                            ancestors of the div element to 100% (because they default to 0), and clear the default styles,
+                            i.e. margin and padding, to 0.
+                        </div>
+                    </div>
+                    <div style="float: right;width: 50%;margin-right: 15px">
+                        <img style="width: 100%;" src="../assets/icons/about_item_3.png" alt="">
+                    </div>
+
+                </div>
+            </ul>
         </div>
     </div>
 

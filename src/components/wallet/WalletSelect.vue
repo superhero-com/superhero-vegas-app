@@ -28,7 +28,7 @@
         },
         methods: {
             mnemonic: function () {
-                this.$store.commit('increment', "WalletMnemonicLogin");
+                this.$store.commit('walletPage', "WalletMnemonicLogin");
                 console.log(this.$store.state.walletPage)
             },
             superHero: function () {
@@ -38,7 +38,7 @@
                     callback: action => {
                         this.loading = false;
 
-                        this.$store.commit('increment', "WalletAccount");
+                        this.$store.commit('walletPage', "WalletAccount");
                         this.$message({
                             type: 'info',
                             message: `action: ${action}`

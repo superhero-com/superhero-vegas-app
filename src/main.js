@@ -24,11 +24,15 @@ Vue.use(Vuex);
 
 const store = new Vuex.Store({
     state: {
-        walletPage: "WalletSelect"
+        walletPage: "WalletSelect",
+        participatePage: "ParticipateOngoing"
     },
     mutations: {
-        increment(state, page) {
+        walletPage(state, page) {
             state.walletPage = page;
+        },
+        participatePage(state, page) {
+            state.participatePage = page;
         }
     }
 });
