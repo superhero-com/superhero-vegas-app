@@ -1,16 +1,15 @@
 <template>
     <div class="private">
 
-        <div style="height: 55px;text-align: left;padding-left: 12px;color:#000000;background-color: #ffffff; ">
+        <div style="height: 55px;text-align: left;padding-left: 12px;color:#babac0;background-color: #000000; ">
             <span style="line-height: 55px;  font-weight: 500;">Private</span>
         </div>
 
 
-        <div style="text-align: left;padding-left: 12px;color:#666666;background-color: #ffffff; padding-bottom: 30px">
+        <div style="text-align: left;margin-top:10px;padding-left: 12px;color:#babac0; padding-bottom: 30px">
             <span style="line-height: 24px;  font-weight: 500;font-size: 16px">Private guessing. Since the guessing game may be divided into multiple countries with different languages and guessing scenes in each country, this function allows users to play with their friends and enter the domain name Aens to access the guessing game initiated by the user. The user initiated is not controlled by the prophet, and the user controls the results, the user initiated commission will be part of the dealer, please note!</span>
         </div>
 
-        <el-divider class="divider"></el-divider>
 
 
         <div style=" width: 95%;margin:15px auto">
