@@ -1,16 +1,17 @@
 <template>
     <div class="wallet-select">
-        <el-row>
-            <img style="margin-top: 50px;margin-bottom: 50px" width="80%" src="../../assets/icons/wallet_logo.jpg" alt="">
-        </el-row>
-        <el-row>
-            <span style="margin-left: 18px;margin-right: 18px;line-height: 20px;font-size: 16px;padding-top: 20px;margin-top: 10px">The wallet is not currently connected</span>
-        </el-row>
-        <el-row>
-            <el-button style="margin-top: 25px" type="primary" @click='superHero()' :loading="loading" round>Connect to
-                a wallet
-            </el-button>
-        </el-row>
+        <div class="pt-16">
+            <img  width="80%"  src="../../assets/icons/wallet_logo.jpg"
+                 alt="">
+        </div>
+        <div class="mt-6">
+            <span class="mt-16 white--text">The wallet is not currently connected</span>
+        </div>
+        <div class="mt-6">
+            <v-btn @click='superHero()' color="primary" elevation="2" large rounded>Connect to a wallet</v-btn>
+        </div>
+
+
     </div>
 </template>
 

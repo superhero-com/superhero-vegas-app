@@ -10,12 +10,12 @@
         <!--        <el-divider class="divider"></el-divider>-->
         <div class="list-group">
             <ul
-                    class="list"
+                    class="list pa-0"
                     v-infinite-scroll="load"
                     infinite-scroll-disabled="disabled">
 
                 <router-link to='/mark_detail'>
-                    <el-card class="card-item" v-for="i in count" :key="i"
+                    <div class="card-item" v-for="i in count" :key="i"
                              :body-style="{ padding: '0px' }">
                         <div style="color: #babac0;border-radius: 10px;height: 40px;background: #000000;margin-left:10px;margin-right:10px;margin-top:10px;line-height: 40px">
                             <div style="font-size:18px;color:#ffffff;background: rgb(49,91,247);display: inline-block;height: 40px;float: left;border-radius: 10px;border-bottom-left-radius:10px;border-top-right-radius:30px;border-bottom-right-radius:30px;text-align: center;line-height: 40px;padding-left: 10px;padding-right: 10px;">
@@ -37,6 +37,22 @@
                         <div style="text-align: left;padding-left: 30px;padding-right:30px;padding-top:15px;padding-bottom:15px;font-size: 18px;line-height: 30px;font-weight: bold;color: #ffffff">
                             <span>The 2022 World Cup in Qatar, to predict who will be the winner?</span>
                         </div>
+
+
+                        <el-row style="margin-top: 10px ; width: 100%">
+                            <el-button round style="width: 70%;background-color: #1E1E1E">China</el-button>
+                        </el-row>
+                        <el-row style="margin-top: 10px ; width: 100%">
+                            <el-button round style="width: 70%;background-color: #1E1E1E">China</el-button>
+                        </el-row>
+                        <el-row style="margin-top: 10px ; width: 100%">
+                            <el-button round style="width: 70%;background-color: #1E1E1E">China</el-button>
+                        </el-row>
+                        <el-row style="margin-top: 10px ; width: 100%">
+                            <el-button round style="width: 70%;background-color: #1E1E1E">China</el-button>
+                        </el-row>
+
+
                         <div style="display: flex;">
                             <div style="text-align:left;width: 100%;padding-left: 30px;padding-right: 30px">
                                 <span class="card-item-content-title">Data source：</span>
@@ -66,7 +82,7 @@
                                 </div>
                             </div>
                         </div>
-                    </el-card>
+                    </div>
                 </router-link>
             </ul>
         </div>

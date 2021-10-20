@@ -1,13 +1,12 @@
 <template>
-    <div class="sidebar">
-
+    <div class="pa-0">
         <div class="logo">
-            <img style="width: 200px" src="../assets/icons/nav_logo.jpg" alt=""/>
+            <img style="width: 70%" src="../assets/icons/nav_logo.jpg" alt=""/>
         </div>
-        <ul class="nav-list">
+        <ul class="nav-group pa-0">
             <li v-for="(item,index) in nva_list" :key="index">
                 <router-link :to='item.page'>
-                    <a :class='item.nva_class' href="#">
+                    <a class='item' href="#">
                         <svg-icon class="icon" :name='item.icon'></svg-icon>
                         <span class="text">{{ item.text }} </span>
                     </a>
@@ -34,31 +33,26 @@
                 nva_list: [
                     {
                         text: 'Market',
-                        nva_class: 'item',
                         icon: 'nav_home',
                         page: '/',
                     },
                     {
                         text: 'Private',
-                        nva_class: 'item',
                         icon: 'nav_private',
                         page: '/private',
                     },
                     {
                         text: 'Participate',
-                        nva_class: 'item',
                         icon: 'nav_my',
                         page: '/participate',
                     },
                     {
                         text: 'Update',
-                        nva_class: 'item',
                         icon: 'nav_update',
                         page: '/update',
                     },
                     {
                         text: 'About',
-                        nva_class: 'item',
                         icon: 'nav_about',
                         page: '/about',
                     }
@@ -73,25 +67,25 @@
 
 <style lang="scss" scoped>
 
-    .sidebar {
-        margin-bottom: 10px;
+    .nav-group{
+        margin-left: 45px;
+        margin-right: 45px;
     }
-
     .logo {
-        height: 100px;
+        height: 90px;
         display: flex;
         align-items: center;
         justify-content: center;
     }
 
     .item {
+        background-color: rgba(0, 0, 0, 0);
         height: 50px;
         display: flex;
         align-items: center;
-        margin-left: 25px;
-        margin-right: 25px;
         margin-top: 15px;
         padding-left: 22px;
+        padding-right: 22px;
 
         .icon {
             width: 26px;
@@ -109,14 +103,11 @@
     }
 
 
-    .router-link-active {
-
-    }
-
     .router-link-exact-active {
         .item {
             border-radius: 100px;
             background-color: rgb(30, 30, 30);
+
             .icon {
                 fill: #1161FE;
             }

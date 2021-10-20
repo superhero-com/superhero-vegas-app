@@ -30,7 +30,8 @@ function resolve(dir) {
 }
 
 module.exports = {
-        publicPath:'./',
+    publicPath:'./',
+
     chainWebpack: config => {
         config.module.rules.delete("svg"); //重点:删除默认配置中处理svg,
         config.module
@@ -45,4 +46,8 @@ module.exports = {
                 symbolId: 'icon-[name]'
             })
     },
+
+    transpileDependencies: [
+      'vuetify'
+    ]
 }

@@ -2,11 +2,10 @@ html, body, div, span, applet, object, h1, h2, h3, h4, h5, h6, p, blockquote, pr
     margin: 0;
     padding: 0;
     border: 0;
-    font-size: 100%;
     font: inherit;
     font-weight: normal;
     vertical-align: baseline;
-    font-family: "Ubuntu";
+    font-family: "Ubuntu", serif;
 }
 
 @font-face {
@@ -14,16 +13,14 @@ html, body, div, span, applet, object, h1, h2, h3, h4, h5, h6, p, blockquote, pr
     src: url("../fonts/Ubuntu-Regular.ttf");
 }
 *{
-    font-family: "Ubuntu";
+    font-family: "Ubuntu", serif;
 }
-/* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
     display: block;
 }
 
 ol, ul, li {
     list-style: none;
-
 }
 
 blockquote, q {
@@ -31,7 +28,6 @@ blockquote, q {
 }
 
 blockquote:before, blockquote:after, q:before, q:after {
-    content: '';
     content: none;
 }
 
@@ -44,7 +40,6 @@ th, td {
     vertical-align: middle;
 }
 
-/* custom */
 a {
     outline: none;
     text-decoration:none;

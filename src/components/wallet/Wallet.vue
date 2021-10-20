@@ -30,16 +30,9 @@
 
 <style lang="scss" scoped>
     .wallet {
-        width: 329px;
-        /*background-color: #001630;*/
         align-items: center; /*定义body的元素垂直居中*/
         justify-content: center; /*定义body的里的元素水平居中*/
-        color: #000000;
-        padding-bottom: 20px;
     }
 
-    span {
-        color: #FFFFFF;
-    }
 
 </style>
