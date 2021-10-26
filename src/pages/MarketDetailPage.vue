@@ -25,7 +25,7 @@
                                     v-infinite-scroll="load"
                                     infinite-scroll-disabled="disabled">
 
-                                <el-card class="card-item" shadow="never" v-for="i in count" :key="i"
+                                <el-card class="market-item" shadow="never" v-for="i in count" :key="i"
                                          :body-style="{ padding: '0px' }">
                                     <div style="color: #cccccc;border-radius: 10px;height: 40px;line-height: 40px">
                                         <div style="color:#ffffff;background: #F7296E;display: inline-block;height: 40px;float: left;border-radius:6px;border-top-right-radius:30px;border-bottom-right-radius:30px;text-align: center;line-height: 40px;padding-left: 10px;padding-right: 10px;">
@@ -49,7 +49,7 @@
                                     </div>
                                     <div style="display: flex;">
                                         <div style="text-align:left;width: 100%;padding-left: 30px;padding-right: 30px">
-                                            <span class="card-item-content-title">Data source：</span>
+                                            <span class="item-content-source-title">Data source：</span>
                                             <el-link class="card-item-content" type="primary">
                                                 https://www.baidu.com
                                             </el-link>
@@ -73,7 +73,7 @@
 
                                     <div style="margin: 15px;color: #cccccc;background: #edf3f7;border-radius: 6px;height: 40px;text-align: center">
                                         <div style="text-align:left;padding-left: 15px;padding-right: 15px;float: left;display: inline-block;line-height: 40px">
-                                            <span class="card-item-content-title">Total pledge：</span>
+                                            <span class="item-content-source-title">Total pledge：</span>
                                             <span class="card-item-content" style="color: #de2563;">1000 AE</span>
                                         </div>
                                         <div style="text-align:left;float: right;display: flex;  border:1px solid #cccccc;background: #ffffff;height:30px;border-radius: 5px;margin-top: 5px;margin-right: 10px">
@@ -238,7 +238,7 @@
 
     }
 
-    .card-item-content-title {
+    .item-content-source-title {
         font-size: 14px;
         color: #babac0;
     }
@@ -267,7 +267,7 @@
 
     }
 
-    .card-item {
+    .market-item {
         margin: 8px;
         background-color: #FFFFFF;
         border-radius: 10px;
@@ -275,7 +275,7 @@
 
     }
 
-    .card-item:hover {
+    .market-item:hover {
         background-color: rgba(0, 0, 0, 0.05);
     }
 

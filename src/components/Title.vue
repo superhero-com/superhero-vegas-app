@@ -19,7 +19,7 @@
             },
             is_back: {
                 type: Boolean,
-                default: true
+                default: false
             }
         },
         data() {

@@ -172,7 +172,7 @@
 
     }
 
-    .card-item-content-title {
+    .item-content-source-title {
         font-size: 14px;
         color: #666666;
     }
@@ -201,7 +201,7 @@
 
     }
 
-    .card-item {
+    .market-item {
         margin: 8px;
         background-color: #FFFFFF;
         border-radius: 10px;
@@ -209,7 +209,7 @@
 
     }
 
-    .card-item:hover {
+    .market-item:hover {
         background-color: rgba(0, 0, 0, 0.05);
     }
 
