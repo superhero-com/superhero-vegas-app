@@ -7,24 +7,48 @@
             <div class="item-header-time">
                 <span>EndTime : 2021-09-20 11:19:02</span>
             </div>
-            <div class="item-header-type">
-                <svg-icon class="item-header-type-icon" name='icon_hint'></svg-icon>
-                <span>Manual</span>
-            </div>
+            <v-tooltip bottom>
+                <template v-slot:activator="{ on, attrs }">
+                    <div   v-bind="attrs"
+                           v-on="on" class="item-header-type">
+                        <svg-icon class="item-header-type-icon" name='icon_hint'></svg-icon>
+                        <span>Manual</span>
+                    </div>
+
+
+                </template>
+                <span>The forecast results are controlled by the publisher. Please pay attention to the risks</span>
+            </v-tooltip>
+
         </div>
 
         <div class="item-content-text">
             <span>The 2022 World Cup in Qatar, to predict who will be the winner?</span>
         </div>
 
-
-
-
+        <div v-show="is_market">
+            <!--      <div class="flex-column justify-center ml-15 mr-15">-->
+            <!--          <v-progress-linear  :value="china" height="40" class="rounded-xl mb-3">-->
+            <!--              <strong>China 33%</strong>-->
+            <!--           </v-progress-linear>-->
+            <!--          <v-progress-linear  :value="korean" height="40" class="rounded-xl mb-3">-->
+            <!--              <strong>Korean 80% ✔️</strong>-->
+            <!--          </v-progress-linear>-->
+            <!--       </div>-->
+            <div class="flex-column justify-center ml-15 mr-15">
+                <v-btn class="mb-3" outlined block @click='superHero()' color="primary" elevation="0" large rounded>
+                    China
+                </v-btn>
+                <v-btn class="mb-3" outlined block @click='superHero()' color="primary" elevation="0" large rounded>
+                    Korean
+                </v-btn>
+            </div>
+        </div>
         <div class="item-content-source">
             <span class="item-content-source-title">Data source：</span>
-            <span @click="sourceClock" class="card-item-content" style="color:#f7296e">
+            <a href="#" class="card-item-content" style="color:#f7296e">
                 https://www.baidu.com
-            </span>
+            </a>
         </div>
         <div class="item-footer">
             <div class="item-footer-pledge">
@@ -53,19 +77,19 @@
                 type: String,
                 default: ""
             },
-            is_back: {
+            is_market: {
                 type: Boolean,
-                default: true
+                default: false
             }
         },
         data() {
-            return {knowledge: 33}
+            return {china: 33, korean: 80}
         },
         methods: {
 
-            sourceClock() {
-    console.log("1111");
-    return;
+            sourceClock(url) {
+                window.location.href = url;
+                event.stopPropagation()
             }
         }
     }
@@ -125,7 +149,7 @@
         float: right;
         border-radius: 100px;
         background: #EA034F;
-        margin: 5px 10px;
+        margin: 8px 10px;
         height: 26px;
         line-height: 26px;
         color: #ffffff

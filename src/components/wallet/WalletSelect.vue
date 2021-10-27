@@ -10,8 +10,6 @@
         <div class="mt-6">
             <v-btn @click='superHero()' color="primary" elevation="2" large rounded>Connect to a wallet</v-btn>
         </div>
-
-
     </div>
 </template>
 
