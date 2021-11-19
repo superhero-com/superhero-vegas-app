@@ -1,72 +1,95 @@
 <template>
     <div class="private">
-        <el-button class="button" @click='goBlack()'>返回</el-button>
-        <div>
-            <span> 为了国际化标准，请输入中英文</span>
-        </div>
-        <div><span>预测的问题(中文)</span></div>
-        <div class="input">
-            <el-input placeholder="中文"></el-input>
-        </div>
-        <div class="input">
-            <el-input placeholder="英文"></el-input>
+        <Title is_back="true" title="Create Market"></Title>
+
+        <div class="ml-4 mr-4">
+            <div class="mt-4">The problem with forecasting</div>
+            <v-textarea
+                    outlined
+                    name="input-7-4"
+                    auto-grow
+                    class="mt-4"
+                    placeholder="Example: What will the weather be like in Beijing in 10 days?"
+                    hide-details="auto"
+            ></v-textarea>
         </div>
 
-        <div><span>预测的结果最多4个</span></div>
-        <div><span>预测的结果(A)</span></div>
-        <div class="input">
-            <el-input placeholder="中文"></el-input>
-            <el-input placeholder="英文"></el-input>
+        <div class="ml-4 mr-4">
+            <div class="mt-4">Predicted results (up to four)</div>
+            <v-text-field
+                    outlined
+                    auto-grow
+                    class="mt-4"
+                    placeholder="It's sunny"
+                    hide-details="auto"
+            ></v-text-field>
+            <v-text-field
+                    outlined
+                    auto-grow
+                    class="mt-4"
+                    placeholder="It's cloudy"
+                    hide-details="auto"
+            ></v-text-field>
+            <v-text-field
+                    outlined
+                    auto-grow
+                    class="mt-4"
+                    placeholder="It rains"
+                    hide-details="auto"
+            ></v-text-field>
+            <v-text-field
+                    outlined
+                    auto-grow
+                    class="mt-4"
+                    placeholder="Other"
+                    hide-details="auto"
+            ></v-text-field>
         </div>
 
-        <div><span>预测的结果(B)</span></div>
-        <div class="input">
-            <el-input placeholder="中文"></el-input>
-            <el-input placeholder="英文"></el-input>
+        <div class="ml-4 mr-4">
+            <div class="mt-4">Data Source</div>
+            <v-text-field
+                    outlined
+                    auto-grow
+                    class="mt-4"
+                    placeholder="https://weather.com"
+                    hide-details="auto"
+            />
         </div>
 
-        <div><span>预测的结果(C)</span></div>
-        <div class="input">
-            <el-input placeholder="中文"></el-input>
-            <el-input placeholder="英文"></el-input>
+        <div class="ml-4 mr-4">
+            <div class="mt-4">Minimum Pledge Quantity（AE）</div>
+            <v-text-field
+                    outlined
+                    auto-grow
+                    class="mt-4"
+                    placeholder="10"
+                    label="Count"
+                    hide-details="auto"
+            />
         </div>
-
-        <div><span>预测的结果(D)</span></div>
-        <div class="input">
-            <el-input placeholder="中文"></el-input>
-            <el-input placeholder="英文"></el-input>
+        <div class="ml-4 mr-4">
+            <div class="mt-4">How long do you think you can bet on this game from now on（Hours）?</div>
+            <v-text-field
+                    outlined
+                    auto-grow
+                    class="mt-4"
+                    label="240"
+                    hide-details="auto"
+            />
         </div>
-        <div><span>数据来源(D)</span></div>
-        <div class="input">
-            <el-input placeholder="https://www.huobi.com"></el-input>
+        <div class="mt-6 mb-14 d-flex justify-center">
+            <v-btn @click='goBlack()' color="primary" elevation="2" large rounded>Confirm Create</v-btn>
         </div>
-        <div><span>最小质押数量(AE)</span></div>
-        <div class="input">
-            <el-input placeholder="大于1AE"></el-input>
-        </div>
-        <div><span>预测投注截止时间</span></div>
-        <span class="demonstration"></span>
-        <el-date-picker
-                v-model="value1"
-                type="date"
-                placeholder="选择日期">
-        </el-date-picker>
-        <div><span>预测投注开奖</span></div>
-        <span class="demonstration"></span>
-        <el-date-picker
-                v-model="value2"
-                type="date"
-                placeholder="选择日期">
-        </el-date-picker>
-      <div>
-          <el-button class="button" @click='goBlack()'>确认发起</el-button>
-      </div>
     </div>
 </template>
 
 <script>
+    import Title from "../components/Title";
+
     export default {
         name: 'CreateMarketPage',
+        components: {Title},
         props: {
             msg: String
         },
@@ -74,6 +97,7 @@
             return {
                 value1: "",
                 value2: "",
+                dates: ['', ''],
             }
         },
         methods: {
