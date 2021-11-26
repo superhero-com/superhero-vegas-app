@@ -4,10 +4,21 @@
 
 
     <div>
-        <Title title="Public Market"></Title>
+
+
+        <p class=".text-xl-h4 text-h5 mt-5">Welcome Back to AEVegas!</p>
+<!--        <v-card class="card mt-5 mb-5 pb-5" rounded="lg">-->
+<!--            <v-card-title class="text-h6">-->
+<!--                Public Market-->
+<!--            </v-card-title>-->
+<!--           -->
+
+<!--        </v-card>-->
+
         <router-link to='/mark_detail'>
             <MarketItem></MarketItem>
         </router-link>
+
     </div>
 
 
@@ -15,28 +26,23 @@
 
 <script>
 
-    import Title from "../components/Title";
     import MarketItem from "../components/MarketItem";
+
     export default {
         name: 'MarketPage',
-        components: {MarketItem, Title},
+        components: {MarketItem},
         props: {
             msg: String
         },
         data() {
             return {
-                count: 1,
+                count: 10,
                 knowledge: 33,
                 loading: false
             }
         },
         computed: {
-            noMore() {
-                return this.count >= 20
-            },
-            disabled() {
-                return this.loading || this.noMore
-            }
+
         },
         methods: {
             load() {

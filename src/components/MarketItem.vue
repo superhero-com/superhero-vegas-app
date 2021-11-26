@@ -27,19 +27,19 @@
         </div>
 
         <div v-show="is_market">
-            <!--      <div class="flex-column justify-center ml-15 mr-15">-->
-            <!--          <v-progress-linear  :value="china" height="40" class="rounded-xl mb-3">-->
-            <!--              <strong>China 33%</strong>-->
-            <!--           </v-progress-linear>-->
-            <!--          <v-progress-linear  :value="korean" height="40" class="rounded-xl mb-3">-->
-            <!--              <strong>Korean 80% ✔️</strong>-->
-            <!--          </v-progress-linear>-->
-            <!--       </div>-->
+                  <div class="flex-column justify-center ml-15 mr-15">
+                      <v-progress-linear  :value="china" height="40" class="mb-3 " color="deep-purple accent-4">
+                          <strong>China 33%</strong>
+                       </v-progress-linear>
+                      <v-progress-linear  :value="korean" height="40" class="mb-3" >
+                          <strong>Korean 80% ✔</strong>
+                      </v-progress-linear>
+                   </div>
             <div class="flex-column justify-center ml-15 mr-15">
-                <v-btn class="mb-3" outlined block @click='superHero()' color="primary" elevation="0" large rounded>
+                <v-btn class="mb-3"  block @click='superHero()' color="primary" elevation="0" large >
                     China
                 </v-btn>
-                <v-btn class="mb-3" outlined block @click='superHero()' color="primary" elevation="0" large rounded>
+                <v-btn class="mb-3" outlined block @click='superHero()' color="primary" elevation="0" large >
                     Korean
                 </v-btn>
             </div>
@@ -98,11 +98,10 @@
 <style lang="scss" scoped>
 
     .market-item {
-        margin-top: 10px;
-        background-color: #343434;
+        background-color: #1B1B23;
         border-radius: 10px;
-        margin-left: 10px;
-        margin-right: 10px;
+        /*margin-left: 15px;*/
+        /*margin-right: 15px;*/
         padding-top: 10px;
         padding-bottom: 10px;
         border: 0 solid #000000
@@ -125,7 +124,7 @@
         display: inline-block;
         height: 40px;
         float: left;
-        border-radius: 10px 30px 30px 10px;
+        border-radius: 10px 0px 10px 0px;
         text-align: center;
         line-height: 40px;
         padding-left: 10px;
@@ -167,9 +166,9 @@
     }
 
     .icon {
-        width: 20px;
+        width: 18px;
         fill: #ffffff;
-        height: 20px;
+        height: 18px;
     }
 
 
@@ -196,55 +195,9 @@
         margin-top: 15px;
     }
 
-    .carousel-item {
-        /*border-radius: 12px;*/
-
-
-    }
-
 
     .market-item:hover {
-        background-color: #2a2a2a;
-    }
-
-    .el-carousel__item h3 {
-        color: #475669;
-        font-size: 18px;
-        opacity: 0.75;
-        /*line-height: 200px;*/
-        margin: 0;
-    }
-
-    .el-carousel__item:nth-child(2n) {
-        background-color: #99a9bf;
-    }
-
-    .el-carousel__item:nth-child(2n+1) {
-        background-color: #d3dce6;
-    }
-
-
-    .outer-container, .content {
-        width: 614px;
-
-        height: calc(100vh);
-    }
-
-    .outer-container {
-        position: relative;
-        overflow: hidden;
-    }
-
-    .inner-container {
-        position: absolute;
-        left: 0;
-        overflow-x: hidden;
-        overflow-y: scroll;
-    }
-
-    /* for Chrome */
-    .inner-container::-webkit-scrollbar {
-        display: none;
+        background-color: #22222a;
     }
 
 
@@ -288,7 +241,7 @@
         text-align: left;
         float: right;
         display: flex;
-        border: 1px solid #1E1E1E;
+        border: 1px solid rgba(255, 255, 255, 0.4);
         background: rgba(247, 41, 110, 0);
         height: 30px;
         border-radius: 5px;
@@ -298,12 +251,12 @@
 
     .item-footer-time-group-left-group {
         background: rgb(49, 91, 247);
-        height: 26px;
+        height: 24px;
         margin: 2px;
         line-height: 26px;
         color: #ffffff;
         border-radius: 3px;
-        display: inline
+        display: flex;
     }
 
     .item-footer-time-group-left-group-icon {
@@ -313,11 +266,11 @@
     }
 
     .item-footer-time-group-left-group-text {
-        font-size: 14px;
+        font-size: 12px;
         display: inline;
         padding-left: 2px;
         padding-right: 10px;
-        height: 26px
+        height: 24px
     }
 
     .item-footer-time-group-right-group {
@@ -327,21 +280,22 @@
         line-height: 26px;
         color: #ffffff;
         border-radius: 3px;
-        display: inline
+        display: flex;
     }
 
     .item-footer-time-group-right-group-text {
-        font-size: 14px;
+        font-size: 12px;
         display: inline;
         padding-left: 5px;
         padding-right: 0;
-        height: 26px
+        height: 24px
     }
 
     .item-footer-time-group-right-group-icon {
         display: inline-block;
         margin: 3px 10px 3px 5px;
         float: right;
+
         fill: #F7296E;
         border-radius: 50px
     }

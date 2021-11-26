@@ -1,22 +1,23 @@
 <template>
 
     <v-app id="inspire">
-        <v-main class="black">
+        <v-main class="background">
             <div style="width: 1200px;margin: 0 auto;">
-                <div class="pa-0  " style="width: 300px;position: fixed;top:0">
-                    <v-sheet min-height="100vh" class="black">
+                <div class="pa-0  " style="width: 260px;position: fixed;top:0">
+                    <v-sheet class="card mt-5 pb-16 rounded-lg">
                         <navigation></navigation>
                     </v-sheet>
                 </div>
 
-                <div style="width: 600px;margin-left: 300px">
-                    <v-sheet min-height="100vh" class="grey darken-4">
+                <div style="width: 600px;margin-left: 280px">
+                    <v-sheet class="background">
                         <router-view></router-view>
                     </v-sheet>
                 </div>
 
-                <div class="pa-0  " style="width: 300px; position:fixed;float: right;top: 0;left: 50%;margin-left:300px;">
-                    <v-sheet min-height="100vh" class="black">
+                <div class="pa-0  "
+                     style="width: 300px; position:fixed;float: right;top: 0;left: 50%;margin-left:300px;">
+                    <v-sheet class="card mt-5 pb-16 rounded-lg" >
                         <wallet></wallet>
                     </v-sheet>
                 </div>
@@ -45,7 +46,7 @@
 
 
 <style lang="scss" scoped>
-    html, body{
+    html, body {
         background-color: black;
     }
 </style>

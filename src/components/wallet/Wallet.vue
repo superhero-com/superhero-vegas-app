@@ -1,22 +1,19 @@
 <template>
     <div class="wallet">
-        <div>
-<!--            <Search></Search>-->
-        </div>
+
         <component :is="this.$store.state.walletPage"></component>
     </div>
 </template>
 
 
 <script>
-    import Search from "./Search";
     import WalletSelect from "./WalletSelect";
     import WalletMnemonicLogin from "./WalletMnemonicLogin";
     import WalletMnemonicCreate from "./WalletMnemonicCreate";
     import WalletAccount from "./WalletAccount";
 
     export default {
-        components: {WalletSelect, WalletMnemonicLogin, WalletMnemonicCreate,WalletAccount, Search},
+        components: {WalletSelect, WalletMnemonicLogin, WalletMnemonicCreate,WalletAccount},
         name: 'Wallet',
         props: {
             msg: String

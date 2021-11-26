@@ -1,24 +1,26 @@
 <template>
     <div class="private">
 
-        <Title title="Private"></Title>
+                <p class=".text-xl-h4 text-h5 mt-5">Private forecasts have publisher public results.</p>
+<!--        <div class="header mt-5">-->
+<!--            <span class="header-content">Private forecasts have publisher public results!</span>-->
+<!--        </div>-->
 
-        <div class="header">
-            <span class="header-content">Private guessing. Since the guessing game may be divided into multiple countries with different languages and guessing scenes in each country, this function allows users to play with their friends and enter the domain name Aens to access the guessing game initiated by the user. The user initiated is not controlled by the prophet, and the user controls the results, the user initiated commission will be part of the dealer, please note!</span>
-        </div>
 
-
-        <div style="width: 90%;margin:15px auto;">
+        <v-card class="card mb-5 pb-5 mt-5" rounded="lg">
+            <v-card-title class="text-h6">
+                Private Market
+            </v-card-title>
             <div style="text-align: center">
                 <v-text-field
-                        class=""
-                        style="height:40px;"
-                        label="Enter the publisher address or .Chain domain name"
+                        class="ml-5 mr-5"
+                        placeholder="Enter the publisher address or .Chain domain name"
                         outlined
+                        hide-details="auto"
                 ></v-text-field>
 
                 <router-link to='/mark_detail'>
-                    <v-btn @click='superHero()' class="mt-10" large dense color="primary" rounded>
+                    <v-btn @click='superHero()' class="mt-5"  large dense color="primary" rounded>
                         <v-icon left>
                             mdi-magnify
                         </v-icon>
@@ -27,6 +29,11 @@
                 </router-link>
 
             </div>
+
+
+        </v-card>
+
+        <div style="width: 90%;margin:15px auto;">
 
         </div>
 
@@ -50,11 +57,10 @@
 </template>
 
 <script>
-    import Title from "../components/Title";
 
     export default {
         name: 'PrivatePage',
-        components: {Title},
+        components: {},
         props: {
             msg: String
         }
@@ -63,25 +69,7 @@
 
 <style scoped>
 
-    .divider {
-        padding: 0px;
-        margin: 0px;
-    }
 
-    input {
-        outline-style: none;
-        border: 1px solid #ccc;
-        border-radius: 30px;
-        background-color: rgba(49, 91, 247, 0);
-        padding-top: 10px;
-        padding-bottom: 10px;
-        padding-left: 15px;
-        padding-right: 15px;
-        color: white;
-        font-size: 14px;
-        width: 70%;
-        font-family: "Microsoft soft";
-    }
 
     .private {
         color: #FFFFFF;
@@ -90,15 +78,13 @@
     .header {
         text-align: left;
         margin-top: 10px;
-        padding-left: 12px;
         color: #babac0;
-        padding-bottom: 10px
     }
 
     .header-content {
-        line-height: 24px;
         font-weight: 500;
-        font-size: 16px
+        font-size: 16px;
+        color: white;
     }
 
     .add-market-content {

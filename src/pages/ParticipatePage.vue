@@ -1,6 +1,6 @@
 <template>
     <div>
-        <Title title="Participate"></Title>
+                <p class=".text-xl-h4 text-h5 mt-5">My Participate.</p>
         <v-tabs fixed-tabs background-color="black" class="black">
             <v-tab  @change="change('ONGOING')">
                 Ongoing
@@ -23,9 +23,8 @@
     import ParticipateOngoing from "../components/participate/ParticipateOngoing";
     import ParticipateFailure from "../components/participate/ParticipateFailure";
     import ParticipateWinning from "../components/participate/ParticipateWinning";
-    import Title from "../components/Title";
     export default {
-        components: {Title, ParticipateOngoing,ParticipateFailure,ParticipateWinning},
+        components: { ParticipateOngoing,ParticipateFailure,ParticipateWinning},
         name: 'ParticipatePage',
         props: {
             msg: String

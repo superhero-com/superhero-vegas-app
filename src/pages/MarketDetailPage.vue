@@ -1,19 +1,16 @@
 <template>
     <div>
-        <Title is_back="true" title="Market Detail"></Title>
-        <router-link to='/mark_detail'>
+        <p class=".text-xl-h4 text-h5 mt-5">Start making predictions.</p>
             <MarketItem is_market="true"></MarketItem>
-        </router-link>
     </div>
 </template>
 
 <script>
 
     import MarketItem from "../components/MarketItem";
-    import Title from "../components/Title";
     export default {
         name: 'MarketDetailPage',
-        components: {Title, MarketItem},
+        components: { MarketItem},
         props: {
             msg: String
         },
