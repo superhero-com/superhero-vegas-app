@@ -1,7 +1,7 @@
 <template>
     <div class="pa-0 ">
         <div class="logo">
-            <img style="width: 70%" src="../assets/icons/nav_logo.jpg" alt=""/>
+            <svg-icon class="ml-5 mr-5" name="icon_logo" alt=""/>
         </div>
         <ul class="pa-0">
             <li v-for="(item,index) in nva_list" :key="index">

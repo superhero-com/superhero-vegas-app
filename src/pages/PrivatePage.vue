@@ -13,7 +13,7 @@
             </v-card-title>
             <div style="text-align: center">
                 <v-text-field
-                        class="ml-5 mr-5"
+                        class="ml-5 mr-5 rounded-lg"
                         placeholder="Enter the publisher address or .Chain domain name"
                         outlined
                         hide-details="auto"
