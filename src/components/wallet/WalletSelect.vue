@@ -1,22 +1,19 @@
 <template>
     <div class="wallet-select">
-        <div class="pt-16">
-            <img width="80%" src="../../assets/icons/wallet_logo.jpg"
-                 alt="">
-        </div>
-        <div class="mt-6">
-            <span class="mt-16 white--text">The wallet is not currently connected</span>
-        </div>
-        <div class="mt-6">
+        <div class="pt-6">
             <v-btn @click='walletCreated()'
                    color="primary"
                    elevation="2"
                    :loading="connectLoading"
                    :disabled="connectLoading"
-                   large
+                   small
                    rounded>{{address}}
             </v-btn>
-            <br/>
+        </div>
+        <div class="mt-6">
+            <span class="mt-16 white--text">The wallet is not currently connected</span>
+        </div>
+        <div class="mt-6">
 
             <v-dialog
                     v-model="dialog"
@@ -84,14 +81,14 @@
                 dialog: false,
                 connectLoading: false,
                 spendLoading: false,
-                address: "Connect",
+                address: "Connect to a Wallet",
                 hash: "",
                 balance: "",
                 walletName: "",
             }
         },
         mounted: function () {
-            this.walletCreated();
+            // this.walletCreated();
         },
         methods: {
             mnemonic: function () {

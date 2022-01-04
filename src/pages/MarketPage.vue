@@ -14,7 +14,9 @@
 <!--           -->
 
 <!--        </v-card>-->
-
+        <div>
+            <img style="width: 100%" src="../assets/icons/header_market.png" alt="">
+        </div>
         <router-link to='/mark_detail'>
             <MarketItem></MarketItem>
         </router-link>

@@ -17,9 +17,9 @@
 
                 <div class="pa-0  "
                      style="width: 300px; position:fixed;float: right;top: 0;left: 50%;margin-left:300px;">
-                    <v-sheet class="card mt-5 pb-16 rounded-lg" >
-                        <wallet></wallet>
-                    </v-sheet>
+                    <wallet></wallet>
+<!--                    <v-sheet class="card mt-5 pb-16 rounded-lg" >-->
+
                 </div>
             </div>
         </v-main>
