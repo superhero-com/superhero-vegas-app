@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@aeternity/aepp-sdk@^9.0.1":
-  version "9.0.1"
-  resolved "https://registry.yarnpkg.com/@aeternity/aepp-sdk/-/aepp-sdk-9.0.1.tgz#99f51be78e5df4a1971ab5fe9a04bf7c89cbe6a7"
-  integrity sha512-LfLH25/5S23aSV35qRJGoFMAuHO/Ti7q/bOKxcx+ItflZeui9ow3/bnRkQjmvJopf8T82kP/C+F1sT7LKL1Fzg==
+"@aeternity/aepp-sdk@^8.2.0":
+  version "8.2.1"
+  resolved "https://registry.yarnpkg.com/@aeternity/aepp-sdk/-/aepp-sdk-8.2.1.tgz#62f02d62cc20613d5cada68972bc7b1fe950021d"
+  integrity sha512-6rh9t3Esfpp9F9l5snyjKoJH0we/PtfsB8PafCeofapEgvBfIJAnrnwQ+KPNTHWBETURe8Ewfvgvgt9bhmiTxg==
   dependencies:
     "@aeternity/bip39" "^0.1.0"
     "@aeternity/json-bigint" "^0.3.1"
@@ -21,7 +21,6 @@
     cross-fetch "^3.1.4"
     crypto-browserify "^3.12.0"
     ed2curve "^0.3.0"
-    events "^3.3.0"
     joi-browser "^13.4.0"
     libsodium-wrappers-sumo "0.7.9"
     path-browserify "^1.0.1"
@@ -1409,22 +1408,10 @@
   dependencies:
     "@vue/cli-shared-utils" "^4.5.13"
 
-"@vue/cli-plugin-router@~4.5.0":
-  version "4.5.15"
-  resolved "https://registry.npmmirror.com/@vue/cli-plugin-router/download/@vue/cli-plugin-router-4.5.15.tgz?cache=0&sync_timestamp=1637121138678&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2F%40vue%2Fcli-plugin-router%2Fdownload%2F%40vue%2Fcli-plugin-router-4.5.15.tgz#1e75c8c89df42c694f143b9f1028de3cf5d61e1e"
-  integrity sha1-HnXIyJ30LGlPFDufECjePPXWHh4=
-  dependencies:
-    "@vue/cli-shared-utils" "^4.5.15"
-
 "@vue/cli-plugin-vuex@^4.5.13":
   version "4.5.13"
   resolved "https://registry.nlark.com/@vue/cli-plugin-vuex/download/@vue/cli-plugin-vuex-4.5.13.tgz#98646d8bc1e69cf6c6a6cba2fed3eace0356c360"
   integrity sha1-mGRti8HmnPbGpsui/tPqzgNWw2A=
-
-"@vue/cli-plugin-vuex@~4.5.0":
-  version "4.5.15"
-  resolved "https://registry.npmmirror.com/@vue/cli-plugin-vuex/download/@vue/cli-plugin-vuex-4.5.15.tgz#466c1f02777d02fef53a9bb49a36cc3a3bcfec4e"
-  integrity sha1-RmwfAnd9Av71Opu0mjbMOjvP7E4=
 
 "@vue/cli-service@~4.5.0":
   version "4.5.13"
@@ -1493,24 +1480,6 @@
   version "4.5.13"
   resolved "https://registry.nlark.com/@vue/cli-shared-utils/download/@vue/cli-shared-utils-4.5.13.tgz?cache=0&sync_timestamp=1623215875135&other_urls=https%3A%2F%2Fregistry.nlark.com%2F%40vue%2Fcli-shared-utils%2Fdownload%2F%40vue%2Fcli-shared-utils-4.5.13.tgz#acd40f31b4790f1634292bdaa5fca95dc1e0ff50"
   integrity sha1-rNQPMbR5DxY0KSvapfypXcHg/1A=
-  dependencies:
-    "@hapi/joi" "^15.0.1"
-    chalk "^2.4.2"
-    execa "^1.0.0"
-    launch-editor "^2.2.1"
-    lru-cache "^5.1.1"
-    node-ipc "^9.1.1"
-    open "^6.3.0"
-    ora "^3.4.0"
-    read-pkg "^5.1.1"
-    request "^2.88.2"
-    semver "^6.1.0"
-    strip-ansi "^6.0.0"
-
-"@vue/cli-shared-utils@^4.5.15":
-  version "4.5.15"
-  resolved "https://registry.npmmirror.com/@vue/cli-shared-utils/download/@vue/cli-shared-utils-4.5.15.tgz?cache=0&sync_timestamp=1637121137255&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2F%40vue%2Fcli-shared-utils%2Fdownload%2F%40vue%2Fcli-shared-utils-4.5.15.tgz#dba3858165dbe3465755f256a4890e69084532d6"
-  integrity sha1-26OFgWXb40ZXVfJWpIkOaQhFMtY=
   dependencies:
     "@hapi/joi" "^15.0.1"
     chalk "^2.4.2"
@@ -4083,7 +4052,7 @@ eventemitter3@^4.0.0:
   resolved "https://registry.npm.taobao.org/eventemitter3/download/eventemitter3-4.0.7.tgz#2de9b68f6528d5644ef5c59526a1b4a07306169f"
   integrity sha1-Lem2j2Uo1WRO9cWVJqG0oHMGFp8=
 
-events@^3.0.0, events@^3.3.0:
+events@^3.0.0:
   version "3.3.0"
   resolved "https://registry.yarnpkg.com/events/-/events-3.3.0.tgz#31a95ad0a924e2d2c419a813aeb2c4e878ea7400"
   integrity sha512-mQw+2fkQbALzQ7V0MY0IqdnXNOeTtP4r0lN9z7AAawCXgqea7bDii20AYrIBrFd/Hx0M2Ocz6S111CaFkUcb0Q==
