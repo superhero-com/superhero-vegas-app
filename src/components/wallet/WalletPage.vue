@@ -120,7 +120,7 @@
 <script>
     import {BrowserWindowMessageConnection, Node, RpcAepp, WalletDetector} from '@aeternity/aepp-sdk/'
 
-    const MAIN_NET_NODE_INTERNAL_URL = 'https://node.aechina.io';
+    const MAIN_NET_NODE_INTERNAL_URL = 'https://node.aeasy.io';
     const COMPILER_URL = 'https://compiler.aeasy.io';
 
     const gradients = [
@@ -231,11 +231,9 @@
             },
 
             async walletCreated() {
-
-
                 this.connectLoading = true;
                 this.client = await RpcAepp({
-                    name: 'Simple Aepp',
+                    name: 'Vegas Aepp',
                     nodes: [
                         {name: 'ae_mainnet', instance: await Node({url: MAIN_NET_NODE_INTERNAL_URL})}
                     ],
@@ -245,9 +243,6 @@
                     },
                     onAddressChange: async (addresses) => {
                         console.log(addresses);
-                        // this.pub = await this.client.address();
-                        // this.balance = await this.client.balance(this.pub).catch(e => '0');
-                        // this.addressResponse = await errorAsField(this.client.address())
                     },
                     onDisconnect: () => {
                         this.resetState();

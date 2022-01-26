@@ -30,7 +30,7 @@
 <script>
 
     import Navigation from "./components/Navigation";
-    import Wallet from "./components/wallet/Wallet";
+    import Wallet from "./components/wallet/Extension";
 
     export default {
         name: 'App',

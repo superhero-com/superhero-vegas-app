@@ -7,13 +7,10 @@
 
 
 <script>
-    import WalletSelect from "./WalletSelect";
-    import WalletMnemonicLogin from "./WalletMnemonicLogin";
-    import WalletMnemonicCreate from "./WalletMnemonicCreate";
-    import WalletAccount from "./WalletAccount";
+    import WalletSelect from "./WalletPage";
 
     export default {
-        components: {WalletSelect, WalletMnemonicLogin, WalletMnemonicCreate,WalletAccount},
+        components: {WalletSelect},
         name: 'Wallet',
         props: {
             msg: String
