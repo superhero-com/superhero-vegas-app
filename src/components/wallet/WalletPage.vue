@@ -13,7 +13,6 @@
             <span
                     v-if="isLogin"
                     class="ml-2"
-
             >
                 {{address}}
             </span>
@@ -30,8 +29,6 @@
         </div>
 
         <div class="mt-1 d-flex align-center">
-
-
             <div class="card  rounded-lg justify-center pa-3" style="width: 175px">
                 <div class="d-flex align-center justify-center">
                     <img style="width: 30px" src="../../assets/icons/right_ae_logo.png" alt="">
@@ -171,12 +168,6 @@
             // this.walletCreated();
         },
         methods: {
-            mnemonic: function () {
-                this.$store.commit('walletPage', "WalletMnemonicLogin");
-                console.log(this.$store.state.walletPage)
-            },
-
-
             async spend() {
                 this.spendLoading = true;
                 let spendResponse = await this.client.spend(
