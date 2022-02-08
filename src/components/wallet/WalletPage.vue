@@ -11,14 +11,14 @@
             </v-btn>
 
             <span
-                    v-if="isLogin"
+                    v-if="this.$store.state.isLogin"
                     class="ml-2"
             >
                 {{address}}
             </span>
 
             <v-btn
-                    v-if="isLogin"
+                    v-if="this.$store.state.isLogin"
                     class="ml-2"
                     icon
                     x-small
@@ -40,13 +40,9 @@
                         :value="value"
                         :gradient="gradient"
                         :smooth="radius || false"
-                        :padding="padding"
                         :line-width="width"
-                        :stroke-linecap="lineCap"
                         :gradient-direction="gradientDirection"
                         :fill="fill"
-                        :type="type"
-                        :auto-line-width="autoLineWidth"
                         class="mt-4 mb-4"
                         auto-draw
                 ></v-sparkline>
@@ -75,9 +71,9 @@
             </div>
 
         </div>
-        <div class="card  rounded-lg d-flex align-start mr-3 overflow-hidden">
+        <div class="card  rounded-lg d-flex align-start mr-3 overflow-hidden" style=" position: relative">
 
-            <img style="width: 80px; position: absolute;margin-left: 0px;margin-top: 10px"
+            <img style="width: 80px; position: absolute;left: -10px;bottom: -10px"
                  src="../../assets/icons/right_vegas_bg.png" alt="">
 
             <div class="d-flex align-center  flex-column ml-auto  mt-3 mr-3">
@@ -92,9 +88,10 @@
 
             </div>
         </div>
-        <div class="card  rounded-lg d-flex align-start mr-3 overflow-hidden mt-3">
 
-            <img style="width: 80px; position: absolute;margin-left: 0px;margin-top: 10px"
+        <div class="card  rounded-lg d-flex align-start mr-3 overflow-hidden mt-3" style=" position: relative">
+
+            <img style="width: 80px; position: absolute;left: -10px;bottom: -10px"
                  src="../../assets/icons/right_ae_bg.png" alt="">
 
             <div class="d-flex align-center  flex-column ml-auto  mt-3 mr-3">
@@ -110,23 +107,19 @@
             </div>
         </div>
 
+
     </div>
 </template>
 
 
 <script>
-    import {BrowserWindowMessageConnection, Node, RpcAepp, WalletDetector} from '@aeternity/aepp-sdk/'
+    import {BrowserWindowMessageConnection, Node, RpcAepp, WalletDetector} from '@aeternity/aepp-sdk'
 
     const MAIN_NET_NODE_INTERNAL_URL = 'https://node.aeasy.io';
     const COMPILER_URL = 'https://compiler.aeasy.io';
 
     const gradients = [
-        ['#fff'],
-        ['#42b3f4'],
-        ['red', 'orange', 'yellow'],
-        ['purple', 'violet'],
-        ['#00c6ff', '#F0F', '#FF0'],
-        ['#f72047', '#ffd200', '#1feaea'],
+        ['#ffffff', '#ffffff'],
     ];
 
     export default {
@@ -138,81 +131,62 @@
 
         data() {
             return {
-
-
                 width: 5,
                 radius: 10,
-                padding: 0,
-                lineCap: 'round',
                 gradient: gradients[0],
                 value: [0, 2, 5, 9, 5, 10, 3, 5, 6, 0, 16, 8, 6, 9, 19],
                 gradientDirection: 'top',
                 gradients,
                 fill: false,
-                type: 'trend',
-                autoLineWidth: false,
 
-                client: null,
-                dialog: false,
+
                 connectLoading: false,
                 spendLoading: false,
-                isLogin: false,
                 btn_connect_data: "Connect to a Wallet",
-                address: "",
-                hash: "",
-                balance: "",
-                walletName: "",
             }
         },
         mounted: function () {
-            // this.walletCreated();
+            this.walletCreated();
         },
         methods: {
-            async spend() {
-                this.spendLoading = true;
-                let spendResponse = await this.client.spend(
-                    50000,
-                    "ak_QyFYYpgJ1vUGk1Lnk8d79WJEVcAtcfuNHqquuP2ADfxsL6yKx", {
-                        // fee: 1
-                        // onAccount: onAccount
-                    }
-                );
-                this.dialog = true;
-                this.spendLoading = false;
-                this.hash = spendResponse.hash;
-                console.log(spendResponse);
-            },
             async connectToWallet(wallet) {
-                console.log(wallet);
-                await this.client.connectToWallet(await wallet.getConnection());
-                this.accounts = await this.client.subscribeAddress('subscribe', 'connected');
+                //连接钱包
+                await this.$store.state.ae.connectToWallet(await wallet.getConnection());
+                await this.$store.state.ae.subscribeAddress('subscribe', 'connected');
 
-                let address = await this.client.address();
+                //获取连接钱包的地址，用于页面展示
+                let address = await this.$store.state.ae.address();
+
+                //获取地址到全局变量，其他页面使用,并设置登录状态为已登录
+                this.$store.state.address = await this.$store.state.ae.address();
+                this.$store.state.isLogin = true;
+
+
                 this.btn_connect_data = "Logout";
-
                 this.address = address.slice(0, 5) + "..." + address.slice(-4);
-                this.balance = await this.client.getBalance(address);
-                this.walletName = this.client.rpcClient.info.name;
                 this.connectLoading = false;
-                this.isLogin = true;
+
 
             },
             scanForWallets() {
+                //
                 const handleWallets = async function ({wallets, newWallet}) {
                     newWallet = newWallet || Object.values(wallets)[0];
                     this.detector.stopScan();
                     await this.connectToWallet(newWallet)
                 };
+                //获取浏览器消息连接器
                 const scannerConnection = BrowserWindowMessageConnection({
                     connectionInfo: {id: 'spy'}
                 });
+
                 this.detector = WalletDetector({connection: scannerConnection});
                 this.detector.scan(handleWallets.bind(this))
             },
 
             async walletConnect() {
-                if (this.isLogin) {
-                    this.isLogin = false;
+                if (this.$store.state.isLogin) {
+                    this.$store.state.isLogin = false;
                     this.connectLoading = false;
                     this.address = "";
                     this.btn_connect_data = "Connect to a Wallet";
@@ -221,29 +195,32 @@
                 }
             },
 
+
+            /**
+             * 连接钱包
+             */
             async walletCreated() {
+                //显示loading
                 this.connectLoading = true;
-                this.client = await RpcAepp({
+                //创建DApp钱包连接rpc后保存到全局变量中
+                this.$store.state.ae = await RpcAepp({
                     name: 'Vegas Aepp',
                     nodes: [
                         {name: 'ae_mainnet', instance: await Node({url: MAIN_NET_NODE_INTERNAL_URL})}
                     ],
                     compilerUrl: COMPILER_URL,
                     onNetworkChange: async (params) => {
-                        this.client.selectNode(params.networkId);
+                        this.$store.state.ae.selectNode(params.networkId);
                     },
                     onAddressChange: async (addresses) => {
                         console.log(addresses);
                     },
                     onDisconnect: () => {
                         this.resetState();
-                        alert('Disconnected')
                     }
                 });
-                this.height = await this.client.height();
-                console.log(this.height);
+                //搜索浏览器钱包
                 this.scanForWallets()
-
             },
         },
 

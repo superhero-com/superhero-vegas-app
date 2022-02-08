@@ -81,7 +81,7 @@
             />
         </div>
         <div class="mt-6 mb-14 d-flex justify-center">
-            <v-btn @click='goBlack()' color="primary" elevation="2" large rounded>Confirm Create</v-btn>
+            <v-btn @click='createMarket()' color="primary" elevation="2" large rounded>Confirm Create</v-btn>
         </div>
 
         </v-card>
@@ -106,8 +106,8 @@
         },
         methods: {
 
-            goBlack() {
-                this.$router.back();
+            createMarket() {
+                alert(this.$store.state.test);
                 // this.$router.go(-1)
             }
         }

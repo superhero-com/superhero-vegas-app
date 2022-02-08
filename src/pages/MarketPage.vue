@@ -18,7 +18,10 @@
             <img style="width: 100%" src="../assets/icons/header_market.png" alt="">
         </div>
         <router-link to='/mark_detail'>
-            <MarketItem></MarketItem>
+            <div class="mt-3">
+                <MarketItem></MarketItem>
+            </div>
+
         </router-link>
 
     </div>
