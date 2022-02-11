@@ -18,7 +18,6 @@
                 <div class="pa-0  "
                      style="width: 330px; position:fixed;float: right;top: 0;left: 50%;margin-left:310px;">
                     <wallet></wallet>
-<!--                    <v-sheet class="card mt-5 pb-16 rounded-lg" >-->
 
                 </div>
             </div>

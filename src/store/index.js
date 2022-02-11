@@ -8,7 +8,7 @@ export default new Vuex.Store({
         walletPage: "WalletSelect",
         participatePage: "ParticipateOngoing",
 
-        ae: null,
+        aeInstance: null,
         isLogin: false,
         address: ''
     },

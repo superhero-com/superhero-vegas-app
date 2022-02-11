@@ -7,13 +7,6 @@
 
 
         <p class=".text-xl-h4 text-h5 mt-5">Welcome Back to AEVegas!</p>
-<!--        <v-card class="card mt-5 mb-5 pb-5" rounded="lg">-->
-<!--            <v-card-title class="text-h6">-->
-<!--                Public Market-->
-<!--            </v-card-title>-->
-<!--           -->
-
-<!--        </v-card>-->
         <div>
             <img style="width: 100%" src="../assets/icons/header_market.png" alt="">
         </div>
@@ -21,6 +14,7 @@
             <div class="mt-3">
                 <MarketItem></MarketItem>
             </div>
+
 
         </router-link>
 

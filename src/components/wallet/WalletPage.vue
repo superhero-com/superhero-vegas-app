@@ -146,19 +146,19 @@
             }
         },
         mounted: function () {
-            this.walletCreated();
+            // this.walletCreated();
         },
         methods: {
             async connectToWallet(wallet) {
                 //连接钱包
-                await this.$store.state.ae.connectToWallet(await wallet.getConnection());
-                await this.$store.state.ae.subscribeAddress('subscribe', 'connected');
+                await this.$store.state.aeInstance.connectToWallet(await wallet.getConnection());
+                await this.$store.state.aeInstance.subscribeAddress('subscribe', 'connected');
 
                 //获取连接钱包的地址，用于页面展示
-                let address = await this.$store.state.ae.address();
+                let address = await this.$store.state.aeInstance.address();
 
                 //获取地址到全局变量，其他页面使用,并设置登录状态为已登录
-                this.$store.state.address = await this.$store.state.ae.address();
+                this.$store.state.address = await this.$store.state.aeInstance.address();
                 this.$store.state.isLogin = true;
 
 
@@ -203,14 +203,14 @@
                 //显示loading
                 this.connectLoading = true;
                 //创建DApp钱包连接rpc后保存到全局变量中
-                this.$store.state.ae = await RpcAepp({
+                this.$store.state.aeInstance = await RpcAepp({
                     name: 'Vegas Aepp',
                     nodes: [
                         {name: 'ae_mainnet', instance: await Node({url: MAIN_NET_NODE_INTERNAL_URL})}
                     ],
                     compilerUrl: COMPILER_URL,
                     onNetworkChange: async (params) => {
-                        this.$store.state.ae.selectNode(params.networkId);
+                        this.$store.state.aeInstance.selectNode(params.networkId);
                     },
                     onAddressChange: async (addresses) => {
                         console.log(addresses);
