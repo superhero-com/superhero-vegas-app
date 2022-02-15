@@ -1,0 +1,403 @@
+{
+  "encoded_aci": {
+    "contract": {
+      "event": {
+        "variant": [{
+          "AddMarket": ["address", "hash", "int"]
+        }, {
+          "SubmitAnswer": ["address", "hash", "int"]
+        }, {
+          "ReceiveReward": ["address", "int", "int"]
+        }, {
+          "ContractBalance": ["int"]
+        }]
+      },
+      "functions": [{
+        "arguments": [{
+          "name": "config",
+          "type": "VegasMarketContact.config"
+        }],
+        "name": "init",
+        "payable": false,
+        "returns": "VegasMarketContact.state",
+        "stateful": true
+      }, {
+        "arguments": [{
+          "name": "content",
+          "type": "string"
+        }, {
+          "name": "source_url",
+          "type": "string"
+        }, {
+          "name": "min_amount",
+          "type": "int"
+        }, {
+          "name": "over_time",
+          "type": "int"
+        }, {
+          "name": "answers",
+          "type": {
+            "list": ["VegasMarketContact.answer"]
+          }
+        }],
+        "name": "add_market",
+        "payable": false,
+        "returns": "VegasMarketContact.market",
+        "stateful": true
+      }, {
+        "arguments": [{
+          "name": "market_address",
+          "type": "address"
+        }, {
+          "name": "market_id",
+          "type": {
+            "bytes": 32
+          }
+        }, {
+          "name": "answer_index",
+          "type": "int"
+        }],
+        "name": "submit_answer",
+        "payable": true,
+        "returns": "bool",
+        "stateful": true
+      }, {
+        "arguments": [{
+          "name": "market_address",
+          "type": "address"
+        }, {
+          "name": "market_id",
+          "type": {
+            "bytes": 32
+          }
+        }],
+        "name": "update_market_progress_to_wait",
+        "payable": false,
+        "returns": "bool",
+        "stateful": true
+      }, {
+        "arguments": [{
+          "name": "market_address",
+          "type": "address"
+        }, {
+          "name": "market_id",
+          "type": {
+            "bytes": 32
+          }
+        }, {
+          "name": "market_index",
+          "type": "int"
+        }],
+        "name": "provide_answer",
+        "payable": false,
+        "returns": "bool",
+        "stateful": true
+      }, {
+        "arguments": [{
+          "name": "market_address",
+          "type": "address"
+        }, {
+          "name": "market_id",
+          "type": {
+            "bytes": 32
+          }
+        }],
+        "name": "update_market_progress_to_over",
+        "payable": false,
+        "returns": "bool",
+        "stateful": true
+      }, {
+        "arguments": [{
+          "name": "market_address",
+          "type": "address"
+        }, {
+          "name": "market_id",
+          "type": {
+            "bytes": 32
+          }
+        }, {
+          "name": "result_index",
+          "type": "int"
+        }],
+        "name": "private_update_market_progress_to_over",
+        "payable": false,
+        "returns": "bool",
+        "stateful": true
+      }, {
+        "arguments": [{
+          "name": "market_address",
+          "type": "address"
+        }, {
+          "name": "market_id",
+          "type": {
+            "bytes": 32
+          }
+        }],
+        "name": "receive_reward",
+        "payable": false,
+        "returns": "int",
+        "stateful": true
+      }, {
+        "arguments": [{
+          "name": "market_id",
+          "type": {
+            "bytes": 32
+          }
+        }],
+        "name": "get_oracle_market_provide_count",
+        "payable": false,
+        "returns": "int",
+        "stateful": false
+      }, {
+        "arguments": [{
+          "name": "account",
+          "type": "address"
+        }, {
+          "name": "name",
+          "type": "string"
+        }],
+        "name": "add_aggregator_user",
+        "payable": false,
+        "returns": "bool",
+        "stateful": true
+      }, {
+        "arguments": [{
+          "name": "market_address",
+          "type": "address"
+        }, {
+          "name": "market_id",
+          "type": {
+            "bytes": 32
+          }
+        }],
+        "name": "get_market",
+        "payable": false,
+        "returns": "VegasMarketContact.market",
+        "stateful": false
+      }, {
+        "arguments": [{
+          "name": "market_address",
+          "type": "address"
+        }, {
+          "name": "market_id",
+          "type": {
+            "bytes": 32
+          }
+        }],
+        "name": "is_user_markets_receive_record",
+        "payable": false,
+        "returns": "bool",
+        "stateful": false
+      }, {
+        "arguments": [{
+          "name": "market_address",
+          "type": "address"
+        }, {
+          "name": "market_id",
+          "type": {
+            "bytes": 32
+          }
+        }],
+        "name": "is_user_markets_record",
+        "payable": false,
+        "returns": "bool",
+        "stateful": false
+      }, {
+        "arguments": [{
+          "name": "market_address",
+          "type": "address"
+        }, {
+          "name": "market_id",
+          "type": {
+            "bytes": 32
+          }
+        }],
+        "name": "get_user_markets_record",
+        "payable": false,
+        "returns": "int",
+        "stateful": false
+      }, {
+        "arguments": [{
+          "name": "market_id",
+          "type": {
+            "bytes": 32
+          }
+        }],
+        "name": "is_oracle_market_record",
+        "payable": false,
+        "returns": "bool",
+        "stateful": false
+      }, {
+        "arguments": [{
+          "name": "x#1",
+          "type": {
+            "list": ["'a"]
+          }
+        }],
+        "name": "most_of",
+        "payable": false,
+        "returns": "'a",
+        "stateful": false
+      }, {
+        "arguments": [],
+        "name": "get_state",
+        "payable": false,
+        "returns": "VegasMarketContact.state",
+        "stateful": false
+      }],
+      "kind": "contract_main",
+      "name": "VegasMarketContact",
+      "payable": true,
+      "state": {
+        "record": [{
+          "name": "markets",
+          "type": {
+            "map": ["address", {
+              "map": ["hash", "VegasMarketContact.market"]
+            }]
+          }
+        }, {
+          "name": "user_markets_record",
+          "type": {
+            "map": ["address", {
+              "map": ["hash", {
+                "map": ["address", "int"]
+              }]
+            }]
+          }
+        }, {
+          "name": "user_markets_receive_record",
+          "type": {
+            "map": ["address", {
+              "map": ["hash", {
+                "map": ["address", "int"]
+              }]
+            }]
+          }
+        }, {
+          "name": "oracle_market",
+          "type": {
+            "map": ["hash", {
+              "list": ["int"]
+            }]
+          }
+        }, {
+          "name": "oracle_market_count",
+          "type": {
+            "map": ["hash", "int"]
+          }
+        }, {
+          "name": "oracle_market_record",
+          "type": {
+            "map": ["hash", {
+              "map": ["address", "int"]
+            }]
+          }
+        }, {
+          "name": "owner",
+          "type": "address"
+        }, {
+          "name": "aggregator_user",
+          "type": {
+            "map": ["address", "string"]
+          }
+        }, {
+          "name": "config",
+          "type": "VegasMarketContact.config"
+        }]
+      },
+      "type_defs": [{
+        "name": "config",
+        "typedef": {
+          "record": [{
+            "name": "oracle_trigger_count",
+            "type": "int"
+          }, {
+            "name": "market_min_time",
+            "type": "int"
+          }, {
+            "name": "market_max_time",
+            "type": "int"
+          }]
+        },
+        "vars": []
+      }, {
+        "name": "market",
+        "typedef": {
+          "record": [{
+            "name": "market_id",
+            "type": "hash"
+          }, {
+            "name": "owner",
+            "type": "address"
+          }, {
+            "name": "content",
+            "type": "string"
+          }, {
+            "name": "source_url",
+            "type": "string"
+          }, {
+            "name": "answers",
+            "type": {
+              "list": ["VegasMarketContact.answer"]
+            }
+          }, {
+            "name": "create_height",
+            "type": "int"
+          }, {
+            "name": "create_time",
+            "type": "int"
+          }, {
+            "name": "over_time",
+            "type": "int"
+          }, {
+            "name": "min_amount",
+            "type": "int"
+          }, {
+            "name": "total_amount",
+            "type": "int"
+          }, {
+            "name": "result",
+            "type": "int"
+          }, {
+            "name": "progress",
+            "type": "int"
+          }, {
+            "name": "market_type",
+            "type": "int"
+          }]
+        },
+        "vars": []
+      }, {
+        "name": "answer",
+        "typedef": {
+          "record": [{
+            "name": "content",
+            "type": "string"
+          }, {
+            "name": "count",
+            "type": "int"
+          }]
+        },
+        "vars": []
+      }]
+    }
+  },
+  "external_encoded_aci": [{
+    "namespace": {
+      "name": "ListInternal",
+      "type_defs": []
+    }
+  }, {
+    "namespace": {
+      "name": "List",
+      "type_defs": []
+    }
+  }, {
+    "namespace": {
+      "name": "String",
+      "type_defs": []
+    }
+  }],
+  "interface": "\n\n\npayable main contract VegasMarketContact =\n  record state = {markets : map(address, map(hash, VegasMarketContact.market)),user_markets_record : map(address, map(hash, map(address, int))),user_markets_receive_record : map(address, map(hash, map(address, int))),oracle_market : map(hash, list(int)),oracle_market_count : map(hash, int),oracle_market_record : map(hash, map(address, int)),owner : address,aggregator_user : map(address, string),config : VegasMarketContact.config}\n  datatype event = AddMarket(address, hash, int) | SubmitAnswer(address, hash, int) | ReceiveReward(address, int, int) | ContractBalance(int)\n  record config = {oracle_trigger_count : int,market_min_time : int,market_max_time : int}\n  record market = {market_id : hash,owner : address,content : string,source_url : string,answers : list(VegasMarketContact.answer),create_height : int,create_time : int,over_time : int,min_amount : int,total_amount : int,result : int,progress : int,market_type : int}\n  record answer = {content : string,count : int}\n  stateful entrypoint init : (VegasMarketContact.config) => VegasMarketContact.state\n  stateful entrypoint add_market : (string, string, int, int, list(VegasMarketContact.answer)) => VegasMarketContact.market\n  payable stateful entrypoint submit_answer : (address, bytes(32), int) => bool\n  stateful entrypoint update_market_progress_to_wait : (address, bytes(32)) => bool\n  stateful entrypoint provide_answer : (address, bytes(32), int) => bool\n  stateful entrypoint update_market_progress_to_over : (address, bytes(32)) => bool\n  stateful entrypoint private_update_market_progress_to_over : (address, bytes(32), int) => bool\n  stateful entrypoint receive_reward : (address, bytes(32)) => int\n  entrypoint get_oracle_market_provide_count : (bytes(32)) => int\n  stateful entrypoint add_aggregator_user : (address, string) => bool\n  entrypoint get_market : (address, bytes(32)) => VegasMarketContact.market\n  entrypoint is_user_markets_receive_record : (address, bytes(32)) => bool\n  entrypoint is_user_markets_record : (address, bytes(32)) => bool\n  entrypoint get_user_markets_record : (address, bytes(32)) => int\n  entrypoint is_oracle_market_record : (bytes(32)) => bool\n  entrypoint most_of : (list('a)) => 'a\n  entrypoint get_state : () => VegasMarketContact.state\n"
+}
