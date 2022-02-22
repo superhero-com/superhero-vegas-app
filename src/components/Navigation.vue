@@ -5,14 +5,15 @@
         </div>
         <ul class="pa-0">
             <li v-for="(item,index) in nva_list" :key="index">
-                <router-link :to='item.page'>
+
+
+                <router-link :to='item.page' >
                     <a class='item' href="#">
                         <div class="line"></div>
                         <svg-icon class="icon" :name='item.icon'></svg-icon>
                         <span class="text">{{ item.text }} </span>
                     </a>
                 </router-link>
-
             </li>
         </ul>
 

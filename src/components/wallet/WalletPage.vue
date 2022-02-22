@@ -114,7 +114,6 @@
 
 <script>
 import {BrowserWindowMessageConnection, Node, RpcAepp, WalletDetector} from '@aeternity/aepp-sdk'
-import VegasMarketContract from "@/contracts/VegasMarketContract";
 
 const MAIN_NET_NODE_INTERNAL_URL = 'https://node.aeasy.io';
 const COMPILER_URL = 'https://compiler.aeasy.io';
@@ -148,7 +147,8 @@ export default {
     }
   },
   mounted: function () {
-    // this.walletCreated();
+    this.walletCreated();
+
   },
   methods: {
     async connectToWallet(wallet) {
@@ -163,11 +163,7 @@ export default {
       this.$store.state.address = await this.$store.state.aeInstance.address();
       this.$store.state.isLogin = true;
 
-
-      let contract = await this.$store.state.aeInstance.getContractInstance(VegasMarketContract, {contractAddress: "ct_bM6qsr3fv5qtn43zXAPofrhQumubhcG6xSm5s9A97LPpgTZrq"});
-      const result = await contract.methods.get_market_public(this.$store.state.address);
-      console.log(JSON.stringify(result.decodedResult));
-      console.log(this.$store.state.address);
+      this.$bus.emit('load');
 
       this.btn_connect_data = "Logout";
       this.address = address.slice(0, 5) + "..." + address.slice(-4);

@@ -8,6 +8,10 @@ import SvgIcon from './components/SvgIcon.vue'
 import vuetify from './plugins/vuetify'
 import './assets/styles/reset.css'
 
+import VueBus from 'vue-bus';
+
+
+
 
 Vue.config.productionTip = true;
 
@@ -16,6 +20,8 @@ Vue.component('svg-icon', SvgIcon);
 
 //use Vuex Store
 Vue.use(Vuex);
+//use Vuex VueBus
+Vue.use(VueBus);
 
 
 new Vue({

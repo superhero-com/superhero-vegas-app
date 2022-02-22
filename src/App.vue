@@ -11,7 +11,9 @@
 
                 <div style="width: 630px;margin-left: 260px">
                     <v-sheet class="background">
+                      <keep-alive>
                         <router-view></router-view>
+                      </keep-alive>
                     </v-sheet>
                 </div>
 

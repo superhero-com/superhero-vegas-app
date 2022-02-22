@@ -17,7 +17,7 @@ export default new Router({
             component: MarketPage
         },
         {
-            path: '/mark_detail',
+            path: '/market_detail',
             name: 'MarketDetailPage',
             component: MarketDetailPage
         },
