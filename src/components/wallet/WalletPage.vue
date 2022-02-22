@@ -164,6 +164,7 @@ export default {
       this.$store.state.isLogin = true;
 
       this.$bus.emit('load');
+      this.$bus.emit('load_market_detail');
 
       this.btn_connect_data = "Logout";
       this.address = address.slice(0, 5) + "..." + address.slice(-4);

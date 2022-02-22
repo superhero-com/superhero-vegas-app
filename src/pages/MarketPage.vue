@@ -44,10 +44,10 @@ export default {
     }
   },
   computed: {},
-  mounted: async function () {
+  mounted: function () {
     this.$bus.on('load', this.load);
     console.log("load ready");
-
+    this.load();
   },
   beforeDestroy() {
     this.$bus.off('load', this.load);
@@ -56,6 +56,7 @@ export default {
 
   methods: {
     async load() {
+      if(this.$store.state.aeInstance == null)return;
       let contract = await this.$store.state.aeInstance.getContractInstance(VegasMarketContract, {contractAddress: "ct_qucrR9M8is4ZYZPHEzUJGKvdDLsmRp6hcJZEFcFeGY6tkhSf9"});
       const result = await contract.methods.get_market_public(this.$store.state.address);
       this.rows = result.decodedResult;

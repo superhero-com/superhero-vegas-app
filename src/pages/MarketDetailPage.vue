@@ -1,86 +1,87 @@
 <template>
   <div>
     <p class=".text-xl-h4 text-h5 mt-5">Start making predictions.</p>
-    <div class="market-item">
-      <p>姓名:{{ model }}</p>
-      <div class="item-header">
-        <div class="item-header-id">
-          <span>#1</span>
+
+    <div class="d-flex justify-center" v-if="is_loading_answer">
+      <v-progress-circular
+          :size="40"
+          color="primary"
+          indeterminate
+      ></v-progress-circular>
+    </div>
+
+    <div v-show="!is_loading_answer">
+      <div class="market-item">
+        <div class="item-header">
+          <div class="item-header-id">
+            <span>#1</span>
+          </div>
+          <div class="item-header-time">
+            <span>EndTime :111</span>
+          </div>
+          <v-tooltip bottom>
+            <template v-slot:activator="{ on, attrs }">
+              <div v-bind="attrs"
+                   v-on="on" class="item-header-type">
+                <svg-icon class="item-header-type-icon" name='icon_hint'></svg-icon>
+                <span>Manual</span>
+              </div>
+
+
+            </template>
+            <span>The forecast results are controlled by the publisher. Please pay attention to the risks</span>
+          </v-tooltip>
+
         </div>
-        <div class="item-header-time">
-          <span>EndTime : {{ model.over_time }}</span>
+
+        <div class="item-content-text">
+          <span>222</span>
         </div>
-        <v-tooltip bottom>
-          <template v-slot:activator="{ on, attrs }">
-            <div v-bind="attrs"
-                 v-on="on" class="item-header-type">
-              <svg-icon class="item-header-type-icon" name='icon_hint'></svg-icon>
-              <span>Manual</span>
+
+
+        <div v-show="is_user_markets_record" class="flex-column justify-center ml-15 mr-15">
+          <v-progress-linear :value="china" height="40" class="mb-3 " color="deep-purple accent-4">
+            <strong>China 33%</strong>
+          </v-progress-linear>
+          <v-progress-linear :value="korean" height="40" class="mb-3">
+            <strong>Korean 80% ✔</strong>
+          </v-progress-linear>
+        </div>
+        <div v-show="!is_user_markets_record" class="flex-column justify-center ml-15 mr-15">
+          <v-btn class="mb-3" block @click='superHero()' color="primary" elevation="0" large>
+            China
+          </v-btn>
+          <v-btn class="mb-3" outlined block @click='superHero()' color="primary" elevation="0" large>
+            Korean
+          </v-btn>
+        </div>
+        <div class="item-content-source">
+          <span class="item-content-source-title">Data source：</span>
+          <a href="#" class="card-item-content" style="color:#f7296e">
+            333
+          </a>
+        </div>
+        <div class="item-footer">
+          <div class="item-footer-pledge">
+            <span class="item-content-source-title">Total pledge：</span>
+            <span class="card-item-content" style="color: #9D9D9D;"> 444 (AE)</span>
+          </div>
+          <div class="item-footer-time-group">
+            <div class="item-footer-time-group-left-group">
+              <svg-icon class="icon item-footer-time-group-left-group-icon" name='icon_dice'></svg-icon>
+              <span class="item-footer-time-group-left-group-text">Start Prediction</span>
             </div>
-
-
-          </template>
-          <span>The forecast results are controlled by the publisher. Please pay attention to the risks</span>
-        </v-tooltip>
-
-      </div>
-
-      <div class="item-content-text">
-        <span>{{ model.content }}</span>
-      </div>
-
-
-      <div v-show="is_market">
-        <div class="d-flex justify-center" v-show="is_loading_answer">
-          <v-progress-circular
-              :size="50"
-              color="primary"
-              indeterminate
-          ></v-progress-circular>
-        </div>
-        <div v-show="!is_loading_answer">
-          <div v-show="is_user_markets_record" class="flex-column justify-center ml-15 mr-15">
-            <v-progress-linear :value="china" height="40" class="mb-3 " color="deep-purple accent-4">
-              <strong>China 33%</strong>
-            </v-progress-linear>
-            <v-progress-linear :value="korean" height="40" class="mb-3">
-              <strong>Korean 80% ✔</strong>
-            </v-progress-linear>
-          </div>
-          <div v-show="!is_user_markets_record" class="flex-column justify-center ml-15 mr-15">
-            <v-btn class="mb-3" block @click='superHero()' color="primary" elevation="0" large>
-              China
-            </v-btn>
-            <v-btn class="mb-3" outlined block @click='superHero()' color="primary" elevation="0" large>
-              Korean
-            </v-btn>
+            <div class="item-footer-time-group-right-group">
+              <span class="item-footer-time-group-right-group-text">555 AE/At a time</span>
+              <svg-icon class="icon item-footer-time-group-right-group-icon" name='icon_ae'></svg-icon>
+            </div>
           </div>
         </div>
       </div>
-      <div class="item-content-source">
-        <span class="item-content-source-title">Data source：</span>
-        <a href="#" class="card-item-content" style="color:#f7296e">
-          {{ model.source_url }}
-        </a>
-      </div>
-      <div class="item-footer">
-        <div class="item-footer-pledge">
-          <span class="item-content-source-title">Total pledge：</span>
-          <span class="card-item-content" style="color: #9D9D9D;"> {{ toAe(model.total_amount) }} (AE)</span>
-        </div>
-        <div class="item-footer-time-group">
-          <div class="item-footer-time-group-left-group">
-            <svg-icon class="icon item-footer-time-group-left-group-icon" name='icon_dice'></svg-icon>
-            <span class="item-footer-time-group-left-group-text">Start Prediction</span>
-          </div>
-          <div class="item-footer-time-group-right-group">
-            <span class="item-footer-time-group-right-group-text">{{ toAe(model.min_amount) }} AE/At a time</span>
-            <svg-icon class="icon item-footer-time-group-right-group-icon" name='icon_ae'></svg-icon>
-          </div>
-        </div>
-      </div>
+
     </div>
   </div>
+
 </template>
 
 <script>
@@ -99,23 +100,37 @@ export default {
       korean: 80,
       is_loading_answer: true,
       is_user_markets_record: false,
+      model: null
     }
   },
 
   mounted: function () {
-    console.log(this.$route.query.market_id);
-    this.isUserMarketsRecord(this.model);
-
+    this.$bus.on('load', this.load);
+    this.load();
   },
 
+  beforeDestroy() {
+    this.$bus.off('load', this.load);
+  },
   methods: {
-    async isUserMarketsRecord(model) {
+    async load() {
+      console.log(this.is_loading_answer);
+      if (this.$store.state.aeInstance == null) return;
+
+      let owner = this.$route.query.owner;
+      let market_id = this.$route.query.market_id;
+      console.log("owner:" + owner);
+      console.log("market_id:" + market_id);
       let contract = await this.$store.state.aeInstance.getContractInstance(VegasMarketContract, {contractAddress: "ct_qucrR9M8is4ZYZPHEzUJGKvdDLsmRp6hcJZEFcFeGY6tkhSf9"});
-      const result = await contract.methods.is_user_markets_record(model.owner, model.market_id);
-      console.log(result.decodedResult);
+
+      const getMarketData = await contract.methods.get_market(owner, market_id);
+      const isUserMarketsRecordData = await contract.methods.is_user_markets_record(owner, market_id);
+      this.model = getMarketData.decodedResult;
+      this.is_user_markets_record = isUserMarketsRecordData.decodedResult;
+      console.log(JSON.stringify(this.model));
       this.is_loading_answer = false;
-      this.is_user_markets_record = result.decodedResult;
-      return result;
+
+      console.log(this.is_loading_answer);
     },
     toAe(amount) {
       return amount;
