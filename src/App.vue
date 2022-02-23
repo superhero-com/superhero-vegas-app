@@ -12,8 +12,14 @@
                 <div style="width: 630px;margin-left: 260px">
                     <v-sheet class="background">
                       <keep-alive>
-                        <router-view></router-view>
+                        <router-view v-if="$route.meta.keepAlive">
+                          <!-- 这里是会被缓存的视图组件，比如 Home！ -->
+                        </router-view>
                       </keep-alive>
+
+                      <router-view v-if="!$route.meta.keepAlive">
+                        <!-- 这里是不被缓存的视图组件，比如 Edit！ -->
+                      </router-view>
                     </v-sheet>
                 </div>
 

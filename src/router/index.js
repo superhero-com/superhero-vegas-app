@@ -14,7 +14,10 @@ export default new Router({
         {
             path: '/',
             name: 'MarketPage',
-            component: MarketPage
+            component: MarketPage,
+            meta: {
+                keepAlive: true // 需要被缓存
+            }
         },
         {
             path: '/market_detail',
@@ -24,12 +27,18 @@ export default new Router({
          {
             path: '/create_market',
             name: 'CreateMarketPage',
-            component: CreateMarketPage
+            component: CreateMarketPage,
+             meta: {
+                 keepAlive: true // 需要被缓存
+             }
         },
         {
             path: '/private',
             name: 'PrivatePage',
-            component: PrivatePage
+            component: PrivatePage,
+            meta: {
+                keepAlive: true // 需要被缓存
+            }
         },
         {
             path: '/participate',
@@ -39,12 +48,18 @@ export default new Router({
         {
             path: '/update',
             name: 'UpdatePage',
-            component: UpdatePage
+            component: UpdatePage,
+            meta: {
+                keepAlive: true // 需要被缓存
+            }
         },
         {
             path: '/about',
             name: 'AboutPage',
-            component: AboutPage
+            component: AboutPage,
+            meta: {
+                keepAlive: true // 需要被缓存
+            }
         }
     ]
 });

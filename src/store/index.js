@@ -10,11 +10,12 @@ export default new Vuex.Store({
         participatePage: "ParticipateOngoing",
 
         aeInstance: null,
+        veagsContract: null,
         isLogin: false,
         address: ''
     },
 
-    modules: {
+    result_datas: {
         marketPage: MarketPage,
     },
 

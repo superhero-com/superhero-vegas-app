@@ -114,6 +114,7 @@
 
 <script>
 import {BrowserWindowMessageConnection, Node, RpcAepp, WalletDetector} from '@aeternity/aepp-sdk'
+import VegasMarketContract from "@/contracts/VegasMarketContract";
 
 const MAIN_NET_NODE_INTERNAL_URL = 'https://node.aeasy.io';
 const COMPILER_URL = 'https://compiler.aeasy.io';
@@ -162,6 +163,9 @@ export default {
       //获取地址到全局变量，其他页面使用,并设置登录状态为已登录
       this.$store.state.address = await this.$store.state.aeInstance.address();
       this.$store.state.isLogin = true;
+      //获取vegas合约
+      this.$store.state.veagsContract = await this.$store.state.aeInstance.getContractInstance(VegasMarketContract, {contractAddress: "ct_qucrR9M8is4ZYZPHEzUJGKvdDLsmRp6hcJZEFcFeGY6tkhSf9"});
+
 
       this.$bus.emit('load');
       this.$bus.emit('load_market_detail');

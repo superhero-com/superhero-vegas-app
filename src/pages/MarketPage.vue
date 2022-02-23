@@ -10,15 +10,29 @@
     <div>
       <img style="width: 100%" src="../assets/icons/header_market.png" alt="">
     </div>
-    <div v-for="(item,index) in rows" :key="index">
 
-      <router-link :to="{path:'/market_detail', query: {owner:item[1].owner,market_id:item[1].market_id}}">
-        <div class="mt-3">
-          <MarketItem :is_market="false" :model="item[1]"></MarketItem>
-        </div>
-      </router-link>
+    <div class="d-flex justify-center" v-if="is_loading">
+      <v-progress-circular
+          :size="40"
+          class="mt-16"
+          color="primary"
+          indeterminate
+      ></v-progress-circular>
+    </div>
+
+    <div v-if="!is_loading">
+      <div v-for="(item,index) in rows" :key="index">
+
+        <router-link :to="{path:'/market_detail', query: {owner:item[1].owner,market_id:item[1].market_id}}">
+          <div class="mt-3">
+            <MarketItem :is_market="false" :model="item[1]"></MarketItem>
+          </div>
+        </router-link>
+
+      </div>
 
     </div>
+
 
   </div>
 
@@ -28,7 +42,6 @@
 <script>
 
 import MarketItem from "../components/MarketItem";
-import VegasMarketContract from "@/contracts/VegasMarketContract";
 
 export default {
   name: 'MarketPage',
@@ -38,7 +51,7 @@ export default {
   },
   data() {
     return {
-      loading: false,
+      is_loading: true,
       rows: [],
 
     }
@@ -56,10 +69,10 @@ export default {
 
   methods: {
     async load() {
-      if(this.$store.state.aeInstance == null)return;
-      let contract = await this.$store.state.aeInstance.getContractInstance(VegasMarketContract, {contractAddress: "ct_qucrR9M8is4ZYZPHEzUJGKvdDLsmRp6hcJZEFcFeGY6tkhSf9"});
-      const result = await contract.methods.get_market_public(this.$store.state.address);
+      if (this.$store.state.aeInstance == null) return;
+      const result = await this.$store.state.veagsContract.methods.get_market_public(this.$store.state.address);
       this.rows = result.decodedResult;
+      this.is_loading = false;
       console.log(JSON.stringify(result.decodedResult));
       console.log(this.$store.state.address);
     }
