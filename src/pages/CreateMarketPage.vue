@@ -212,6 +212,8 @@ export default {
   data() {
     return {
       date: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
+      // date: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
+      time: "00:00",
 
       snackbar: false,
       error_text: '',
@@ -220,7 +222,6 @@ export default {
       sourceUrl: '',
       minAmount: '',
 
-      time: null,
       modal: false,
       modal2: false,
       result_list: [{
@@ -249,7 +250,20 @@ export default {
       console.log("content:" + this.content);
       console.log("sourceUrl:" + this.sourceUrl);
       console.log("minAmount:" + this.minAmount);
+      console.log("date:" + this.date);
 
+
+
+      let overTime = Date.parse(this.date+" "+this.time);
+      console.log("oTime:" + overTime);
+
+      let currentTime = Math.round(new Date() / 1);
+      console.log("cTime:" + currentTime);
+
+      let dTime = ((overTime - currentTime)/1000);
+      console.log("dTime:" + dTime);
+      console.log("height:" + await this.$store.state.aeInstance.height());
+      // console.log(result.decodedResult);
       let results = [];
       for (let i = 0; i < this.result_list.length; i++) {
         if (this.result_list[i].model !== "") {
@@ -261,7 +275,13 @@ export default {
         console.log("result-" + i + ":" + results[i].content);
       }
 
-      // this.$router.go(-1)
+
+      // const result = await this.$store.state.veagsContract.methods.add_market(
+      //     this.content,
+      //     this.sourceUrl,
+      //     this.minAmount,
+      //     0,
+      //     results);
     },
 
     hasPlugin(name) {
