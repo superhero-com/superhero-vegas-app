@@ -164,7 +164,7 @@ export default {
       this.$store.state.address = await this.$store.state.aeInstance.address();
       this.$store.state.isLogin = true;
       //获取vegas合约
-      this.$store.state.veagsContract = await this.$store.state.aeInstance.getContractInstance(VegasMarketContract, {contractAddress: "ct_qucrR9M8is4ZYZPHEzUJGKvdDLsmRp6hcJZEFcFeGY6tkhSf9"});
+      this.$store.state.veagsContract = await this.$store.state.aeInstance.getContractInstance(VegasMarketContract, {contractAddress: "ct_2VHqTpP2FMT32TANv3NtUdtJub7YxJZeUNKcJozayL7RWBt786"});
 
 
       this.$bus.emit('load');

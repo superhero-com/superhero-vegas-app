@@ -1,7 +1,7 @@
 <template>
 
   <div class="market-item">
-    <p>姓名:{{model}}</p>
+<!--    <p>姓名:{{model}}</p>-->
     <div class="item-header">
       <div class="item-header-id">
         <span>#1</span>

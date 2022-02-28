@@ -45,7 +45,7 @@
           <v-icon dark>
             mdi-plus
           </v-icon>
-          Add a Result
+          Other Result
 
         </v-btn>
 
@@ -76,100 +76,29 @@
         />
       </div>
       <div class="ml-4 mr-4">
-        <div class="mt-4">How long do you think you can bet on this game from now on?</div>
-        <v-row
+        <div class="mt-4">Select the deadline for voting (from now on)</div>
+        <v-btn-toggle
             class="mt-4"
-            justify="space-around"
+            v-model="over_height"
+            color="primary "
+            borderless
+            mandatory
         >
-          <v-col
-              cols="12"
-              sm="4"
-          >
-            <v-dialog
-                ref="data_dialog"
-                v-model="modal"
-                :return-value.sync="date"
-                persistent
-                width="290px"
-            >
-              <template v-slot:activator="{ on, attrs }">
-                <v-text-field
-                    v-model="date"
-                    label="Picker in dialog"
-                    prepend-icon="mdi-calendar"
-                    readonly
-                    v-bind="attrs"
-                    v-on="on"
-                ></v-text-field>
-              </template>
-              <v-date-picker
-                  v-model="date"
-                  scrollable
-              >
-                <v-spacer></v-spacer>
-                <v-btn
-                    text
-                    color="primary"
-                    @click="modal = false"
-                >
-                  Cancel
-                </v-btn>
-                <v-btn
-                    text
-                    color="primary"
-                    @click="$refs.data_dialog.save(date)"
-                >
-                  OK
-                </v-btn>
-              </v-date-picker>
-            </v-dialog>
-          </v-col>
-          <v-col
-              cols="12"
-              sm="4"
-          >
-            <v-dialog
-                ref="time_dialog"
-                v-model="modal2"
-                :return-value.sync="time"
-                persistent
-                width="290px"
-            >
-              <template v-slot:activator="{ on, attrs }">
-                <v-text-field
-                    v-model="time"
-                    label="Picker in dialog"
-                    prepend-icon="mdi-clock-time-four-outline"
-                    readonly
-                    v-bind="attrs"
-                    v-on="on"
-                ></v-text-field>
-              </template>
-              <v-time-picker
-                  v-if="modal2"
-                  v-model="time"
-                  full-width
-              >
-                <v-spacer></v-spacer>
-                <v-btn
-                    text
-                    color="primary"
-                    @click="modal2 = false"
-                >
-                  Cancel
-                </v-btn>
-                <v-btn
-                    text
-                    color="primary"
-                    @click="$refs.time_dialog.save(time)"
-                >
-                  OK
-                </v-btn>
-              </v-time-picker>
-            </v-dialog>
-          </v-col>
-        </v-row>
+          <v-btn value="480">
+            ONE DAY
+          </v-btn>
+
+          <v-btn value="3360">
+            WEEK
+          </v-btn>
+
+          <v-btn value="14400">
+            MOON
+          </v-btn>
+
+        </v-btn-toggle>
       </div>
+
       <div class="mt-6 mb-14 d-flex justify-center">
         <v-btn @click='createMarket()' color="primary" elevation="2" large class="mt-4 rounded-lg">Confirm Create
         </v-btn>
@@ -211,19 +140,16 @@ export default {
   },
   data() {
     return {
-      date: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
-      // date: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
-      time: "00:00",
 
       snackbar: false,
       error_text: '',
+
+      over_height: 'one',
 
       content: '',
       sourceUrl: '',
       minAmount: '',
 
-      modal: false,
-      modal2: false,
       result_list: [{
         placeholder: 'China',
         model: ''
@@ -250,20 +176,9 @@ export default {
       console.log("content:" + this.content);
       console.log("sourceUrl:" + this.sourceUrl);
       console.log("minAmount:" + this.minAmount);
-      console.log("date:" + this.date);
+      console.log("over_height:" + this.over_height);
 
 
-
-      let overTime = Date.parse(this.date+" "+this.time);
-      console.log("oTime:" + overTime);
-
-      let currentTime = Math.round(new Date() / 1);
-      console.log("cTime:" + currentTime);
-
-      let dTime = ((overTime - currentTime)/1000);
-      console.log("dTime:" + dTime);
-      console.log("height:" + await this.$store.state.aeInstance.height());
-      // console.log(result.decodedResult);
       let results = [];
       for (let i = 0; i < this.result_list.length; i++) {
         if (this.result_list[i].model !== "") {
@@ -271,17 +186,36 @@ export default {
         }
       }
 
+      if (this.content === null) {
+        return;
+      }
+      if (this.sourceUrl === null) {
+        return;
+      }
+      if (this.minAmount === null) {
+        return;
+      }
+      if (this.over_height === null) {
+        return;
+      }
+
+      if (results.length < 2) {
+        return;
+      }
+
       for (let i = 0; i < results.length; i++) {
         console.log("result-" + i + ":" + results[i].content);
       }
 
+      let currentHeight = await this.$store.state.aeInstance.height();
+      const result = await this.$store.state.veagsContract.methods.add_market(
+          this.content,
+          this.sourceUrl,
+          this.minAmount,
+          Number(currentHeight )+Number(this.over_height),
+          results);
+      console.log(result.decodedResult);
 
-      // const result = await this.$store.state.veagsContract.methods.add_market(
-      //     this.content,
-      //     this.sourceUrl,
-      //     this.minAmount,
-      //     0,
-      //     results);
     },
 
     hasPlugin(name) {

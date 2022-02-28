@@ -65,9 +65,9 @@ payable contract VegasMarketContact =
         //触发预测完成的次数
         oracle_trigger_count : int,
         //预测最低的时间限制
-        market_min_time      : int,
+        market_min_height      : int,
         //预测最高的时间限制
-        market_max_time      : int,
+        market_max_height     : int,
          //交易记录最多缓存条数
         record_max_count     : int}
 
@@ -101,7 +101,7 @@ payable contract VegasMarketContact =
         //创建的时间
         create_time    : int,
         //结束的时间
-        over_time      : int,
+        over_height      : int,
         //最小投注数量
         min_amount     : int,
         //当前主题一共投注了多少
@@ -161,10 +161,10 @@ payable contract VegasMarketContact =
      */
     stateful entrypoint
         add_market : (string,string,int,int,list(answer)) => market
-        add_market (content,source_url,min_amount,over_time,answers) =
+        add_market (content,source_url,min_amount,over_height,answers) =
             //最低结束时间也要大于配置中的时间，比如大于当前时间1天和小于30天
-            require(over_time >= state.config.market_min_time, "OVER TIME MORE THAN MIN REQUIRED")
-            require(over_time =< state.config.market_max_time ,"OVER TIME MORE THAN MAX REQUIRED")
+            require((over_height - Chain.block_height) >= state.config.market_min_height, "OVER TIME MORE THAN MIN REQUIRED")
+            require((over_height - Chain.block_height) =< state.config.market_max_height ,"OVER TIME MORE THAN MAX REQUIRED")
             //生成预测ID
             let market_id = generate_market_id()
             //检测是否有重复的id
@@ -180,7 +180,7 @@ payable contract VegasMarketContact =
                 answers        = answers,
                 create_height  = Chain.block_height,
                 create_time    = Chain.timestamp,
-                over_time      = Chain.timestamp + over_time,
+                over_height    = over_height,
                 min_amount     = min_amount,
                 total_amount   = 0,
                 receive_amount = 0,
@@ -192,6 +192,7 @@ payable contract VegasMarketContact =
             put(state {markets[Call.caller = {}][market_id] = market})
             put(state {markets_start[Call.caller = {}][market_id] = market})
             market
+
 
 
     /**
@@ -206,7 +207,7 @@ payable contract VegasMarketContact =
             //获取预测
             let market = get_market(market_address,market_id)
             //如果预测结束时间小于当前时间，提示错误
-            // require(market.over_time > Chain.timestamp,"MARKET TIME OUT")
+            require(market.over_height > Chain.block_height,"MARKET TIME OUT")
             //如果当前支付数量小于预测规定的金额，提示错误
             require(Call.value == market.min_amount,"MARKET AMOUNT LOW OUT")
             //如果当前的进度不是 START状态，提示错误
@@ -259,7 +260,7 @@ payable contract VegasMarketContact =
             //获取当前预测
             let market = get_market(market_address,market_id)
             //如果没有到达预测的结束时间，提示错误
-            require(market.over_time < Chain.timestamp,"MARKET TIME NOT OUT")
+            require(market.over_height < Chain.block_height,"MARKET TIME NOT OUT")
             //如果如果状态不是需要预言机的结果，提示错误
             require(market.market_type  == 1 ,"MARKET TYPE ERROR")
             //如果进度 不是 START状态，提示错误
@@ -322,7 +323,7 @@ payable contract VegasMarketContact =
             //获取当前预测
             let market = get_market(market_address,market_id)
             //如果没有到达预测的结束时间，提示错误
-            require(market.over_time < Chain.timestamp,"MARKET TIME NOT OUT")
+            require(market.over_height < Chain.block_height,"MARKET TIME NOT OUT")
             //如果如果状态不是需要预言机的结果，提示错误
             require(market.market_type  == 1 ,"MARKET TYPE ERROR")
             //如果进度 不是 WAIT状态，提示错误
@@ -363,7 +364,7 @@ payable contract VegasMarketContact =
             //如果提供的结果大于了答案的总数，提示错误
             require(result_index < List.length(market.answers),"INDEX OUT ERROR")
             //如果没有到达预测的结束时间，提示错误
-            require(market.over_time < Chain.timestamp,"MARKET TIME NOT OUT")
+            require(market.over_height < Chain.block_height,"MARKET TIME NOT OUT")
             //如果如果状态不是需要预言机的结果，提示错误
             require(market.market_type  == 1 ,"MARKET TYPE ERROR")
             //如果进度 不是 START状态，提示错误
@@ -670,6 +671,7 @@ payable contract VegasMarketContact =
         get_state:()=>state
         get_state () =
             state
+
 
 
 

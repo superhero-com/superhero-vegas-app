@@ -3,13 +3,13 @@
                 <p class=".text-xl-h4 text-h5 mt-5">My Participate.</p>
         <v-tabs fixed-tabs background-color="black" class="black">
             <v-tab  @change="change('ONGOING')">
-                Ongoing
+              Created by me
             </v-tab>
             <v-tab @change="change('FAILURE')">
-                Failure
+              Wait result
             </v-tab>
             <v-tab @change="change('WINNING')">
-                Winning
+              Participate
             </v-tab>
 
         </v-tabs>

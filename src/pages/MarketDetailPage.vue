@@ -48,7 +48,7 @@
             </v-progress-linear>
           </div>
         </div>
-        <div v-show="is_user_markets_record" class="flex-column justify-center ml-15 mr-15">
+        <div v-show="!is_user_markets_record" class="flex-column justify-center ml-15 mr-15">
           <div v-for="(item,index) in model.answers" :key="index">
             <v-btn tile class="mb-3" block @click='showAlert(index)' color="primary accent-4" elevation="0" large>
               {{ item.content }}
@@ -93,8 +93,8 @@
         </v-card-title>
 
         <v-card-text>
-          The answer you're going to bet on is {{model.answers[select_index].content}}
-          Bets will cost you {{model.min_amount}} AE,After reaching the end time, you will receive the prize manually
+          The answer you're going to bet on is {{ model.answers[select_index].content }}
+          Bets will cost you {{ model.min_amount }} AE,After reaching the end time, you will receive the prize manually
           and will be limited to one bet per topic
         </v-card-text>
 
@@ -161,7 +161,7 @@ export default {
       snackbar: false,
       error_text: '',
 
-      select_index:0,
+      select_index: 0,
       is_loading: true,
       is_user_markets_record: false,
       model: null,
@@ -184,7 +184,7 @@ export default {
     getAnswersProportion(count) {
       return count / this.model.put_count * 100;
     },
-    showAlert(index){
+    showAlert(index) {
       this.select_index = index;
       this.agree_dialog = true;
 
@@ -196,11 +196,11 @@ export default {
         console.log(result);
         console.log(JSON.stringify(result.decodedEvents));
         await this.load();
-      }catch (e) {
+      } catch (e) {
         console.log(e.message);
         this.error_text = e.message;
         this.snackbar = true;
-      }finally {
+      } finally {
         this.agree_loading = false;
         this.agree_dialog = false;
       }
