@@ -1,13 +1,13 @@
 <template>
 
   <div class="market-item">
-<!--    <p>姓名:{{model}}</p>-->
+    <!--    <p>姓名:{{model}}</p>-->
     <div class="item-header">
-      <div class="item-header-id">
-        <span>#1</span>
-      </div>
+<!--      <div class="item-header-id">-->
+<!--        <span>#1</span>-->
+<!--      </div>-->
       <div class="item-header-time">
-        <span>EndTime : {{model.over_time}}</span>
+        <span>EndTime : {{ formatTime(model) }}</span>
       </div>
       <v-tooltip bottom>
         <template v-slot:activator="{ on, attrs }">
@@ -25,18 +25,18 @@
     </div>
 
     <div class="item-content-text">
-      <span>{{model.content}}</span>
+      <span>{{ model.content }}</span>
     </div>
     <div class="item-content-source">
       <span class="item-content-source-title">Data source：</span>
       <a href="#" class="card-item-content" style="color:#f7296e">
-        {{model.source_url}}
+        {{ model.source_url }}
       </a>
     </div>
     <div class="item-footer">
       <div class="item-footer-pledge">
         <span class="item-content-source-title">Total pledge：</span>
-        <span class="card-item-content" style="color: #9D9D9D;"> {{toAe(model.total_amount)}} (AE)</span>
+        <span class="card-item-content" style="color: #9D9D9D;"> {{ toAe(model.total_amount) }} (AE)</span>
       </div>
       <div class="item-footer-time-group">
         <div class="item-footer-time-group-left-group">
@@ -44,7 +44,7 @@
           <span class="item-footer-time-group-left-group-text">Start Prediction</span>
         </div>
         <div class="item-footer-time-group-right-group">
-          <span class="item-footer-time-group-right-group-text">{{toAe(model.min_amount)}} AE/At a time</span>
+          <span class="item-footer-time-group-right-group-text">{{ toAe(model.min_amount) }} AE/At a time</span>
           <svg-icon class="icon item-footer-time-group-right-group-icon" name='icon_ae'></svg-icon>
         </div>
       </div>
@@ -54,7 +54,8 @@
 <script>
 
 
-import VegasMarketContract from "@/contracts/VegasMarketContract";
+import {AmountFormatter} from '@aeternity/aepp-sdk/'
+import { formatDate } from "@/utils/date.js"
 
 export default {
 
@@ -68,7 +69,7 @@ export default {
     },
     model: {
       type: Object,
-      default () {
+      default() {
         return {}
       }
     }
@@ -77,20 +78,23 @@ export default {
     return {china: 33, korean: 80}
   },
   methods: {
-    async isPut(model) {
-      let contract = await this.$store.state.aeInstance.getContractInstance(VegasMarketContract, {contractAddress: "ct_qucrR9M8is4ZYZPHEzUJGKvdDLsmRp6hcJZEFcFeGY6tkhSf9"});
-      const result = await contract.methods.is_user_markets_record(model.owner,model.market_id);
-      console.log(result.decodedResult);
-      return result;
+
+    toAe(amount) {
+      return AmountFormatter.toAe(amount);
     },
-    toAe(amount){
-      return amount;
+    formatTime(market) {
+      let currentTime = Date.parse(new Date());
+      let endTimeTime = ((market.over_height - this.$store.state.blockHeight) * 1000 * 3 * 60) + currentTime;
+
+      return formatDate( new Date(endTimeTime), 'yyyy-MM-dd hh:mm:ss')
+      // return endTimeTime;
     },
     //
     sourceClock(url) {
       window.location.href = url;
       event.stopPropagation()
-    }
+    },
+
   }
 }
 </script>

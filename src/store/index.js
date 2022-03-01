@@ -11,6 +11,7 @@ export default new Vuex.Store({
 
         aeInstance: null,
         veagsContract: null,
+        blockHeight: 0,
         isLogin: false,
         address: ''
     },

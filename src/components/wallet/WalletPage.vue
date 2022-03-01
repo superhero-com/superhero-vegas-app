@@ -165,7 +165,8 @@ export default {
       this.$store.state.isLogin = true;
       //获取vegas合约
       this.$store.state.veagsContract = await this.$store.state.aeInstance.getContractInstance(VegasMarketContract, {contractAddress: "ct_2VHqTpP2FMT32TANv3NtUdtJub7YxJZeUNKcJozayL7RWBt786"});
-
+      //获取当前最新高度
+      this.$store.state.blockHeight = await this.$store.state.aeInstance.height();
 
       this.$bus.emit('load');
       this.$bus.emit('load_market_detail');

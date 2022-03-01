@@ -11,7 +11,7 @@
 
     export default {
         components: {},
-        name: 'ParticipateFailure',
+        name: 'ParticipateWait',
         props: {
             msg: String
         },

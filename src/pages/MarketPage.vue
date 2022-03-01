@@ -72,6 +72,9 @@ export default {
       if (this.$store.state.aeInstance == null) return;
       const result = await this.$store.state.veagsContract.methods.get_market_public(this.$store.state.address);
       this.rows = result.decodedResult;
+      this.rows .sort(function(a,b){
+        return a[1].create_time < b[1].create_time ? 1 : -1
+      });
       this.is_loading = false;
       console.log(JSON.stringify(result.decodedResult));
       console.log(this.$store.state.address);

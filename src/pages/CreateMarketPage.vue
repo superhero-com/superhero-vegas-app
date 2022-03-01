@@ -40,6 +40,7 @@
             rounded-lg
             large
             color="primary"
+
             @click='addResult()'
         >
           <v-icon dark>
@@ -100,7 +101,14 @@
       </div>
 
       <div class="mt-6 mb-14 d-flex justify-center">
-        <v-btn @click='createMarket()' color="primary" elevation="2" large class="mt-4 rounded-lg">Confirm Create
+        <v-btn @click='createMarket()'
+               :loading="createLoading"
+               :disabled="createLoading"
+               color="primary"
+               elevation="2"
+               large
+               class="mt-4 rounded-lg">
+          Confirm Create
         </v-btn>
       </div>
 
@@ -132,6 +140,9 @@
 
 <script>
 
+
+import {AmountFormatter} from '@aeternity/aepp-sdk/'
+
 export default {
   name: 'CreateMarketPage',
   components: {},
@@ -156,7 +167,9 @@ export default {
       }, {
         placeholder: 'U.S.A',
         model: ''
-      }]
+      }],
+
+      createLoading: false,
     }
   },
   methods: {
@@ -207,28 +220,23 @@ export default {
         console.log("result-" + i + ":" + results[i].content);
       }
 
+      this.createLoading = true;
+
       let currentHeight = await this.$store.state.aeInstance.height();
       const result = await this.$store.state.veagsContract.methods.add_market(
           this.content,
           this.sourceUrl,
-          this.minAmount,
-          Number(currentHeight )+Number(this.over_height),
+          AmountFormatter.toAettos(this.minAmount),
+          Number(currentHeight) + Number(this.over_height),
           results);
-      console.log(result.decodedResult);
+      let market = result.decodedResult;
+      this.createLoading = false;
+      //load home
+      this.$bus.emit('load');
+      await this.$router.push({path: '/market_detail', query: {owner: market.owner, market_id: market.market_id}})
+      console.log(market);
 
     },
-
-    hasPlugin(name) {
-      name = name.toLowerCase();
-      for (var i = 0; i < navigator.plugins.length; i++) {
-        console.log(navigator.plugins);
-        if (navigator.plugins [i].name.toLowerCase().indexOf(name) > -1) {
-
-          return true;
-        }
-      }
-      return false;
-    }
   }
 }
 </script>

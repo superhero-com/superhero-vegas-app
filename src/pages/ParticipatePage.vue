@@ -2,13 +2,13 @@
     <div>
                 <p class=".text-xl-h4 text-h5 mt-5">My Participate.</p>
         <v-tabs fixed-tabs background-color="black" class="black">
-            <v-tab  @change="change('ONGOING')">
+            <v-tab  @change="change('MY')">
               Created by me
             </v-tab>
-            <v-tab @change="change('FAILURE')">
+            <v-tab @change="change('WAIT')">
               Wait result
             </v-tab>
-            <v-tab @change="change('WINNING')">
+            <v-tab @change="change('RECORD')">
               Participate
             </v-tab>
 
@@ -20,9 +20,9 @@
 </template>
 
 <script>
-    import ParticipateOngoing from "../components/participate/ParticipateOngoing";
-    import ParticipateFailure from "../components/participate/ParticipateFailure";
-    import ParticipateWinning from "../components/participate/ParticipateWinning";
+    import ParticipateOngoing from "../components/participate/ParticipateMy";
+    import ParticipateFailure from "../components/participate/ParticipateWait";
+    import ParticipateWinning from "../components/participate/ParticipateRecord";
     export default {
         components: { ParticipateOngoing,ParticipateFailure,ParticipateWinning},
         name: 'ParticipatePage',
@@ -41,14 +41,14 @@
             },
             change: function (labelData) {
                 switch (labelData) {
-                    case "ONGOING":
-                        this.$store.commit('participatePage', "ParticipateOngoing");
+                    case "MY":
+                        this.$store.commit('participatePage', "ParticipateMy");
                         break;
-                    case "FAILURE":
-                        this.$store.commit('participatePage', "ParticipateFailure");
+                    case "WAIT":
+                        this.$store.commit('participatePage', "ParticipateWait");
                         break;
-                    case "WINNING":
-                        this.$store.commit('participatePage', "ParticipateWinning");
+                    case "RECORD":
+                        this.$store.commit('participatePage', "ParticipateRecord");
                         break;
                 }
             },

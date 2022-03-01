@@ -10,7 +10,7 @@
 
     export default {
         components: {},
-        name: 'ParticipateWinning',
+        name: 'ParticipateRecord',
         props: {
             msg: String
         },

@@ -94,7 +94,7 @@
 
         <v-card-text>
           The answer you're going to bet on is {{ model.answers[select_index].content }}
-          Bets will cost you {{ model.min_amount }} AE,After reaching the end time, you will receive the prize manually
+          Bets will cost you {{ toAe(model.min_amount) }} AE,After reaching the end time, you will receive the prize manually
           and will be limited to one bet per topic
         </v-card-text>
 
@@ -145,7 +145,7 @@
 </template>
 
 <script>
-
+import {AmountFormatter} from '@aeternity/aepp-sdk/'
 
 export default {
   name: 'MarketDetailPage',
@@ -179,7 +179,7 @@ export default {
   methods: {
 
     toAe(amount) {
-      return amount;
+      return AmountFormatter.toAe(amount);
     },
     getAnswersProportion(count) {
       return count / this.model.put_count * 100;
@@ -192,6 +192,16 @@ export default {
     async submitAnswer() {
       try {
         this.agree_loading = true;
+
+        let accountBalance = await this.$store.state.aeInstance.balance(this.$store.state.address);
+        if(accountBalance<=this.model.min_amount){
+          console.log(accountBalance);
+          this.error_text = "not sufficient funds";
+          this.snackbar = true;
+          return;
+        }
+
+
         const result = await this.$store.state.veagsContract.methods.submit_answer(this.model.owner, this.model.market_id, this.select_index, {amount: this.model.min_amount});
         console.log(result);
         console.log(JSON.stringify(result.decodedEvents));

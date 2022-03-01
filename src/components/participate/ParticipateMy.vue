@@ -11,7 +11,7 @@
 
     export default {
         components: {},
-        name: 'ParticipateOngoing',
+        name: 'ParticipateMy',
         props: {
             msg: String
         },
