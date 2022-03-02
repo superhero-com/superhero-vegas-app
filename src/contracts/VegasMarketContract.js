@@ -270,7 +270,7 @@ payable contract VegasMarketContact =
             put(state {markets[market_address][market_id].progress = 1})
 
             //删除进行中的预测，因为已经进入等待状态了
-            put(state {markets_start[market_address] = Map.delete(market_id,state.markets[market_address])})
+            put(state {markets_start[market_address] = Map.delete(market_id,state.markets_start[market_address])})
             //将预测添加进入等待结果的数据中
             put(state {markets_wait[market_address = {}][market_id] = state.markets[market_address][market_id]})
 
@@ -339,7 +339,7 @@ payable contract VegasMarketContact =
             put(state {markets[market_address][market_id].result = reward_num})
 
             //删除进行中的预测，因为已经进入等待状态了
-            put(state {markets_wait[market_address] = Map.delete(market_id,state.markets[market_address])})
+            put(state {markets_wait[market_address] = Map.delete(market_id,state.markets_wait[market_address])})
             //将预测添加进入等待结果的数据中
             put(state {markets_over[market_address = {}][market_id] = state.markets[market_address][market_id]})
 
@@ -668,9 +668,23 @@ payable contract VegasMarketContact =
                     most_of_(most, counts', xs)
 
     entrypoint
+        get_config:() => config
+        get_config () =
+            state.config
+    
+    entrypoint
         get_state:()=>state
         get_state () =
             state
+
+
+
+
+
+
+
+
+
 
 
 

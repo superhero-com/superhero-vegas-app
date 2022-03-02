@@ -43,7 +43,10 @@ export default new Router({
         {
             path: '/participate',
             name: 'ParticipatePage',
-            component: ParticipatePage
+            component: ParticipatePage,
+            meta: {
+                keepAlive: false // 需要被缓存
+            }
         },
         {
             path: '/update',

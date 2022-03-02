@@ -24,7 +24,10 @@
         methods: {
             toggleTab: function (tab) {
                 this.currentTab = tab; // tab 为当前触发标签页的组件名
-            }
+            },
+          async load() {
+            console.log("load ready3");
+          },
         }
     }
 </script>

@@ -85,6 +85,18 @@
             borderless
             mandatory
         >
+          <v-btn value="1">
+            1
+          </v-btn>
+
+          <v-btn value="3">
+            3
+          </v-btn>
+
+          <v-btn value="5">
+            5
+          </v-btn>
+
           <v-btn value="480">
             ONE DAY
           </v-btn>

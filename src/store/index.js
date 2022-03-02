@@ -1,23 +1,18 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import MarketPage from "@/pages/MarketPage";
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
     state: {
         walletPage: "WalletSelect",
-        participatePage: "ParticipateOngoing",
+        // participatePage: "ParticipateMy",
 
         aeInstance: null,
         veagsContract: null,
         blockHeight: 0,
         isLogin: false,
         address: ''
-    },
-
-    result_datas: {
-        marketPage: MarketPage,
     },
 
     mutations: {
