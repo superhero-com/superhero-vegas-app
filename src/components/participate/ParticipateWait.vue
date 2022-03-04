@@ -16,7 +16,7 @@
         <div v-if="!is_loading">
             <div v-for="(item,index) in marketsStart" :key="index">
 
-                <router-link :to="{path:'/market_detail', query: {owner:item[1].owner,market_id:item[1].market_id}}">
+                <router-link :to="{path:'/market_detail_wait', query: {owner:item[1].owner,market_id:item[1].market_id}}">
                     <div class="mt-3">
                         <MarketItem :is_market="false" :model="item[1]"></MarketItem>
                     </div>

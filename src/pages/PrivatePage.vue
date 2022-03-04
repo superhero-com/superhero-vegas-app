@@ -1,10 +1,10 @@
 <template>
     <div class="private">
 
-                <p class=".text-xl-h4 text-h5 mt-5">Private forecasts have publisher public results.</p>
-<!--        <div class="header mt-5">-->
-<!--            <span class="header-content">Private forecasts have publisher public results!</span>-->
-<!--        </div>-->
+        <p class=".text-xl-h4 text-h5 mt-5">Private forecasts have publisher public results.</p>
+        <!--        <div class="header mt-5">-->
+        <!--            <span class="header-content">Private forecasts have publisher public results!</span>-->
+        <!--        </div>-->
 
 
         <v-card class="card mb-5 pb-5 mt-5" rounded="lg">
@@ -20,7 +20,12 @@
                 ></v-text-field>
 
                 <router-link to='/mark_detail'>
-                    <v-btn @click='superHero()' class="mt-5"  large dense color="primary" rounded>
+                    <v-btn @click='superHero()'
+                           large
+                           dense
+                           color="primary"
+                           elevation="2"
+                           class="mt-4 rounded-lg">
                         <v-icon left>
                             mdi-magnify
                         </v-icon>
@@ -43,8 +48,8 @@
 
                 <div class="add-market-content">
                     <div style="margin-right: 10px">
-                        <div>Want to be a bookmaker?</div>
-                        <div>I also make predictions？</div>
+                        <div>Want your own market?</div>
+                        <div>I'm going to create one</div>
                     </div>
                     <div class="add-market-content-icon">
                         +
@@ -58,40 +63,53 @@
 
 <script>
 
-    export default {
-        name: 'PrivatePage',
-        components: {},
-        props: {
-            msg: String
-        }
+export default {
+    name: 'PrivatePage',
+    components: {},
+    props: {
+        msg: String
     }
+}
 </script>
 
 <style scoped>
 
 
+.private {
+    color: #FFFFFF;
+}
 
-    .private {
-        color: #FFFFFF;
-    }
+.header {
+    text-align: left;
+    margin-top: 10px;
+    color: #babac0;
+}
 
-    .header {
-        text-align: left;
-        margin-top: 10px;
-        color: #babac0;
-    }
+.header-content {
+    font-weight: 500;
+    font-size: 16px;
+    color: white;
+}
 
-    .header-content {
-        font-weight: 500;
-        font-size: 16px;
-        color: white;
-    }
+.add-market-content {
+    margin-top: 10px;
+    color: #F7296E;
+    border-radius: 10px;
+    line-height: 20px;
+    border: 1px solid #F7296E;
+    display: inline-flex;
+    padding: 2px 2px 2px 15px;
+    font-size: 14px
+}
 
-    .add-market-content {
-        margin-top:10px;color: #F7296E;border-radius: 30px;line-height: 20px; border:1px solid #F7296E;display: inline-flex;padding-left: 15px;padding-right: 2px;padding-top:2px;padding-bottom:2px;font-size: 14px
-    }
-
-    .add-market-content-icon {
-        width: 40px;height:40px;background: #F7296E;border-radius: 30px;float: right;color: #ffffff;text-align: center;line-height: 40px
-    }
+.add-market-content-icon {
+    width: 40px;
+    height: 40px;
+    background: #F7296E;
+    border-radius: 10px;
+    float: right;
+    color: #ffffff;
+    text-align: center;
+    line-height: 40px
+}
 </style>

@@ -7,6 +7,7 @@ import UpdatePage from "../pages/UpdatePage";
 import AboutPage from "../pages/AboutPage";
 import MarketDetailPage from "../pages/MarketDetailPage";
 import CreateMarketPage from "../pages/CreateMarketPage";
+import MarketWaitResultDetailPage from "@/pages/MarketWaitResultDetailPage";
 
 Vue.use(Router);
 export default new Router({
@@ -23,6 +24,11 @@ export default new Router({
             path: '/market_detail',
             name: 'MarketDetailPage',
             component: MarketDetailPage
+        },
+        {
+            path: '/market_detail_wait',
+            name: 'MarketWaitResultDetailPage',
+            component: MarketWaitResultDetailPage
         },
          {
             path: '/create_market',

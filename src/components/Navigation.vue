@@ -34,7 +34,7 @@
                 currentSelect: 0,
                 nva_list: [
                     {
-                        text: 'Market',
+                        text: 'Markets',
                         icon: 'nav_home',
                         page: '/',
                     },
@@ -44,9 +44,14 @@
                         page: '/private',
                     },
                     {
-                        text: 'Participate',
+                        text: 'Record',
                         icon: 'nav_my',
                         page: '/participate',
+                    },
+                    {
+                        text: 'Oracle',
+                        icon: 'nav_my',
+                        page: '/oracle_walt',
                     },
                     {
                         text: 'Update',
