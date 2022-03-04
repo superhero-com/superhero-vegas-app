@@ -2,13 +2,13 @@
   <div>
     <p class=".text-xl-h4 text-h5 mt-5">My Participate.</p>
     <v-tabs fixed-tabs background-color="black" class="black">
-      <v-tab @change="change('MY')">
+      <v-tab @change="change('ParticipateMy')">
         Created by me
       </v-tab>
-      <v-tab @change="change('WAIT')">
+      <v-tab @change="change('ParticipateWait')">
         Wait result
       </v-tab>
-      <v-tab @change="change('RECORD')">
+      <v-tab @change="change('ParticipateRecord')">
         Participate
       </v-tab>
 
@@ -36,23 +36,13 @@ export default {
     };
   },
   mounted: function () {
-    this.change("MY");
+    this.change("ParticipateMy");
   },
 
   methods: {
 
     change: function (labelData) {
-      switch (labelData) {
-        case "MY":
-          this.participatePage = "ParticipateMy";
-          break;
-        case "WAIT":
-          this.participatePage = "ParticipateWait";
-          break;
-        case "RECORD":
-          this.participatePage = "ParticipateRecord";
-          break;
-      }
+      this.participatePage = labelData;
       this.$nextTick(() => {
         this.$refs.child.load();
       })

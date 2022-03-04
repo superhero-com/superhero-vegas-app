@@ -10,7 +10,7 @@
     <div>
       <img style="width: 100%" src="../assets/icons/header_market.png" alt="">
     </div>
-    <div v-if="!is_loading" style="margin-top:100px;text-align: center;color: white">No up-to-date global market</div>
+    <div v-if="is_not_data" style="margin-top:100px;text-align: center;color: white">No up-to-date global market</div>
 
     <div class="d-flex justify-center" v-if="is_loading">
       <v-progress-circular
@@ -53,6 +53,7 @@ export default {
   data() {
     return {
       is_loading: true,
+      is_not_data:false,
       marketsStart: [],
 
     }
@@ -75,6 +76,7 @@ export default {
       let startResult = startResultDecode.decodedResult;
       console.log(JSON.stringify(startResult.decodedResult));
       if (startResult.lenght === 0) {
+        this.is_not_data = true;
         return;
       }
       this.marketsStart = startResult;
@@ -82,6 +84,7 @@ export default {
         return a[1].create_time < b[1].create_time ? 1 : -1
       });
       this.is_loading = false;
+      this.is_not_data = false;
     }
   }
 };

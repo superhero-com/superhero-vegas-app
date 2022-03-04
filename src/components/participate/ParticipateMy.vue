@@ -1,6 +1,6 @@
 <template>
   <div style="text-align: center;">
-    <div v-if="!is_loading" style="margin-top:200px;text-align: center;color: white">There are no ongoing topics that I initiated</div>
+    <div v-if="is_not_data" style="margin-top:200px;text-align: center;color: white">There are no ongoing topics that I initiated</div>
 
     <div class="d-flex justify-center" v-if="is_loading">
       <v-progress-circular
@@ -15,6 +15,7 @@
 
         <router-link :to="{path:'/market_detail', query: {owner:item[1].owner,market_id:item[1].market_id}}">
           <div class="mt-3">
+
             <MarketItem :is_market="false" :model="item[1]"></MarketItem>
           </div>
         </router-link>
@@ -43,6 +44,7 @@ export default {
   data() {
     return {
       is_loading: true,
+      is_not_data: false,
       marketsStart: [],
     }
   },
@@ -61,6 +63,7 @@ export default {
       let startResult = startResultDecode.decodedResult;
       console.log(JSON.stringify(startResult));
       if (startResult.lenght === 0) {
+        this.is_not_data = true;
         return;
       }
       this.marketsStart = startResult;
@@ -68,6 +71,7 @@ export default {
         return a[1].create_time < b[1].create_time ? 1 : -1
       });
       this.is_loading = false;
+      this.is_not_data = false;
     }
   }
 }

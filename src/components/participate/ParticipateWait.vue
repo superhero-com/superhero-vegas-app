@@ -1,6 +1,32 @@
 <template>
     <div style="text-align: center;">
-        <div style="margin-top:200px;text-align: center;color: white">No Failure Data</div>
+        <div v-if="is_not_data" style="margin-top:200px;text-align: center;color: white">There are no ongoing topics
+            that I
+            initiated
+        </div>
+
+        <div class="d-flex justify-center" v-if="is_loading">
+            <v-progress-circular
+                    :size="40"
+                    class="mt-16"
+                    color="primary"
+                    indeterminate
+            ></v-progress-circular>
+        </div>
+        <div v-if="!is_loading">
+            <div v-for="(item,index) in marketsStart" :key="index">
+
+                <router-link :to="{path:'/market_detail', query: {owner:item[1].owner,market_id:item[1].market_id}}">
+                    <div class="mt-3">
+                        <MarketItem :is_market="false" :model="item[1]"></MarketItem>
+                    </div>
+                </router-link>
+
+            </div>
+
+        </div>
+
+
     </div>
 
 
@@ -8,45 +34,65 @@
 
 
 <script>
+import MarketItem from "../../components/MarketItem";
 
-    export default {
-        components: {},
-        name: 'ParticipateWait',
-        props: {
-            msg: String
-        },
-        data() {
-            return {
-                currentTab: "ParticipateOngoing",
-                input: ''
+export default {
+    components: {MarketItem},
+    name: 'ParticipateWait',
+    props: {
+        msg: String,
+
+    },
+    data() {
+        return {
+            is_loading: true,
+            is_not_data: false,
+            marketsStart: [],
+        }
+    },
+    mounted: function () {
+        this.$bus.on('load', this.load);
+    },
+    beforeDestroy() {
+        this.$bus.off('load', this.load);
+    },
+
+    methods: {
+        async load() {
+            console.log("load ready1");
+            if (this.$store.state.aeInstance == null) return;
+            const startResultDecode = await this.$store.state.veagsContract.methods.get_markets_wait(this.$store.state.address);
+            let startResult = startResultDecode.decodedResult;
+            console.log(JSON.stringify(startResult));
+            if (startResult.lenght === 0) {
+                this.is_not_data = true;
+                return;
             }
-        },
-
-        methods: {
-            toggleTab: function (tab) {
-                this.currentTab = tab; // tab 为当前触发标签页的组件名
-            },
-          async load() {
-            console.log("load ready 2");
-          },
+            this.marketsStart = startResult;
+            this.marketsStart.sort(function (a, b) {
+                return a[1].create_time < b[1].create_time ? 1 : -1
+            });
+            this.is_loading = false;
+            this.is_not_data = false;
         }
     }
+}
 </script>
 
 <style lang="scss" scoped>
 
 
-    .search {
-        width: 306px;
-        height: 80px;
-        line-height: 80px;
-        text-align: center;
-    }
+.search {
+  width: 306px;
+  height: 80px;
+  line-height: 80px;
+  text-align: center;
+}
 
-    .input {
-        margin: 0 auto;
-        width: 255px;
-    }
+.input {
+  margin: 0 auto;
+  width: 255px;
+}
 
 
 </style>

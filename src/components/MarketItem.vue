@@ -2,10 +2,12 @@
 
   <div class="market-item">
     <!--    <p>姓名:{{model}}</p>-->
+      <p>{{model.market_id}}</p>
     <div class="item-header">
 <!--      <div class="item-header-id">-->
 <!--        <span>#1</span>-->
 <!--      </div>-->
+
       <div class="item-header-time">
         <span>EndTime : {{ formatTime(model) }}</span>
       </div>

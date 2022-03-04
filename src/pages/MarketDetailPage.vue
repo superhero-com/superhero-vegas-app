@@ -15,10 +15,10 @@
       <div class="market-item">
         <div class="item-header">
           <div class="item-header-id">
-            <span>#1</span>
+            <span>PROGRESS:{{ model.progress }}</span>
           </div>
           <div class="item-header-time">
-            <span>EndTime :{{ model.over_time }}</span>
+            <span>EndTime :{{ formatTime(model) }}</span>
           </div>
           <v-tooltip bottom>
             <template v-slot:activator="{ on, attrs }">
@@ -146,6 +146,7 @@
 
 <script>
 import {AmountFormatter} from '@aeternity/aepp-sdk/'
+import {formatDate} from "@/utils/date";
 
 export default {
   name: 'MarketDetailPage',
@@ -230,7 +231,13 @@ export default {
       console.log(JSON.stringify(this.model));
       this.is_loading = false;
     },
+      formatTime(market) {
+          let currentTime = Date.parse(new Date());
+          let endTimeTime = ((market.over_height - this.$store.state.blockHeight) * 1000 * 3 * 60) + currentTime;
 
+          return formatDate( new Date(endTimeTime), 'yyyy-MM-dd hh:mm:ss')
+          // return endTimeTime;
+      },
   }
 };
 </script>
