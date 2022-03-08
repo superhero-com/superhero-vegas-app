@@ -2,7 +2,7 @@
   <div>
     <p class=".text-xl-h4 text-h5 mt-5">My Participate.</p>
     <v-tabs fixed-tabs background-color="black" class="black">
-      <v-tab @change="change('ParticipateMy')">
+      <v-tab @change="change('ParticipateInProgress')">
         In Progress
       </v-tab>
 <!--      <v-tab @change="change('ParticipateWait')">-->
@@ -20,23 +20,22 @@
 </template>
 
 <script>
-import ParticipateMy from "../components/participate/ParticipateMy";
-import ParticipateWait from "../components/participate/ParticipateWait";
+import ParticipateInProgress from "../components/participate/ParticipateInProgress";
 import ParticipateRecord from "../components/participate/ParticipateRecord";
 
 export default {
-  components: {ParticipateMy, ParticipateWait, ParticipateRecord},
+  components: {ParticipateInProgress, ParticipateRecord},
   name: 'ParticipatePage',
   props: {
     msg: String
   },
   data() {
     return {
-      participatePage: 'ParticipateMy',
+      participatePage: 'ParticipateInProgress',
     };
   },
   mounted: function () {
-    this.change("ParticipateMy");
+    this.change("ParticipateInProgress");
   },
 
   methods: {

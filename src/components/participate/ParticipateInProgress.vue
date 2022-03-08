@@ -16,7 +16,7 @@
         <div v-if="!is_loading">
             <div v-for="(item,index) in marketsStart" :key="index">
 
-                <router-link :to="{path:'/market_detail_wait', query: {owner:item[1].owner,market_id:item[1].market_id}}">
+                <router-link :to="{path:'/market_detail', query: {owner:item[1].owner,market_id:item[1].market_id}}">
                     <div class="mt-3">
                         <MarketItem :is_market="false" :model="item[1]"></MarketItem>
                     </div>
@@ -38,7 +38,7 @@ import MarketItem from "../../components/MarketItem";
 
 export default {
     components: {MarketItem},
-    name: 'ParticipateWait',
+    name: 'ParticipateInProgress',
     props: {
         msg: String,
 
@@ -61,10 +61,11 @@ export default {
         async load() {
             console.log("load ready1");
             if (this.$store.state.aeInstance == null) return;
-            const startResultDecode = await this.$store.state.veagsContract.methods.get_markets_wait(this.$store.state.address);
+            const startResultDecode = await this.$store.state.veagsContract.methods.get_markets_start(this.$store.state.address);
             let startResult = startResultDecode.decodedResult;
             console.log(JSON.stringify(startResult));
-            if (startResult.lenght === 0) {
+            if (startResult.length === 0 ) {
+                this.is_loading = false;
                 this.is_not_data = true;
                 return;
             }

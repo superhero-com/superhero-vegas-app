@@ -50,7 +50,7 @@
                     },
                     {
                         text: 'Referee Review',
-                        icon: 'nav_my',
+                        icon: 'nav_review',
                         page: '/referee_view',
                     },
                     {

@@ -57,17 +57,29 @@ payable contract VegasMarketContact =
     //预言记录对象，用于存储用户竞猜后临时保存的记录，在页面展示
     record market_rocord = {
         //预言id sha256（地址+时间戳）
-        market_id      : hash,
+        market_id        : hash,
         //预测发布者地址
-        market_address : address}
+        owner            : address,
+        //内容
+        content          : string,
+        //投注了多少钱
+        amount           : int,
+        //选择的结果
+        put_result       : string,
+        //选择的结果
+        put_result_index : int,
+        //选择发生的时间
+        put_time         : int,
+        //选择发生的高度
+        put_height       : int}
 
     record config = {
         //触发预测完成的次数
         oracle_trigger_count : int,
         //预测最低的时间限制
-        market_min_height      : int,
+        market_min_height    : int,
         //预测最高的时间限制
-        market_max_height     : int,
+        market_max_height    : int,
          //交易记录最多缓存条数
         record_max_count     : int}
 
@@ -150,7 +162,6 @@ payable contract VegasMarketContact =
               aggregator_user             = {},
               config                      = config}
 
-
     /**
      * 发布一个预测，只有聚合器用户才可以发布 status=(0) 的预测
      * - content: 主题
@@ -232,7 +243,16 @@ payable contract VegasMarketContact =
             //更新进行中的预测为最新状态
             put(state {markets_start[market_address = {}][market_id] = state.markets[market_address][market_id]})
 
-            let market_rocord = {market_id = market_id,market_address = market_address}
+            let market_rocord = {
+                market_id        = market_id,
+                owner            = market_address,
+                content          = market.content,
+                amount           = Call.value,
+                put_result       = new_answer.content,
+                put_result_index = answer_index,
+                put_time         = Chain.timestamp,
+                put_height       = Chain.block_height}
+
 
             let records = get_market_records(Call.caller)
 
@@ -614,7 +634,7 @@ payable contract VegasMarketContact =
     /**
      * 获取交易记录数据
      */
-    function
+    entrypoint
         get_market_records : (address) => list(market_rocord)
         get_market_records(addr) =
             switch(Map.lookup(addr, state.markets_record))
@@ -654,19 +674,52 @@ payable contract VegasMarketContact =
 
 
     //获取最多投票的结果
-    entrypoint most_of((x :: xs) : list('a )) : 'a  =
-        most_of_(x, {[x] = 1}, xs)
+    function 
+        most_of : (list('a)) => 'a
+        most_of((x :: xs) ) =
+            most_of_(x, {[x] = 1}, xs)
 
-    function most_of_(most : 'a, counts : map('a, int), xs : list('a)) =
-        switch(xs)
-            [] => (most)
-            (x :: xs) =>
-                let counts' = counts{ [x = 0] @ n = n + 1 }
-                if (counts'[x] >= counts'[most])
-                    most_of_(x, counts', xs)
-                else
-                    most_of_(most, counts', xs)
 
+    function 
+        most_of_ : ('a, map('a, int), list('a)) => 'a
+        most_of_(most, counts , xs) =
+            switch(xs)
+                [] => (most)
+                (x :: xs) =>
+                    let counts' = counts{ [x = 0] @ n = n + 1 }
+                    if (counts'[x] >= counts'[most])
+                        most_of_(x, counts', xs)
+                    else
+                        most_of_(most, counts', xs)
+
+
+    //获取法官用户
+    entrypoint
+        get_aggregator_user:() => map(address, string)
+        get_aggregator_user () =
+            state.aggregator_user
+
+
+    //删除法官用户
+    stateful entrypoint
+        delete_aggregator_user:(address) => bool
+        delete_aggregator_user (addr) =
+            protocol_restrict()
+            put(state {aggregator_user = Map.delete(addr,state.aggregator_user)})
+            true
+
+
+    //获取法官提供的结果
+    entrypoint
+        get_oracle_market_record:(hash) => map(address, int)
+        get_oracle_market_record (market_id) =
+            switch(Map.lookup(market_id, state.oracle_market_record))
+                    Some(market_record_user) => market_record_user
+                    None => {}
+    
+
+
+    //获取配置信息        
     entrypoint
         get_config:() => config
         get_config () =
@@ -676,15 +729,6 @@ payable contract VegasMarketContact =
         get_state:()=>state
         get_state () =
             state
-
-
-
-
-
-
-
-
-
 
 
 

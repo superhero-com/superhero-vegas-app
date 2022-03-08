@@ -211,16 +211,16 @@ export default {
         }
       }
 
-      if (this.content === null) {
+      if (this.content === null || this.content === '') {
         return;
       }
-      if (this.sourceUrl === null) {
+      if (this.sourceUrl === null || this.sourceUrl === '') {
         return;
       }
-      if (this.minAmount === null) {
+      if (this.minAmount === null || this.minAmount === '') {
         return;
       }
-      if (this.over_height === null) {
+      if (this.over_height === null || this.over_height === '') {
         return;
       }
 
@@ -235,18 +235,25 @@ export default {
       this.createLoading = true;
 
       let currentHeight = await this.$store.state.aeInstance.height();
-      const result = await this.$store.state.veagsContract.methods.add_market(
-          this.content,
-          this.sourceUrl,
-          AmountFormatter.toAettos(this.minAmount),
-          Number(currentHeight) + Number(this.over_height),
-          results);
-      let market = result.decodedResult;
-      this.createLoading = false;
-      //load home
-      this.$bus.emit('load');
-      await this.$router.push({path: '/market_detail', query: {owner: market.owner, market_id: market.market_id}})
-      console.log(market);
+      try{
+          const result = await this.$store.state.veagsContract.methods.add_market(
+              this.content,
+              this.sourceUrl,
+              AmountFormatter.toAettos(this.minAmount),
+              Number(currentHeight) + Number(this.over_height),
+              results);
+          let market = result.decodedResult;
+          this.createLoading = false;
+          //load home
+          this.$bus.emit('load');
+          await this.$router.push({path: '/market_detail', query: {owner: market.owner, market_id: market.market_id}})
+          console.log(market);
+      }catch (e) {
+          console.log(e);
+          this.createLoading = false;
+      }
+
+
 
     },
   }

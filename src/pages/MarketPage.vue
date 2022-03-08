@@ -77,8 +77,9 @@ export default {
       const startResultDecode = await this.$store.state.veagsContract.methods.get_markets_start(this.$store.state.address);
       let startResult = startResultDecode.decodedResult;
       console.log(JSON.stringify(startResult.decodedResult));
-      if (startResult.lenght === 0) {
+      if (startResult.length === 0) {
         this.is_not_data = true;
+        this.is_loading = false;
         return;
       }
       this.marketsStart = startResult;

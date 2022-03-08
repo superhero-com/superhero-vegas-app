@@ -8,28 +8,10 @@
             <!--      <div class="item-header-id">-->
             <!--        <span>#1</span>-->
             <!--      </div>-->
-            <v-tooltip bottom>
-                <template v-slot:activator="{ on, attrs }">
-                    <div v-bind="attrs"
-                         v-on="on"
-                         v-bind:class="{'item-header-type':model.market_type === 1,'item-header-type-warning':model.market_type === 0}">
-
-
-                        <svg-icon class="item-header-type-icon" name='icon_hint'></svg-icon>
-                        <span>{{ model.market_type === 1 ? "SAFE" : "PRIVATE" }}</span>
-                    </div>
-                </template>
-                <span>
-                    {{
-                        model.market_type === 1 ? "The topic is created by the community and the results are aggregated by different users" : "The private forecast is provided by the creator, the provider may be fraudulent, please confirm whether the question maker can be trusted"
-                    }}
-
-                </span>
-            </v-tooltip>
 
             <div class="item-header-time">
                 <span>
-                    EndTime : {{ formatTime(model) }}
+                     Occurred Time : {{ formatTime(model) }}
                 </span>
             </div>
 
@@ -45,41 +27,33 @@
         ></v-divider>
 
         <div class="item-content-text">
-            <span>{{ model.content }}</span>
+            <div>{{ model.content }}</div>
+            <div class="mt-5">My choice: {{ model.put_result }}</div>
         </div>
-        <div class="item-content-source">
-            <span class="item-content-source-title">Data source：</span>
-            <a href="#" class="card-item-content" style="color:#f7296e">
-                {{ model.source_url }}
-            </a>
-        </div>
+
         <div class="item-footer">
             <div class="item-footer-pledge">
-                <span class="item-content-source-title">Total pledge：</span>
-                <span class="card-item-content" style="color: #9D9D9D;"> {{ toAe(model.total_amount) }} (AE)</span>
-            </div>
-            <div class="item-footer-time-group">
-                <div class="item-footer-time-group-left-group">
-                    <svg-icon class="icon item-footer-time-group-left-group-icon" name='icon_dice'></svg-icon>
-                    <span class="item-footer-time-group-left-group-text">Start Prediction</span>
-                </div>
-                <div class="item-footer-time-group-right-group">
-                    <span class="item-footer-time-group-right-group-text">{{
-                            toAe(model.min_amount)
-                        }} AE/Amount</span>
-                    <svg-icon class="icon item-footer-time-group-right-group-icon" name='icon_ae'></svg-icon>
-                </div>
+                <span class="item-content-source-title">Amount：</span>
+                <span class="card-item-content" style="color: #9D9D9D;"> {{ toAe(model.amount) }} (AE)</span>
             </div>
 
-            <!--            <div class="item-footer-time-group-state">-->
-            <!--                <div class="item-footer-time-group-left-group-state">-->
-            <!--                    <svg-icon class="icon item-footer-time-group-left-group-icon-state" name='icon_dice'></svg-icon>-->
-            <!--                    <span class="item-footer-time-group-left-group-text-state">STATE:</span>-->
-            <!--                </div>-->
-            <!--                <div class="item-footer-time-group-right-group-state">-->
-            <!--                    <span class="item-footer-time-group-right-group-text-state">IN PROGRESS</span>-->
-            <!--                </div>-->
-            <!--            </div>-->
+            <div v-if="!isShow()" class="item-footer-time-group-state-while">
+                <v-progress-circular
+                        :size="20"
+                        color="primary"
+                        indeterminate
+                ></v-progress-circular>
+            </div>
+
+            <div v-if="isShow()" :class="state">
+                <div class="item-footer-time-group-left-group-state">
+                    <svg-icon class="icon item-footer-time-group-left-group-icon-state" :name='state_icon'></svg-icon>
+                    <span class="item-footer-time-group-left-group-text-state">STATE:</span>
+                </div>
+                <div class="item-footer-time-group-right-group-state">
+                    <span class="item-footer-time-group-right-group-text-state">{{ state_text }}</span>
+                </div>
+            </div>
         </div>
         <v-snackbar
                 v-model="snackbar"
@@ -97,6 +71,8 @@
                 </v-btn>
             </template>
         </v-snackbar>
+
+
     </div>
 </template>
 <script>
@@ -120,38 +96,88 @@ export default {
             default() {
                 return {}
             }
-        }
+        },
+
     },
     data() {
-        return {snackbar: false,}
+        return {
+            snackbar: false,
+            progress: null,
+            state: "",
+            state_text: "",
+            state_icon: "",
+            is_user_markets_receive_record: false,
+        }
     },
     watch: {
-        overlay(val) {
+        snackbar(val) {
             val && setTimeout(() => {
-                this.overlay = false
+                this.snackbar = false
             }, 2000)
         },
     },
+    mounted: function () {
+        console.log("init:");
+        this.getProgress();
+    },
     methods: {
+
+        async getProgress() {
+            const getMarketData = await this.$store.state.veagsContract.methods.get_market(this.model.owner, this.model.market_id);
+
+            let market = await getMarketData.decodedResult;
+
+            console.log("getMarketData:" + JSON.stringify(this.progress));
+
+            const isUserMarketsReceiveRecordDecode = await this.$store.state.veagsContract.methods.is_user_markets_receive_record(this.model.owner, this.model.market_id);
+            this.is_user_markets_receive_record = await isUserMarketsReceiveRecordDecode.decodedResult;
+            this.getType(market);
+            this.progress = market.progress;
+        },
+
+
+        isShow() {
+            return this.progress != null;
+        },
+
+        getType(market) {
+            if (market.progress === 0 || market.progress === 1) {
+                this.state = "item-footer-time-group-state-progress";
+                this.state_text = "IN PROGRESS";
+                this.state_icon = "type_progress";
+            } else {
+                if (market.result === this.model.put_result_index) {
+                    if (this.is_user_markets_receive_record) {
+                        this.state = "item-footer-time-group-state-success-yes";
+                        this.state_icon = "type_success_ok";
+                        this.state_text = "RECEIVE SUCCESS";
+                    } else {
+                        this.state = "item-footer-time-group-state-success-no";
+                        this.state_icon = "type_success_no";
+                        this.state_text = "NOT RECEIVE";
+                    }
+
+                } else {
+                    this.state = "item-footer-time-group-state-failure";
+                    this.state_text = "NOT WINNING";
+                    this.state_icon = "type_failure";
+                }
+
+            }
+
+            console.log("type:" + this.model.result_index);
+            console.log("result:" + market.result);
+        },
+
 
         toAe(amount) {
             return AmountFormatter.toAe(amount);
         },
         copyMarket() {
-            console.log("123");
             this.snackbar = true;
         },
-        formatTime(market) {
-            let currentTime = Date.parse(new Date());
-            let endTimeTime = ((market.over_height - this.$store.state.blockHeight) * 1000 * 3 * 60) + currentTime;
-
-            return formatDate(new Date(endTimeTime), 'yyyy-MM-dd hh:mm')
-            // return endTimeTime;
-        },
-        //
-        sourceClock(url) {
-            window.location.href = url;
-            event.stopPropagation()
+        formatTime(model) {
+            return formatDate(new Date(model.put_time), 'yyyy-MM-dd hh:mm:ss')
         },
 
     }
@@ -200,7 +226,7 @@ export default {
   line-height: 40px;
   float: left;
   color: #9D9D9D;
-  margin-right: 10px;
+  margin-left: 10px;
 }
 
 .item-header-type {
@@ -306,8 +332,8 @@ export default {
 }
 
 .item-footer {
-  color: #000000;
-  background: #000000;
+  //color: #000000;
+  //background: #000000;
   border-radius: 5px;
   height: 40px;
   text-align: center;
@@ -388,7 +414,32 @@ export default {
   border-radius: 50px
 }
 
-.item-footer-time-group-state {
+
+.item-footer-time-group-state-progress {
+  text-align: left;
+  float: right;
+  display: flex;
+  background: rgba(247, 41, 110, 0);
+  height: 30px;
+  border-radius: 5px;
+  margin-top: 5px;
+  margin-right: 10px;
+  background: rgb(247, 191, 49);
+}
+
+.item-footer-time-group-state-failure {
+  text-align: left;
+  float: right;
+  display: flex;
+  background: rgba(247, 41, 110, 0);
+  height: 30px;
+  border-radius: 5px;
+  margin-top: 5px;
+  margin-right: 10px;
+  background: rgb(160, 164, 179);
+}
+
+.item-footer-time-group-state-success-no {
   text-align: left;
   float: right;
   display: flex;
@@ -398,6 +449,31 @@ export default {
   margin-top: 5px;
   margin-right: 10px;
   background: rgb(49, 91, 247);
+}
+
+.item-footer-time-group-state-success-yes {
+  text-align: left;
+  float: right;
+  display: flex;
+  background: rgba(247, 41, 110, 0);
+  height: 30px;
+  border-radius: 5px;
+  margin-top: 5px;
+  margin-right: 10px;
+  background: rgb(88, 160, 0);
+}
+
+
+.item-footer-time-group-state-while {
+  text-align: left;
+  float: right;
+  display: flex;
+  background: rgba(247, 41, 110, 0);
+  height: 30px;
+  border-radius: 5px;
+  margin-top: 5px;
+  padding-right: 30px;
+  margin-right: 10px;
 }
 
 .item-footer-time-group-left-group-state {
