@@ -44,14 +44,14 @@
                         page: '/private',
                     },
                     {
-                        text: 'Record',
+                        text: 'My Bet',
                         icon: 'nav_my',
                         page: '/participate',
                     },
                     {
-                        text: 'Oracle',
+                        text: 'Referee Review',
                         icon: 'nav_my',
-                        page: '/oracle_walt',
+                        page: '/referee_view',
                     },
                     {
                         text: 'Update',

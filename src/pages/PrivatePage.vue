@@ -1,23 +1,43 @@
 <template>
     <div class="private">
 
-        <p class=".text-xl-h4 text-h5 mt-5">Private forecasts have publisher public results.</p>
+        <p class=".text-xl-h4 text-h5 mt-5">Private forecasts provide the results by the creator</p>
         <!--        <div class="header mt-5">-->
         <!--            <span class="header-content">Private forecasts have publisher public results!</span>-->
         <!--        </div>-->
 
 
-        <v-card class="card mb-5 pb-5 mt-5" rounded="lg">
+        <v-card class="card mb-5 pb-5 " rounded="lg">
             <v-card-title class="text-h6">
-                Private Market
+                Search Market
             </v-card-title>
+
+            <div class="ml-5 mb-2">Enter the creator address</div>
             <div style="text-align: center">
+
                 <v-text-field
                         class="ml-5 mr-5 rounded-lg"
-                        placeholder="Enter the publisher address or .Chain domain name"
+                        placeholder="ak_idkx6m3bgRr7WiKXuB8EBYBoRqVsaS..."
                         outlined
                         hide-details="auto"
                 ></v-text-field>
+
+
+            </div>
+            <div class="mt-4 ml-5 mb-2">Enter the market ID</div>
+            <div style="text-align: center">
+
+                <v-text-field
+                        class="ml-5 mr-5 rounded-lg"
+                        placeholder="3815482b788c03d73d06a83fd13e6055867..."
+                        outlined
+                        hide-details="auto"
+                ></v-text-field>
+
+
+            </div>
+
+            <div style="text-align: center">
 
                 <router-link to='/mark_detail'>
                     <v-btn @click='superHero()'
@@ -29,10 +49,9 @@
                         <v-icon left>
                             mdi-magnify
                         </v-icon>
-                        Search
+                        SEARCH
                     </v-btn>
                 </router-link>
-
             </div>
 
 

@@ -123,17 +123,15 @@
 
     <v-snackbar
         v-model="snackbar"
-        :vertical="true"
-        color="red accent-2"
     >
       {{ error_text }}
 
       <template v-slot:action="{ attrs }">
         <v-btn
-            color="indigo"
-            text
-            v-bind="attrs"
-            @click="snackbar = false"
+                color="pink"
+                text
+                v-bind="attrs"
+                @click.native.prevent="snackbar = false"
         >
           Close
         </v-btn>

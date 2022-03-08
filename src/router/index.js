@@ -8,6 +8,7 @@ import AboutPage from "../pages/AboutPage";
 import MarketDetailPage from "../pages/MarketDetailPage";
 import CreateMarketPage from "../pages/CreateMarketPage";
 import MarketWaitResultDetailPage from "@/pages/MarketWaitResultDetailPage";
+import RefereeReviewPage from "@/pages/RefereeReviewPage";
 
 Vue.use(Router);
 export default new Router({
@@ -31,7 +32,7 @@ export default new Router({
             component: MarketWaitResultDetailPage
         },
          {
-            path: '/create_market',
+             path: '/create_market',
             name: 'CreateMarketPage',
             component: CreateMarketPage,
              meta: {
@@ -50,6 +51,14 @@ export default new Router({
             path: '/participate',
             name: 'ParticipatePage',
             component: ParticipatePage,
+            meta: {
+                keepAlive: false // 需要被缓存
+            }
+        },
+        {
+            path: '/referee_view',
+            name: 'RefereeReviewPage',
+            component: RefereeReviewPage,
             meta: {
                 keepAlive: false // 需要被缓存
             }

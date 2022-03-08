@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p class=".text-xl-h4 text-h5 mt-5">Start making predictions.</p>
+    <p class=".text-xl-h4 text-h5 mt-5">Provide an answer</p>
 
     <div class="d-flex justify-center" v-if="is_loading">
       <v-progress-circular
