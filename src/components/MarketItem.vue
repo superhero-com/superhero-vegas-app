@@ -1,102 +1,21 @@
 <template>
-
     <div class="market-item">
-        <!--    <p>姓名:{{model}}</p>-->
-        <!--        <p>{{ model.market_id }}</p>-->
+        <MarketItemHeader :copy-market="copyMarket" :format-time="formatTime(model)" :model="model" />
 
-        <div class="item-header">
-            <!--      <div class="item-header-id">-->
-            <!--        <span>#1</span>-->
-            <!--      </div>-->
-            <v-tooltip bottom>
-                <template v-slot:activator="{ on, attrs }">
-                    <div v-bind="attrs"
-                         v-on="on"
-                         v-bind:class="{'item-header-type':model.market_type === 1,'item-header-type-warning':model.market_type === 0}">
-
-
-                        <svg-icon class="item-header-type-icon" name='icon_hint'></svg-icon>
-                        <span>{{ model.market_type === 1 ? "SAFE" : "PRIVATE" }}</span>
-                    </div>
-                </template>
-                <span>
-                    {{
-                        model.market_type === 1 ? "The topic is created by the community and the results are aggregated by different users" : "The private forecast is provided by the creator, the provider may be fraudulent, please confirm whether the question maker can be trusted"
-                    }}
-
-                </span>
-            </v-tooltip>
-
-            <div class="item-header-time">
-                <span>
-                    EndTime : {{ formatTime(model) }}
-                </span>
-            </div>
-
-            <v-btn class="item-header-share" @click.native.prevent="copyMarket" icon x-small color="while">
-                <v-icon>mdi-content-copy</v-icon>
-            </v-btn>
-
-        </div>
-
-        <v-divider
-                :dark='true'
-                class="ml-5 mr-5 mt-2"
-        ></v-divider>
+        <v-divider :dark='true' class="ml-5 mr-5 mt-2"></v-divider>
 
         <div class="item-content-text">
             <span>{{ model.content }}</span>
         </div>
+
         <div class="item-content-source">
             <span class="item-content-source-title">Data source：</span>
-            <a href="#" class="card-item-content" style="color:#f7296e">
-                {{ model.source_url }}
-            </a>
+            <a href="#" class="card-item-content" style="color:#f7296e">{{ model.source_url }}</a>
         </div>
-        <div class="item-footer">
-            <div class="item-footer-pledge">
-                <span class="item-content-source-title">Total pledge：</span>
-                <span class="card-item-content" style="color: #9D9D9D;"> {{ toAe(model.total_amount) }} (AE)</span>
-            </div>
-            <div class="item-footer-time-group">
-                <div class="item-footer-time-group-left-group">
-                    <svg-icon class="icon item-footer-time-group-left-group-icon" name='icon_dice'></svg-icon>
-                    <span class="item-footer-time-group-left-group-text">Start Prediction</span>
-                </div>
-                <div class="item-footer-time-group-right-group">
-                    <span class="item-footer-time-group-right-group-text">{{
-                            toAe(model.min_amount)
-                        }} AE/Amount</span>
-                    <svg-icon class="icon item-footer-time-group-right-group-icon" name='icon_ae'></svg-icon>
-                </div>
-            </div>
 
-            <!--            <div class="item-footer-time-group-state">-->
-            <!--                <div class="item-footer-time-group-left-group-state">-->
-            <!--                    <svg-icon class="icon item-footer-time-group-left-group-icon-state" name='icon_dice'></svg-icon>-->
-            <!--                    <span class="item-footer-time-group-left-group-text-state">STATE:</span>-->
-            <!--                </div>-->
-            <!--                <div class="item-footer-time-group-right-group-state">-->
-            <!--                    <span class="item-footer-time-group-right-group-text-state">IN PROGRESS</span>-->
-            <!--                </div>-->
-            <!--            </div>-->
-        </div>
-        <v-snackbar
-                v-model="snackbar"
-        >
-            Copy Success
+        <MarketItemFloor :is-over="isOver(model)" :model="model" :to-ae="formatAe(model.total_amount)" />
 
-            <template v-slot:action="{ attrs }">
-                <v-btn
-                        color="pink"
-                        text
-                        v-bind="attrs"
-                        @click.native.prevent="snackbar = false"
-                >
-                    Close
-                </v-btn>
-            </template>
-        </v-snackbar>
+        <VegasSnackbar :snackbar="snackbar" :snackbar-msg="snackbarMsg" />
     </div>
 </template>
 <script>
@@ -104,51 +23,57 @@
 
 import {AmountFormatter} from '@aeternity/aepp-sdk/'
 import {formatDate} from "@/utils/date.js"
+import MarketItemFloor from "@/components/MarketItemFloor";
+import MarketItemHeader from "@/components/MarketItemHeader";
+import VegasSnackbar from "@/components/VegasSnackbar";
 
 export default {
 
-    components: {},
+    components: {VegasSnackbar, MarketItemHeader, MarketItemFloor},
     name: 'MarketItem',
     props: {
-
-        is_market: {
-            type: Boolean,
-            default: false
-        },
-        model: {
-            type: Object,
-            default() {
-                return {}
-            }
-        }
+        //预测实体数据
+        model: {}
     },
     data() {
-        return {snackbar: false,}
+        return {
+            snackbar: false,
+            snackbarMsg: "",
+        }
     },
     watch: {
+        //定时关闭通知
         overlay(val) {
             val && setTimeout(() => {
                 this.overlay = false
             }, 2000)
         },
     },
-    methods: {
+    mounted() {
 
-        toAe(amount) {
+    },
+
+    methods: {
+        //转换ae
+        formatAe(amount) {
             return AmountFormatter.toAe(amount);
         },
+        //复制地址
         copyMarket() {
             console.log("123");
+            this.snackbarMsg = "Copy Success"
             this.snackbar = true;
         },
-        formatTime(market) {
-            let currentTime = Date.parse(new Date());
-            let endTimeTime = ((market.over_height - this.$store.state.blockHeight) * 1000 * 3 * 60) + currentTime;
-
-            return formatDate(new Date(endTimeTime), 'yyyy-MM-dd hh:mm')
-            // return endTimeTime;
+        //预测是否已经结束
+        isOver(market) {
+            return this.$store.state.blockHeight > market.over_height;
         },
-        //
+        //格式化时间
+        formatTime: function (market) {
+            let currentTime = Date.parse(Date());
+            let endTimeTime = ((market.over_height - this.$store.state.blockHeight) * 1000 * 3 * 60) + currentTime;
+            return formatDate(new Date(endTimeTime), 'yyyy-MM-dd hh:mm')
+        },
         sourceClock(url) {
             window.location.href = url;
             event.stopPropagation()
@@ -163,21 +88,9 @@ export default {
 .market-item {
   background-color: #1B1B23;
   border-radius: 10px;
-  /*margin-left: 15px;*/
-  /*margin-right: 15px;*/
   padding-top: 10px;
   padding-bottom: 10px;
   border: 0 solid #000000
-}
-
-.item-header {
-  color: #babac0;
-  border-radius: 5px;
-  height: 40px;
-  //background: rgba(0, 0, 0, 0.97);
-  margin-left: 10px;
-  margin-right: 10px;
-  line-height: 40px;
 }
 
 .item-header-id {
@@ -187,76 +100,11 @@ export default {
   display: inline-block;
   height: 40px;
   float: left;
-  border-radius: 10px 0px 10px 0px;
+  border-radius: 10px 0 10px 0;
   text-align: center;
   line-height: 40px;
   padding-left: 10px;
   padding-right: 10px;
-}
-
-.item-header-time {
-  font-size: 14px;
-  text-align: center;
-  line-height: 40px;
-  float: left;
-  color: #9D9D9D;
-  margin-right: 10px;
-}
-
-.item-header-type {
-  font-size: 12px;
-  padding-left: 10px;
-  padding-right: 10px;
-  text-align: center;
-  float: left;
-  border-radius: 50px;
-  background: green;
-  margin: 6px 10px;
-  height: 28px;
-  line-height: 28px;
-  color: #ffffff
-}
-
-
-.item-header-type-warning {
-  font-size: 12px;
-  padding-left: 10px;
-  padding-right: 10px;
-  text-align: center;
-  float: left;
-  border-radius: 50px;
-  background: #bc0018;
-  margin: 6px 10px;
-  height: 28px;
-  line-height: 28px;
-  color: #ffffff
-}
-
-
-.item-header-share {
-  float: right;
-  padding-left: 10px;
-  padding-right: 10px;
-  margin-top: 10px;
-  margin-right: 10px;
-  text-align: center;
-  color: #ffffff
-}
-
-.item-header-type-icon {
-  width: 12px;
-  height: 12px;
-  margin-top: 8px;
-  display: inline;
-  fill: #ffffff;
-  float: left;
-  margin-right: 5px
-}
-
-.icon {
-  width: 18px;
-  fill: #ffffff;
-  height: 18px;
 }
 
 
@@ -303,142 +151,6 @@ export default {
   width: 100%;
   padding-left: 30px;
   padding-right: 30px
-}
-
-.item-footer {
-  color: #000000;
-  background: #000000;
-  border-radius: 5px;
-  height: 40px;
-  text-align: center;
-  margin-left: 10px;
-  margin-right: 10px;
-  margin-top: 10px
-}
-
-.item-footer-pledge {
-  text-align: left;
-  padding-left: 15px;
-  padding-right: 15px;
-  float: left;
-  display: inline-block;
-  line-height: 40px
-}
-
-.item-footer-time-group {
-  text-align: left;
-  float: right;
-  display: flex;
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  background: rgba(247, 41, 110, 0);
-  height: 30px;
-  border-radius: 5px;
-  margin-top: 5px;
-  margin-right: 10px
-}
-
-.item-footer-time-group-left-group {
-  background: rgb(49, 91, 247);
-  height: 24px;
-  margin: 2px;
-  line-height: 26px;
-  color: #ffffff;
-  border-radius: 3px;
-  display: flex;
-}
-
-.item-footer-time-group-left-group-icon {
-  display: inline-block;
-  margin: 3px 3px 3px 5px;
-  float: left
-}
-
-.item-footer-time-group-left-group-text {
-  font-size: 12px;
-  display: inline;
-  padding-left: 2px;
-  padding-right: 10px;
-  height: 24px
-}
-
-.item-footer-time-group-right-group {
-  background: rgba(0, 255, 157, 0);
-  height: 26px;
-  margin: 2px;
-  line-height: 26px;
-  color: #ffffff;
-  border-radius: 3px;
-  display: flex;
-}
-
-.item-footer-time-group-right-group-text {
-  font-size: 12px;
-  display: inline;
-  padding-left: 5px;
-  padding-right: 0;
-  height: 24px
-}
-
-.item-footer-time-group-right-group-icon {
-  display: inline-block;
-  margin: 3px 10px 3px 5px;
-  float: right;
-
-  fill: #F7296E;
-  border-radius: 50px
-}
-
-.item-footer-time-group-state {
-  text-align: left;
-  float: right;
-  display: flex;
-  background: rgba(247, 41, 110, 0);
-  height: 30px;
-  border-radius: 5px;
-  margin-top: 5px;
-  margin-right: 10px;
-  background: rgb(49, 91, 247);
-}
-
-.item-footer-time-group-left-group-state {
-  height: 30px;
-  line-height: 30px;
-  color: #ffffff;
-  border-radius: 3px;
-  display: flex;
-}
-
-.item-footer-time-group-left-group-icon-state {
-  display: inline-block;
-  margin: 6px 3px 3px 10px;
-  float: left
-}
-
-.item-footer-time-group-left-group-text-state {
-  font-size: 12px;
-  display: inline;
-  padding-left: 2px;
-  padding-right: 2px;
-  font-weight: bold;
-  height: 24px
-}
-
-.item-footer-time-group-right-group-state {
-  background: rgba(0, 255, 157, 0);
-  height: 26px;
-  margin: 2px;
-  line-height: 26px;
-  color: #ffffff;
-  border-radius: 3px;
-  display: flex;
-}
-
-.item-footer-time-group-right-group-text-state {
-  font-size: 12px;
-  display: inline;
-  padding-left: 0px;
-  padding-right: 10px;
-  height: 24px
 }
 
 </style>

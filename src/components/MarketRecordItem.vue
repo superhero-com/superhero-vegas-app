@@ -1,18 +1,8 @@
 <template>
-
     <div class="market-item">
-        <!--    <p>姓名:{{model}}</p>-->
-        <!--        <p>{{ model.market_id }}</p>-->
-
         <div class="item-header">
-            <!--      <div class="item-header-id">-->
-            <!--        <span>#1</span>-->
-            <!--      </div>-->
-
             <div class="item-header-time">
-                <span>
-                     Occurred Time : {{ formatTime(model) }}
-                </span>
+                <span>Occurred Time : {{ formatTime(model) }}</span>
             </div>
 
             <v-btn class="item-header-share" @click.native.prevent="copyMarket" icon x-small color="while">
@@ -21,10 +11,7 @@
 
         </div>
 
-        <v-divider
-                :dark='true'
-                class="ml-5 mr-5 mt-2"
-        ></v-divider>
+        <v-divider :dark='true' class="ml-5 mr-5 mt-2"></v-divider>
 
         <div class="item-content-text">
             <div>{{ model.content }}</div>
@@ -34,18 +21,14 @@
         <div class="item-footer">
             <div class="item-footer-pledge">
                 <span class="item-content-source-title">Amount：</span>
-                <span class="card-item-content" style="color: #9D9D9D;"> {{ toAe(model.amount) }} (AE)</span>
+                <span class="card-item-content" style="color: #9D9D9D;"> {{ formatAe(model.amount) }} (AE)</span>
             </div>
 
-            <div v-if="!isShow()" class="item-footer-time-group-state-while">
-                <v-progress-circular
-                        :size="20"
-                        color="primary"
-                        indeterminate
-                ></v-progress-circular>
+            <div v-if="!isProgress()" class="item-footer-time-group-state-while">
+                <v-progress-circular :size="20" color="primary" indeterminate></v-progress-circular>
             </div>
 
-            <div v-if="isShow()" :class="state">
+            <div v-if="isProgress()" :class="state">
                 <div class="item-footer-time-group-left-group-state">
                     <svg-icon class="icon item-footer-time-group-left-group-icon-state" :name='state_icon'></svg-icon>
                     <span class="item-footer-time-group-left-group-text-state">STATE:</span>
@@ -55,22 +38,7 @@
                 </div>
             </div>
         </div>
-        <v-snackbar
-                v-model="snackbar"
-        >
-            Copy Success
-
-            <template v-slot:action="{ attrs }">
-                <v-btn
-                        color="pink"
-                        text
-                        v-bind="attrs"
-                        @click.native.prevent="snackbar = false"
-                >
-                    Close
-                </v-btn>
-            </template>
-        </v-snackbar>
+        <VegasSnackbar :snackbar="snackbar" :snackbar-msg="snackbarMsg" />
 
 
     </div>
@@ -80,34 +48,19 @@
 
 import {AmountFormatter} from '@aeternity/aepp-sdk/'
 import {formatDate} from "@/utils/date.js"
+import VegasSnackbar from "@/components/VegasSnackbar";
 
 export default {
 
-    components: {},
-    name: 'MarketItem',
+    components: {VegasSnackbar},
+    name: 'MarketRecordItem',
     props: {
-
-        is_market: {
-            type: Boolean,
-            default: false
-        },
         model: {
             type: Object,
             default() {
                 return {}
             }
         },
-
-    },
-    data() {
-        return {
-            snackbar: false,
-            progress: null,
-            state: "",
-            state_text: "",
-            state_icon: "",
-            is_user_markets_receive_record: false,
-        }
     },
     watch: {
         snackbar(val) {
@@ -116,37 +69,57 @@ export default {
             }, 2000)
         },
     },
-    mounted: function () {
-        console.log("init:");
-        this.getProgress();
+    data() {
+        return {
+            snackbar: false,
+            snackbarMsg: "",
+            //进度
+            progress: null,
+            //状态的css
+            state: "",
+            state_text: "",
+            state_icon: "",
+            //是否已经领取过奖金
+            is_user_markets_receive_record: false,
+        }
     },
+
+    mounted: function () {
+        this.getMarketDetail();
+    },
+
     methods: {
 
-        async getProgress() {
+        async getMarketDetail() {
+            //获取主题详情
             const getMarketData = await this.$store.state.veagsContract.methods.get_market(this.model.owner, this.model.market_id);
-
             let market = await getMarketData.decodedResult;
 
             console.log("getMarketData:" + JSON.stringify(this.progress));
-
+            //获取是否已经领取过奖金
             const isUserMarketsReceiveRecordDecode = await this.$store.state.veagsContract.methods.is_user_markets_receive_record(this.model.owner, this.model.market_id);
             this.is_user_markets_receive_record = await isUserMarketsReceiveRecordDecode.decodedResult;
-            this.getType(market);
+            //获取状态
             this.progress = market.progress;
+            //刷新记录的状态
+            this.updateType(market);
         },
 
-
-        isShow() {
+        isProgress() {
             return this.progress != null;
         },
 
-        getType(market) {
+        //设置具体状态
+        updateType(market) {
+            //如果是正在进行和等待结果，都设置进行中
             if (market.progress === 0 || market.progress === 1) {
                 this.state = "item-footer-time-group-state-progress";
                 this.state_text = "IN PROGRESS";
                 this.state_icon = "type_progress";
             } else {
+                //如果投票的结果和最终的结果相等表示中奖
                 if (market.result === this.model.put_result_index) {
+                    //如果领取过
                     if (this.is_user_markets_receive_record) {
                         this.state = "item-footer-time-group-state-success-yes";
                         this.state_icon = "type_success_ok";
@@ -156,26 +129,24 @@ export default {
                         this.state_icon = "type_success_no";
                         this.state_text = "NOT RECEIVE";
                     }
-
                 } else {
+                    //未中奖
                     this.state = "item-footer-time-group-state-failure";
                     this.state_text = "NOT WINNING";
                     this.state_icon = "type_failure";
                 }
-
             }
-
-            console.log("type:" + this.model.result_index);
-            console.log("result:" + market.result);
         },
-
-
-        toAe(amount) {
+        //格式化ae数量
+        formatAe(amount) {
             return AmountFormatter.toAe(amount);
         },
+        //生成url复制
         copyMarket() {
+            this.snackbarMsg = "Copy Success";
             this.snackbar = true;
         },
+        //格式化时间
         formatTime(model) {
             return formatDate(new Date(model.put_time), 'yyyy-MM-dd hh:mm:ss')
         },

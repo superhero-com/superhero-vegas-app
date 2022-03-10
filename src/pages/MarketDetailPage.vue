@@ -48,7 +48,7 @@
 
                 <div v-show="is_user_markets_record" class="flex-column justify-center ml-15 mr-15">
                     <div v-for="(item,index) in model.answers" :key="index">
-                        <v-progress-linear :value="getAnswersProportion(item.count)" height="40" class="mb-3 "
+                        <v-progress-linear :value="getAnswersProportion(item.count)" height="40" class="mb-3 rounded-lg"
                                            color="primary accent-4">
                             <strong>{{ item.content }} {{ getAnswersProportion(item.count) }}%</strong>
                         </v-progress-linear>
@@ -56,7 +56,7 @@
                 </div>
                 <div v-show="!is_user_markets_record" class="flex-column justify-center ml-15 mr-15">
                     <div v-for="(item,index) in model.answers" :key="index">
-                        <v-btn tile class="mb-3" block @click='showAlert(index)' color="primary accent-4" elevation="0"
+                        <v-btn tile class="mb-3" block @click='showAlert(index)' color="primary accent-4 rounded-lg" elevation="0"
                                large>
                             {{ item.content }}
                         </v-btn>

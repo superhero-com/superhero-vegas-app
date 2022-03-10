@@ -18,7 +18,7 @@ export default new Router({
             name: 'MarketPage',
             component: MarketPage,
             meta: {
-                keepAlive: true // 需要被缓存
+                keepAlive: false // 需要被缓存
             }
         },
         {
@@ -36,7 +36,7 @@ export default new Router({
             name: 'CreateMarketPage',
             component: CreateMarketPage,
              meta: {
-                 keepAlive: true // 需要被缓存
+                 keepAlive: false // 需要被缓存
              }
         },
         {
@@ -44,7 +44,7 @@ export default new Router({
             name: 'PrivatePage',
             component: PrivatePage,
             meta: {
-                keepAlive: true // 需要被缓存
+                keepAlive: false // 需要被缓存
             }
         },
         {

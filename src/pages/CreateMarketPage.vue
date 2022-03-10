@@ -197,7 +197,11 @@ export default {
     addResult() {
       this.result_list.push({placeholder: 'Other result', model: ""});  // 每点一下，push一次
     },
+
     async createMarket() {
+
+        // console.log(JSON.stringify(navigator.extensions));
+        // return;
       console.log("content:" + this.content);
       console.log("sourceUrl:" + this.sourceUrl);
       console.log("minAmount:" + this.minAmount);
