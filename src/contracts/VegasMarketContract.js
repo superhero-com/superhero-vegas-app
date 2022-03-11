@@ -386,13 +386,21 @@ payable contract VegasMarketContact =
             //如果没有到达预测的结束时间，提示错误
             require(market.over_height < Chain.block_height,"MARKET TIME NOT OUT")
             //如果如果状态不是需要预言机的结果，提示错误
-            require(market.market_type  == 1 ,"MARKET TYPE ERROR")
+            require(market.market_type  == 0 ,"MARKET TYPE ERROR")
             //如果进度 不是 START状态，提示错误
             require(market.progress == 0,"MARKET PROGRESS IS NOT START")
+
+            //删除进行中的预测，因为已经进入等待状态了
+            put(state {markets_start[market_address] = Map.delete(market_id,state.markets_start[market_address])})
+
             //如果提供者提供的数据不足以达到设置的标准，提示错误
             put(state {markets[market_address][market_id].progress = 2})
             //计算哪个投票最多，然后设置最终结果
             put(state {markets[market_address][market_id].result = result_index})
+            
+            //将预测添加进入等待结果的数据中
+            put(state {markets_over[market_address = {}][market_id] = state.markets[market_address][market_id]})
+
             true
 
 
@@ -729,6 +737,15 @@ payable contract VegasMarketContact =
         get_state:()=>state
         get_state () =
             state
+
+
+
+
+
+
+
+
+
 
 
 

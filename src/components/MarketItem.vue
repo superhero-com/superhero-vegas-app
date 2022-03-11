@@ -43,9 +43,9 @@ export default {
     },
     watch: {
         //定时关闭通知
-        overlay(val) {
+        snackbar(val) {
             val && setTimeout(() => {
-                this.overlay = false
+                this.snackbar = false
             }, 2000)
         },
     },

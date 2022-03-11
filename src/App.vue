@@ -82,7 +82,7 @@ export default {
             this.$store.state.address = await this.$store.state.aeInstance.address();
             this.$store.state.isLogin = true;
             //获取vegas合约
-            this.$store.state.veagsContract = await this.$store.state.aeInstance.getContractInstance(VegasMarketContract, {contractAddress: "ct_tESY1ihBJzvKDgGu8rgrevpPd1EF6rSJs7oeVH16A2cW4F9ct"});
+            this.$store.state.veagsContract = await this.$store.state.aeInstance.getContractInstance(VegasMarketContract, {contractAddress: "ct_vxg1raPbxkboAdxmSMBzEczZgSXT2Vueu238MPydd9iSntN5G"});
 
             this.forGetHeight();
 

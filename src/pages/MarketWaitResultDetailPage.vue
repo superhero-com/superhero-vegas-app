@@ -1,146 +1,146 @@
 <template>
-  <div>
-    <p class=".text-xl-h4 text-h5 mt-5">Provide an answer</p>
+    <div>
+        <p class=".text-xl-h4 text-h5 mt-5">Provide an answer</p>
 
-    <div class="d-flex justify-center" v-if="is_loading">
-      <v-progress-circular
-          :size="40"
-          class="mt-16"
-          color="primary"
-          indeterminate
-      ></v-progress-circular>
-    </div>
-
-    <div v-if="!is_loading">
-      <div class="market-item">
-        <div class="item-header">
-          <div class="item-header-id">
-            <span>PROGRESS:{{ model.progress }}</span>
-          </div>
-          <div class="item-header-time">
-            <span>EndTime :{{ formatTime(model) }}</span>
-          </div>
-          <v-tooltip bottom>
-            <template v-slot:activator="{ on, attrs }">
-              <div v-bind="attrs"
-                   v-on="on" class="item-header-type">
-                <svg-icon class="item-header-type-icon" name='icon_hint'></svg-icon>
-                <span>Manual</span>
-              </div>
-
-
-            </template>
-            <span>The forecast results are controlled by the publisher. Please pay attention to the risks</span>
-          </v-tooltip>
-
+        <div class="d-flex justify-center" v-if="is_loading">
+            <v-progress-circular
+                    :size="40"
+                    class="mt-16"
+                    color="primary"
+                    indeterminate
+            ></v-progress-circular>
         </div>
 
-        <div class="item-content-text">
-          <span>{{ model.content }}</span>
-        </div>
+        <div v-if="!is_loading">
+            <div class="market-item">
+                <div class="item-header">
+                    <div class="item-header-id">
+                        <span>PROGRESS:{{ model.progress }}</span>
+                    </div>
+                    <div class="item-header-time">
+                        <span>EndTime :{{ formatTime(model) }}</span>
+                    </div>
+                    <v-tooltip bottom>
+                        <template v-slot:activator="{ on, attrs }">
+                            <div v-bind="attrs"
+                                 v-on="on" class="item-header-type">
+                                <svg-icon class="item-header-type-icon" name='icon_hint'></svg-icon>
+                                <span>Manual</span>
+                            </div>
 
 
-        <div v-show="is_user_markets_record" class="flex-column justify-center ml-15 mr-15">
-          <div v-for="(item,index) in model.answers" :key="index">
-            <v-progress-linear :value="getAnswersProportion(item.count)" height="40" class="mb-3 "
-                               color="primary accent-4">
-              <strong>{{ item.content }} {{ getAnswersProportion(item.count) }}%</strong>
-            </v-progress-linear>
-          </div>
-        </div>
-        <div v-show="!is_user_markets_record" class="flex-column justify-center ml-15 mr-15">
-          <div v-for="(item,index) in model.answers" :key="index">
-            <v-btn tile class="mb-3" block @click='showAlert(index)' color="primary accent-4" elevation="0" large>
-              {{ item.content }}
-            </v-btn>
-          </div>
+                        </template>
+                        <span>The forecast results are controlled by the publisher. Please pay attention to the risks</span>
+                    </v-tooltip>
+
+                </div>
+
+                <div class="item-content-text">
+                    <span>{{ model.content }}</span>
+                </div>
 
 
-        </div>
-        <div class="item-content-source">
-          <span class="item-content-source-title">Data source：</span>
-          <a href="#" class="card-item-content" style="color:#f7296e">
-            {{ model.source_url }}
-          </a>
-        </div>
-        <div class="item-footer">
-          <div class="item-footer-pledge">
-            <span class="item-content-source-title">Total pledge：</span>
-            <span class="card-item-content" style="color: #9D9D9D;"> {{ toAe(model.total_amount) }} (AE)</span>
-          </div>
-          <div class="item-footer-time-group">
-            <div class="item-footer-time-group-left-group">
-              <svg-icon class="icon item-footer-time-group-left-group-icon" name='icon_dice'></svg-icon>
-              <span class="item-footer-time-group-left-group-text">Start Prediction</span>
+                <div v-show="is_user_markets_record" class="flex-column justify-center ml-15 mr-15">
+                    <div v-for="(item,index) in model.answers" :key="index">
+                        <v-progress-linear :value="getAnswersProportion(item.count)" height="40" class="mb-3 "
+                                           color="primary accent-4">
+                            <strong>{{ item.content }} {{ getAnswersProportion(item.count) }}%</strong>
+                        </v-progress-linear>
+                    </div>
+                </div>
+                <div v-show="!is_user_markets_record" class="flex-column justify-center ml-15 mr-15">
+                    <div v-for="(item,index) in model.answers" :key="index">
+                        <v-btn tile class="mb-3" block @click='showAlert(index)' color="primary accent-4" elevation="0" large>
+                            {{ item.content }}
+                        </v-btn>
+                    </div>
+
+
+                </div>
+                <div class="item-content-source">
+                    <span class="item-content-source-title">Data source：</span>
+                    <a href="#" class="card-item-content" style="color:#f7296e">
+                        {{ model.source_url }}
+                    </a>
+                </div>
+                <div class="item-footer">
+                    <div class="item-footer-pledge">
+                        <span class="item-content-source-title">Total pledge：</span>
+                        <span class="card-item-content" style="color: #9D9D9D;"> {{ toAe(model.total_amount) }} (AE)</span>
+                    </div>
+                    <div class="item-footer-time-group">
+                        <div class="item-footer-time-group-left-group">
+                            <svg-icon class="icon item-footer-time-group-left-group-icon" name='icon_dice'></svg-icon>
+                            <span class="item-footer-time-group-left-group-text">Start Prediction</span>
+                        </div>
+                        <div class="item-footer-time-group-right-group">
+                            <span class="item-footer-time-group-right-group-text">{{ toAe(model.min_amount) }} AE/At a time</span>
+                            <svg-icon class="icon item-footer-time-group-right-group-icon" name='icon_ae'></svg-icon>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="item-footer-time-group-right-group">
-              <span class="item-footer-time-group-right-group-text">{{ toAe(model.min_amount) }} AE/At a time</span>
-              <svg-icon class="icon item-footer-time-group-right-group-icon" name='icon_ae'></svg-icon>
-            </div>
-          </div>
+
         </div>
-      </div>
-
-    </div>
-    <v-dialog
-        v-if="!is_loading"
-        v-model="agree_dialog"
-        max-width="400"
-    >
-      <v-card>
-        <v-card-title class="text-h5">
-          Whether the betting?
-        </v-card-title>
-
-        <v-card-text>
-          The answer you're going to bet on is {{ model.answers[select_index].content }}
-          Bets will cost you {{ toAe(model.min_amount) }} AE,After reaching the end time, you will receive the prize manually
-          and will be limited to one bet per topic
-        </v-card-text>
-
-        <v-card-actions>
-          <v-spacer></v-spacer>
-
-          <v-btn
-              color="green darken-1"
-              text
-              @click="agree_dialog = false"
-          >
-            Disagree
-          </v-btn>
-
-          <v-btn
-              color="green darken-1"
-              text
-              :loading="agree_loading"
-              @click="submitAnswer()"
-          >
-            Agree
-          </v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
-
-    <v-snackbar
-        v-model="snackbar"
-        :vertical="true"
-        color="red accent-2"
-    >
-      {{ error_text }}
-
-      <template v-slot:action="{ attrs }">
-        <v-btn
-            color="indigo"
-            text
-            v-bind="attrs"
-            @click="snackbar = false"
+        <v-dialog
+                v-if="!is_loading"
+                v-model="agree_dialog"
+                max-width="400"
         >
-          Close
-        </v-btn>
-      </template>
-    </v-snackbar>
+            <v-card>
+                <v-card-title class="text-h5">
+                    Whether the betting?
+                </v-card-title>
 
-  </div>
+                <v-card-text>
+                    The answer you're going to bet on is {{ model.answers[select_index].content }}
+                    Bets will cost you {{ toAe(model.min_amount) }} AE,After reaching the end time, you will receive the prize manually
+                    and will be limited to one bet per topic
+                </v-card-text>
+
+                <v-card-actions>
+                    <v-spacer></v-spacer>
+
+                    <v-btn
+                            color="green darken-1"
+                            text
+                            @click="agree_dialog = false"
+                    >
+                        Disagree
+                    </v-btn>
+
+                    <v-btn
+                            color="green darken-1"
+                            text
+                            :loading="agree_loading"
+                            @click="submitResult()"
+                    >
+                        Agree
+                    </v-btn>
+                </v-card-actions>
+            </v-card>
+        </v-dialog>
+
+        <v-snackbar
+                v-model="snackbar"
+                :vertical="true"
+                color="red accent-2"
+        >
+            {{ error_text }}
+
+            <template v-slot:action="{ attrs }">
+                <v-btn
+                        color="indigo"
+                        text
+                        v-bind="attrs"
+                        @click="snackbar = false"
+                >
+                    Close
+                </v-btn>
+            </template>
+        </v-snackbar>
+
+    </div>
 
 </template>
 
@@ -149,96 +149,96 @@ import {AmountFormatter} from '@aeternity/aepp-sdk/'
 import {formatDate} from "@/utils/date";
 
 export default {
-  name: 'MarketWaitResultDetailPage',
-  components: {},
-  props: {
-    msg: String
-  },
-  data() {
-    return {
-
-      agree_dialog: false,
-      agree_loading: false,
-      snackbar: false,
-      error_text: '',
-
-      select_index: 0,
-      is_loading: true,
-      is_user_markets_record: false,
-      model: null,
-    }
-  },
-
-  mounted: function () {
-    this.$bus.on('load', this.load);
-    this.load();
-  },
-
-  beforeDestroy() {
-    this.$bus.off('load', this.load);
-  },
-  methods: {
-
-    toAe(amount) {
-      return AmountFormatter.toAe(amount);
+    name: 'MarketWaitResultDetailPage',
+    components: {},
+    props: {
+        msg: String
     },
-    getAnswersProportion(count) {
-      return count / this.model.put_count * 100;
-    },
-    showAlert(index) {
-      this.select_index = index;
-      this.agree_dialog = true;
+    data() {
+        return {
 
-    },
-    async submitAnswer() {
-      try {
-        this.agree_loading = true;
+            agree_dialog: false,
+            agree_loading: false,
+            snackbar: false,
+            error_text: '',
 
-        let accountBalance = await this.$store.state.aeInstance.balance(this.$store.state.address);
-        if(accountBalance<=this.model.min_amount){
-          console.log(accountBalance);
-          this.error_text = "not sufficient funds";
-          this.snackbar = true;
-          return;
+            select_index: 0,
+            is_loading: true,
+            is_user_markets_record: false,
+            model: null,
         }
-
-
-        const result = await this.$store.state.veagsContract.methods.provide_answer(this.model.owner, this.model.market_id, this.select_index);
-        console.log(result);
-        console.log(JSON.stringify(result.decodedEvents));
-        await this.load();
-      } catch (e) {
-        console.log(e.message);
-        this.error_text = e.message;
-        this.snackbar = true;
-      } finally {
-        this.agree_loading = false;
-        this.agree_dialog = false;
-      }
     },
-    async load() {
-      if (this.$store.state.aeInstance == null) return;
-      this.is_loading = true;
-      let owner = this.$route.query.owner;
-      let market_id = this.$route.query.market_id;
-      console.log("owner:" + owner);
-      console.log("market_id:" + market_id);
 
-      const getMarketData = await this.$store.state.veagsContract.methods.get_market(owner, market_id);
-      const isUserMarketsRecordData = await this.$store.state.veagsContract.methods.is_oracle_market_record(market_id);
-      this.model = getMarketData.decodedResult;
-      this.is_user_markets_record = isUserMarketsRecordData.decodedResult;
-      console.log(JSON.stringify(this.model));
-      this.is_loading = false;
+    mounted: function () {
+        this.$bus.on('load', this.load);
+        this.load();
     },
-      formatTime(market) {
-          let currentTime = Date.parse(new Date());
-          let endTimeTime = ((market.over_height - this.$store.state.blockHeight) * 1000 * 3 * 60) + currentTime;
 
-          return formatDate( new Date(endTimeTime), 'yyyy-MM-dd hh:mm:ss')
-          // return endTimeTime;
-      },
-  }
+    beforeDestroy() {
+        this.$bus.off('load', this.load);
+    },
+    methods: {
+
+        toAe(amount) {
+            return AmountFormatter.toAe(amount);
+        },
+        getAnswersProportion(count) {
+            return count / this.model.put_count * 100;
+        },
+        showAlert(index) {
+            this.select_index = index;
+            this.agree_dialog = true;
+
+        },
+        async submitResult() {
+            try {
+                this.agree_loading = true;
+
+
+                let result;
+                if (this.model.market_type === 0) {
+                    result = await this.$store.state.veagsContract.methods.private_update_market_progress_to_over(this.model.owner, this.model.market_id, this.select_index);
+                } else {
+                    result = await this.$store.state.veagsContract.methods.provide_answer(this.model.owner, this.model.market_id, this.select_index);
+                }
+
+                console.log(result);
+                console.log(JSON.stringify(result.decodedEvents));
+                await this.load();
+            } catch (e) {
+                console.log(e.message);
+                this.error_text = e.message;
+                this.snackbar = true;
+            } finally {
+                this.agree_loading = false;
+                this.agree_dialog = false;
+            }
+        },
+        async load() {
+            if (this.$store.state.aeInstance == null) return;
+            this.is_loading = true;
+            let owner = this.$route.query.owner;
+            let market_id = this.$route.query.market_id;
+            console.log("owner:" + owner);
+            console.log("market_id:" + market_id);
+
+            const getMarketData = await this.$store.state.veagsContract.methods.get_market(owner, market_id);
+            this.model = getMarketData.decodedResult;
+            if (this.model.market_type === 0 && this.model.result !==-1) {
+                this.is_user_markets_record =true;
+            }
+
+            console.log(JSON.stringify(this.model));
+            this.is_loading = false;
+        },
+        formatTime(market) {
+            let currentTime = Date.parse(new Date());
+            let endTimeTime = ((market.over_height - this.$store.state.blockHeight) * 1000 * 3 * 60) + currentTime;
+
+            return formatDate(new Date(endTimeTime), 'yyyy-MM-dd hh:mm:ss')
+            // return endTimeTime;
+        },
+    }
 };
 </script>
 <style lang="scss" scoped>
