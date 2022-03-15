@@ -15,7 +15,7 @@
 
         <div class="item-content-text">
             <div>{{ model.content }}</div>
-            <div class="mt-5">My choice: {{ model.put_result }}</div>
+            <div class="mt-5">My answer: {{ model.put_result }}</div>
         </div>
 
         <div class="item-footer">

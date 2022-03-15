@@ -125,7 +125,7 @@ export default {
     width: 40px;
     height: 40px;
     background: #F7296E;
-    border-radius: 10px;
+    border-radius: 8px;
     float: right;
     color: #ffffff;
     text-align: center;

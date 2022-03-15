@@ -12,6 +12,7 @@ export default new Vuex.Store({
         veagsContract: null,
         blockHeight: 0,
         isLogin: false,
+        isLogout: false,
         address: ''
     },
 

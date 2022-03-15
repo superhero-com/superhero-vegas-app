@@ -146,6 +146,7 @@ export default {
         },
         loginOut() {
             this.$store.state.isLogin = false;
+            this.$store.state.isLogout = true;
             this.connectLoading = false;
             this.address = "";
         },

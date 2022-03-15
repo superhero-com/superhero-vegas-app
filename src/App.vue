@@ -1,6 +1,7 @@
 <template>
 
     <v-app id="inspire">
+
         <v-main class="background">
 
 
@@ -15,12 +16,10 @@
                     <v-sheet class="background">
                         <keep-alive>
                             <router-view v-if="$route.meta.keepAlive">
-                                <!-- 这里是会被缓存的视图组件，比如 Home！ -->
                             </router-view>
                         </keep-alive>
 
                         <router-view v-if="!$route.meta.keepAlive">
-                            <!-- 这里是不被缓存的视图组件，比如 Edit！ -->
                         </router-view>
                     </v-sheet>
                 </div>
@@ -31,17 +30,31 @@
 
                 </div>
             </div>
-            <v-overlay :value="!this.$store.state.isLogin">
-                <div class="d-flex flex-column" style="text-align: center">
-                    <div class="height: 90px;">
-                        <svg-icon class="ml-5 mr-5" name="icon_logo" alt="" />
-                    </div>
+            <v-overlay v-if="!this.$store.state.isLogin">
+                <div class="d-flex flex-column" style="text-align: center;width: 1200px;">
 
-                    <div >
-                        <v-progress-circular :size="40" color="primary" indeterminate style="margin: auto 0"></v-progress-circular>
-                    </div>
-                    <span class="mt-10">Looking for a wallet. Check for popups.</span>
 
+                        <div class="mb-5">
+                            <img style="width: 200px;height: 200px" src="./assets/icons/logo_loading.png" alt="">
+                        </div>
+
+                    <div class="d-flex flex-column">
+
+                        <div class="mt-6 mb-14 d-flex justify-center" v-if="this.$store.state.isLogout">
+                            <v-btn @click='walletCreated()'
+                                   color="primary"
+                                   elevation="2"
+                                   large
+                                   class="mt-4 rounded-lg">
+                                Looking for a wallet
+                            </v-btn>
+                        </div>
+
+                        <div v-if="!this.$store.state.isLogout">
+                            <v-progress-circular :size="40" color="primary" indeterminate style="margin: auto 0"></v-progress-circular>
+                        </div>
+                        <span class="mt-10" v-if="!this.$store.state.isLogout">Looking for a wallet. Check for popups.</span>
+                    </div>
                 </div>
 
             </v-overlay>
@@ -134,6 +147,8 @@ export default {
         async walletCreated() {
             //显示loading
             this.connectLoading = true;
+            //设置未退出状态
+            this.$store.state.isLogout = false;
             //创建DApp钱包连接rpc后保存到全局变量中
             this.$store.state.aeInstance = await RpcAepp({
                 name: 'Vegas Aepp',
