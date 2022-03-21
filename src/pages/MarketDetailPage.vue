@@ -1,13 +1,8 @@
 <template>
     <div>
         <p class=".text-xl-h4 text-h5 mt-5">Start making predictions.</p>
-        <v-btn
-                color="green darken-1"
-                text
-                @click="receive"
-        >
-            Receive
-        </v-btn>
+
+
         <div class="d-flex justify-center" v-if="is_loading">
             <v-progress-circular
                     :size="40"
@@ -18,79 +13,58 @@
         </div>
 
         <div v-if="!is_loading">
-            <div class="market-item">
-                <div class="item-header">
-                    <div class="item-header-id">
-                        <span>PROGRESS:{{ model.progress }}</span>
-                    </div>
-                    <div class="item-header-time">
-                        <span>EndTime :{{ formatTime(model) }}</span>
-                    </div>
-                    <v-tooltip bottom>
-                        <template v-slot:activator="{ on, attrs }">
-                            <div v-bind="attrs"
-                                 v-on="on" class="item-header-type">
-                                <svg-icon class="item-header-type-icon" name='icon_hint'></svg-icon>
-                                <span>Manual</span>
-                            </div>
+            <div class="mt-3">
+                <MarketItem :is_market="false" :model="model"></MarketItem>
+            </div>
 
+            <div class="market-item mt-3">
 
-                        </template>
-                        <span>The forecast results are controlled by the publisher. Please pay attention to the risks</span>
-                    </v-tooltip>
+                <div class="d-flex justify-start mt-3 mb">
 
+                    <span class="ml-6" style="width: 8px;height: 30px ;background-color: rgb(49, 91, 247); border-radius: 3px;"></span>
+                    <span class=".text-xl-h1 text-h6 ml-2">Optional results</span>
                 </div>
+                <div v-show="is_user_markets_record" class="flex-column justify-center mt-5 mr-15 mb-5">
+                    <div class="d-flex justify-start" v-for="(item,index) in model.answers" :key="index">
 
-                <div class="item-content-text">
-                    <span>{{ model.content }}</span>
-                </div>
-
-
-                <div v-show="is_user_markets_record" class="flex-column justify-center ml-15 mr-15">
-                    <div v-for="(item,index) in model.answers" :key="index">
-                        <v-progress-linear :value="getAnswersProportion(item.count)" height="40" class="mb-3 rounded-lg"
+                        <span class="ml-10 " style="line-height: 45px">{{ index +1}}</span>
+                        <v-progress-linear  :value="getAnswersProportion(item.count)" height="40" class="mb-3 ml-4 rounded-lg"
                                            color="primary accent-4">
-                            <strong>{{ item.content }} {{ getAnswersProportion(item.count) }}%</strong>
+                            <strong>{{ item.content }} {{ getAnswersProportion(item.count) }}%  {{getMyAnswer(index)}}</strong>
                         </v-progress-linear>
                     </div>
                 </div>
-                <div v-show="!is_user_markets_record" class="flex-column justify-center ml-15 mr-15">
-                    <div v-for="(item,index) in model.answers" :key="index">
-                        <v-btn tile class="mb-3" block @click='showAlert(index)' color="primary accent-4 rounded-lg" elevation="0"
-                               large>
+
+                <div v-show="!is_user_markets_record" class="flex-column justify-center mt-5 mr-15  mb-5">
+                    <div class="d-flex justify-start" v-for="(item,index) in model.answers" :key="index">
+
+                        <span class="ml-10 " style="line-height: 45px">{{ index +1}}</span>
+                        <v-btn min-width="501" @click='showAlert(index)'  height="40" class="mb-3 ml-4 rounded-lg"
+                                color="primary accent-4" elevation="0"
+                                large>
                             {{ item.content }}
                         </v-btn>
+
                     </div>
 
+                </div>
 
-                </div>
-                <div class="item-content-source">
-                    <span class="item-content-source-title">Data source：</span>
-                    <a href="#" class="card-item-content" style="color:#f7296e">
-                        {{ model.source_url }}
-                    </a>
-                </div>
-                <div class="item-footer">
-                    <div class="item-footer-pledge">
-                        <span class="item-content-source-title">Total pledge：</span>
-                        <span class="card-item-content" style="color: #9D9D9D;"> {{
-                                toAe(model.total_amount)
-                            }} (AE)</span>
-                    </div>
-                    <div class="item-footer-time-group">
-                        <div class="item-footer-time-group-left-group">
-                            <svg-icon class="icon item-footer-time-group-left-group-icon" name='icon_dice'></svg-icon>
-                            <span class="item-footer-time-group-left-group-text">Start Prediction</span>
-                        </div>
-                        <div class="item-footer-time-group-right-group">
-                            <span class="item-footer-time-group-right-group-text">{{ toAe(model.min_amount) }} AE/At a time</span>
-                            <svg-icon class="icon item-footer-time-group-right-group-icon" name='icon_ae'></svg-icon>
-                        </div>
-                    </div>
-                </div>
+
             </div>
-
+            {{model.over_height}}
+            {{$store.state.blockHeight}}
         </div>
+
+        <v-btn
+                class="mb-3 ml-4 rounded-lg"
+                color="primary accent-4" elevation="0"
+                @click="receive"
+        >
+            Receive
+        </v-btn>
+
+
+
         <v-dialog
                 v-if="!is_loading"
                 v-model="agree_dialog"
@@ -155,10 +129,11 @@
 <script>
 import {AmountFormatter} from '@aeternity/aepp-sdk/'
 import {formatDate} from "@/utils/date";
+import MarketItem from "@/components/MarketItem";
 
 export default {
     name: 'MarketDetailPage',
-    components: {},
+    components: {MarketItem},
     props: {
         msg: String
     },
@@ -173,6 +148,7 @@ export default {
             select_index: 0,
             is_loading: true,
             is_user_markets_record: false,
+            getUserMarketsRecordResult: -1,
             model: null,
         }
     },
@@ -195,7 +171,16 @@ export default {
             console.log(result);
         },
         getAnswersProportion(count) {
+            if(count === 0){
+                return 0;
+            }
             return count / this.model.put_count * 100;
+        },
+        getMyAnswer(index) {
+            if(index === this.getUserMarketsRecordResult){
+                return "(My)";
+            }
+            return "";
         },
         showAlert(index) {
             this.select_index = index;
@@ -238,8 +223,10 @@ export default {
 
             const getMarketData = await this.$store.state.veagsContract.methods.get_market(owner, market_id);
             const isUserMarketsRecordData = await this.$store.state.veagsContract.methods.is_user_markets_record(owner, market_id);
+            const getUserMarketsRecordResultDecode = await this.$store.state.veagsContract.methods.get_user_markets_record_result(owner, market_id);
             this.model = getMarketData.decodedResult;
             this.is_user_markets_record = isUserMarketsRecordData.decodedResult;
+            this.getUserMarketsRecordResult = getUserMarketsRecordResultDecode.decodedResult;
             console.log(JSON.stringify(this.model));
             this.is_loading = false;
         },
