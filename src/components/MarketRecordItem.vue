@@ -73,14 +73,14 @@ export default {
         return {
             snackbar: false,
             snackbarMsg: "",
-            //进度
+            //当前进度
             progress: null,
             //状态的css
             state: "",
             state_text: "",
             state_icon: "",
             //是否已经领取过奖金
-            is_user_markets_receive_record: false,
+            isUserMarketReceive: false,
         }
     },
 
@@ -94,11 +94,9 @@ export default {
             //获取主题详情
             const getMarketData = await this.$store.state.veagsContract.methods.get_market(this.model.owner, this.model.market_id);
             let market = await getMarketData.decodedResult;
-
-            console.log("getMarketData:" + JSON.stringify(this.progress));
             //获取是否已经领取过奖金
             const isUserMarketsReceiveRecordDecode = await this.$store.state.veagsContract.methods.is_user_markets_receive_record(this.model.owner, this.model.market_id);
-            this.is_user_markets_receive_record = await isUserMarketsReceiveRecordDecode.decodedResult;
+            this.isUserMarketReceive = await isUserMarketsReceiveRecordDecode.decodedResult;
             //获取状态
             this.progress = market.progress;
             //刷新记录的状态
@@ -120,7 +118,7 @@ export default {
                 //如果投票的结果和最终的结果相等表示中奖
                 if (market.result === this.model.put_result_index) {
                     //如果领取过
-                    if (this.is_user_markets_receive_record) {
+                    if (this.isUserMarketReceive) {
                         this.state = "item-footer-time-group-state-success-yes";
                         this.state_icon = "type_success_ok";
                         this.state_text = "RECEIVE SUCCESS";

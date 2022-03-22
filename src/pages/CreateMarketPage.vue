@@ -229,7 +229,7 @@ export default {
 
             this.createLoading = true;
 
-            let currentHeight = await this.$store.state.aeInstance.height();
+            let currentHeight = await this.$store.state.aeSdk.height();
             try {
                 const result = await this.$store.state.veagsContract.methods.add_market(
                     this.content,

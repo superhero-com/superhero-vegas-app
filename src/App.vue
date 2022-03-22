@@ -88,14 +88,14 @@ export default {
     methods: {
         async connectToWallet(wallet) {
             //连接钱包
-            await this.$store.state.aeInstance.connectToWallet(await wallet.getConnection());
-            await this.$store.state.aeInstance.subscribeAddress('subscribe', 'connected');
+            await this.$store.state.aeSdk.connectToWallet(await wallet.getConnection());
+            await this.$store.state.aeSdk.subscribeAddress('subscribe', 'connected');
 
             //获取地址到全局变量，其他页面使用,并设置登录状态为已登录
-            this.$store.state.address = await this.$store.state.aeInstance.address();
+            this.$store.state.address = await this.$store.state.aeSdk.address();
             this.$store.state.isLogin = true;
             //获取vegas合约
-            this.$store.state.veagsContract = await this.$store.state.aeInstance.getContractInstance(VegasMarketContract, {contractAddress: "ct_vxg1raPbxkboAdxmSMBzEczZgSXT2Vueu238MPydd9iSntN5G"});
+            this.$store.state.veagsContract = await this.$store.state.aeSdk.getContractInstance(VegasMarketContract, {contractAddress: "ct_vxg1raPbxkboAdxmSMBzEczZgSXT2Vueu238MPydd9iSntN5G"});
 
             this.forGetHeight();
 
@@ -111,7 +111,7 @@ export default {
             const sel = this;
             setTimeout(() => {
                 //获取当前最新高度
-                this.$store.state.aeInstance.height().then(function (height) {
+                this.$store.state.aeSdk.height().then(function (height) {
                     sel.$store.state.blockHeight = height;
                     sel.forGetHeight();
                 });
@@ -150,14 +150,14 @@ export default {
             //设置未退出状态
             this.$store.state.isLogout = false;
             //创建DApp钱包连接rpc后保存到全局变量中
-            this.$store.state.aeInstance = await RpcAepp({
+            this.$store.state.aeSdk = await RpcAepp({
                 name: 'Vegas Aepp',
                 nodes: [
                     {name: 'ae_mainnet', instance: await Node({url: MAIN_NET_NODE_INTERNAL_URL})}
                 ],
                 compilerUrl: COMPILER_URL,
                 onNetworkChange: async (params) => {
-                    this.$store.state.aeInstance.selectNode(params.networkId);
+                    this.$store.state.aeSdk.selectNode(params.networkId);
                 },
                 onAddressChange: async (addresses) => {
                     console.log(addresses);

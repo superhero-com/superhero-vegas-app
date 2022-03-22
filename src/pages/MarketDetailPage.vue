@@ -3,7 +3,7 @@
         <p class=".text-xl-h4 text-h5 mt-5">Start making predictions.</p>
 
 
-        <div class="d-flex justify-center" v-if="is_loading">
+        <div class="d-flex justify-center" v-if="isLoading">
             <v-progress-circular
                     :size="40"
                     class="mt-16"
@@ -12,9 +12,9 @@
             ></v-progress-circular>
         </div>
 
-        <div v-if="!is_loading">
+        <div v-if="!isLoading">
             <div class="mt-3">
-                <MarketItem :is_market="false" :model="model"></MarketItem>
+                <MarketItem :is_market="false" :model="model" :put-result-index="userMarketsRecordResult" :is-user-markets-receive="isUserMarketReceive"></MarketItem>
             </div>
 
             <div class="market-item mt-3">
@@ -24,24 +24,24 @@
                     <span class="ml-6" style="width: 8px;height: 30px ;background-color: rgb(49, 91, 247); border-radius: 3px;"></span>
                     <span class=".text-xl-h1 text-h6 ml-2">Optional results</span>
                 </div>
-                <div v-show="is_user_markets_record" class="flex-column justify-center mt-5 mr-15 mb-5">
+                <div v-show="isUserMarketRecord" class="flex-column justify-center mt-5 mr-15 mb-5">
                     <div class="d-flex justify-start" v-for="(item,index) in model.answers" :key="index">
 
-                        <span class="ml-10 " style="line-height: 45px">{{ index +1}}</span>
-                        <v-progress-linear  :value="getAnswersProportion(item.count)" height="40" class="mb-3 ml-4 rounded-lg"
+                        <span class="ml-10 " style="line-height: 45px">{{ index + 1 }}</span>
+                        <v-progress-linear :value="getAnswersProportion(item.count)" height="40" class="mb-3 ml-4 rounded-lg"
                                            color="primary accent-4">
-                            <strong>{{ item.content }} {{ getAnswersProportion(item.count) }}%  {{getMyAnswer(index)}}</strong>
+                            <strong>{{ item.content }} {{ getAnswersProportion(item.count) }}% {{ getMyAnswer(index) }}</strong>
                         </v-progress-linear>
                     </div>
                 </div>
 
-                <div v-show="!is_user_markets_record" class="flex-column justify-center mt-5 mr-15  mb-5">
+                <div v-show="!isUserMarketRecord" class="flex-column justify-center mt-5 mr-15  mb-5">
                     <div class="d-flex justify-start" v-for="(item,index) in model.answers" :key="index">
 
-                        <span class="ml-10 " style="line-height: 45px">{{ index +1}}</span>
-                        <v-btn min-width="501" @click='showAlert(index)'  height="40" class="mb-3 ml-4 rounded-lg"
-                                color="primary accent-4" elevation="0"
-                                large>
+                        <span class="ml-10 " style="line-height: 45px">{{ index + 1 }}</span>
+                        <v-btn min-width="501" @click='showAlert(index)' height="40" class="mb-3 ml-4 rounded-lg"
+                               color="primary accent-4" elevation="0"
+                               large>
                             {{ item.content }}
                         </v-btn>
 
@@ -51,8 +51,8 @@
 
 
             </div>
-            {{model.over_height}}
-            {{$store.state.blockHeight}}
+            {{ model.over_height }}
+            {{ $store.state.blockHeight }}
         </div>
 
         <v-btn
@@ -64,10 +64,9 @@
         </v-btn>
 
 
-
         <v-dialog
-                v-if="!is_loading"
-                v-model="agree_dialog"
+                v-if="!isLoading"
+                v-model="agreeDialog"
                 max-width="400"
         >
             <v-card>
@@ -76,8 +75,8 @@
                 </v-card-title>
 
                 <v-card-text>
-                    The answer you're going to bet on is {{ model.answers[select_index].content }}
-                    Bets will cost you {{ toAe(model.min_amount) }} AE,After reaching the end time, you will receive the
+                    The answer you're going to bet on is {{ model.answers[selectIndex].content }}
+                    Bets will cost you {{ formatAe(model.min_amount) }} AE,After reaching the end time, you will receive the
                     prize manually
                     and will be limited to one bet per topic
                 </v-card-text>
@@ -88,7 +87,7 @@
                     <v-btn
                             color="green darken-1"
                             text
-                            @click="agree_dialog = false"
+                            @click="agreeDialog = false"
                     >
                         Disagree
                     </v-btn>
@@ -96,7 +95,7 @@
                     <v-btn
                             color="green darken-1"
                             text
-                            :loading="agree_loading"
+                            :loading="agreeLoading"
                             @click="submitAnswer()"
                     >
                         Agree
@@ -105,22 +104,7 @@
             </v-card>
         </v-dialog>
 
-        <v-snackbar
-                v-model="snackbar"
-        >
-            {{ error_text }}
-
-            <template v-slot:action="{ attrs }">
-                <v-btn
-                        color="pink"
-                        text
-                        v-bind="attrs"
-                        @click.native.prevent="snackbar = false"
-                >
-                    Close
-                </v-btn>
-            </template>
-        </v-snackbar>
+        <VegasSnackbar :snackbar="snackbar" :snackbar-msg="snackbarMsg" />
 
     </div>
 
@@ -130,112 +114,141 @@
 import {AmountFormatter} from '@aeternity/aepp-sdk/'
 import {formatDate} from "@/utils/date";
 import MarketItem from "@/components/MarketItem";
+import VegasSnackbar from "@/components/VegasSnackbar";
 
 export default {
     name: 'MarketDetailPage',
-    components: {MarketItem},
+    components: {VegasSnackbar, MarketItem},
     props: {
         msg: String
     },
     data() {
         return {
-
-            agree_dialog: false,
-            agree_loading: false,
+            //同意dialog
+            agreeDialog: false,
+            //确认按钮loading状态
+            agreeLoading: false,
+            //错误提示组件
             snackbar: false,
-            error_text: '',
-
-            select_index: 0,
-            is_loading: true,
-            is_user_markets_record: false,
-            getUserMarketsRecordResult: -1,
-            model: null,
+            //错误提示组件的msg
+            snackbarMsg: '',
+            //临时变量，选择的第几个问题
+            selectIndex: 0,
+            //是否显示loading
+            isLoading: true,
+            //当前用户是否参与过预测
+            isUserMarketRecord: false,
+            //当前用户投票的第几个条目
+            userMarketsRecordResult: -1,
+            //当前用户是否中奖后领取过
+            isUserMarketReceive: false,
+            //数据
+            model: {},
         }
     },
-
+    watch: {
+        //定时关闭通知
+        snackbar(val) {
+            val && setTimeout(() => {
+                this.snackbar = false
+            }, 2000)
+        },
+    },
     mounted: function () {
+        //注册load事件
         this.$bus.on('load', this.load);
         this.load();
     },
-
     beforeDestroy() {
+        //移除load事件
         this.$bus.off('load', this.load);
     },
     methods: {
-
-        toAe(amount) {
+        //转换ae
+        formatAe(amount) {
             return AmountFormatter.toAe(amount);
         },
+        //领取
         async receive() {
             const result = await this.$store.state.veagsContract.methods.receive_reward(this.model.owner, this.model.market_id);
             console.log(result);
         },
+        //获取当前投票的百分比
         getAnswersProportion(count) {
-            if(count === 0){
+            if (count === 0) {
                 return 0;
             }
             return count / this.model.put_count * 100;
         },
+        //获得自己投票的标示
         getMyAnswer(index) {
-            if(index === this.getUserMarketsRecordResult){
+            if (index === this.userMarketsRecordResult) {
                 return "(My)";
             }
             return "";
         },
-        showAlert(index) {
-            this.select_index = index;
-            this.agree_dialog = true;
 
+        //显示对话框
+        showAlert(index) {
+            this.selectIndex = index;
+            this.agreeDialog = true;
         },
+
+        //提交选择的答案
         async submitAnswer() {
             try {
-                this.agree_loading = true;
-
-                let accountBalance = await this.$store.state.aeInstance.balance(this.$store.state.address);
+                //显示确认按钮的loading
+                this.agreeLoading = true;
+                //获取当前账户下的余额
+                let accountBalance = await this.$store.state.aeSdk.balance(this.$store.state.address);
+                //如果当前的余额小于最小限制的余额,给出错误提示
                 if (accountBalance <= this.model.min_amount) {
-                    console.log(accountBalance);
-                    this.error_text = "not sufficient funds";
+                    this.snackbarMsg = "Lack of balance";
                     this.snackbar = true;
                     return;
                 }
-
-
-                const result = await this.$store.state.veagsContract.methods.submit_answer(this.model.owner, this.model.market_id, this.select_index, {amount: this.model.min_amount});
-                console.log(result);
-                console.log(JSON.stringify(result.decodedEvents));
+                //提交问题
+                await this.$store.state.veagsContract.methods.submit_answer(this.model.owner, this.model.market_id, this.selectIndex, {amount: this.model.min_amount});
+                //重新加载页面
                 await this.load();
             } catch (e) {
                 console.log(e.message);
-                this.error_text = e.message;
+                this.snackbarMsg = e.message;
                 this.snackbar = true;
             } finally {
-                this.agree_loading = false;
-                this.agree_dialog = false;
+                this.agreeLoading = false;
+                this.agreeDialog = false;
             }
         },
         async load() {
-            if (this.$store.state.aeInstance == null) return;
-            this.is_loading = true;
+            //sdk没有初始化直接返回
+            if (this.$store.state.aeSdk == null) return;
+            //页面开始loading
+            this.isLoading = true;
+            //获取url中的归属人
             let owner = this.$route.query.owner;
-            let market_id = this.$route.query.market_id;
-            console.log("owner:" + owner);
-            console.log("market_id:" + market_id);
-
-            const getMarketData = await this.$store.state.veagsContract.methods.get_market(owner, market_id);
-            const isUserMarketsRecordData = await this.$store.state.veagsContract.methods.is_user_markets_record(owner, market_id);
-            const getUserMarketsRecordResultDecode = await this.$store.state.veagsContract.methods.get_user_markets_record_result(owner, market_id);
-            this.model = getMarketData.decodedResult;
-            this.is_user_markets_record = isUserMarketsRecordData.decodedResult;
-            this.getUserMarketsRecordResult = getUserMarketsRecordResultDecode.decodedResult;
-            console.log(JSON.stringify(this.model));
-            this.is_loading = false;
+            //获取marketId
+            let marketId = this.$route.query.market_id;
+            //获取合约中的具体信息
+            const getMarketDecode = await this.$store.state.veagsContract.methods.get_market(owner, marketId);
+            //获取当前用户是否参与过
+            const isUserMarketsRecordDecode = await this.$store.state.veagsContract.methods.is_user_markets_record(owner, marketId);
+            //获取当前用户的投票结果
+            const getUserMarketsRecordResultDecode = await this.$store.state.veagsContract.methods.get_user_markets_record_result(owner, marketId);
+            //获取是否已经领取过奖金
+            const isUserMarketsReceiveRecordDecode = await this.$store.state.veagsContract.methods.is_user_markets_receive_record(owner, marketId);
+            //解码
+            this.model = getMarketDecode.decodedResult;
+            this.isUserMarketRecord = isUserMarketsRecordDecode.decodedResult;
+            this.userMarketsRecordResult = getUserMarketsRecordResultDecode.decodedResult;
+            this.isUserMarketReceive = await isUserMarketsReceiveRecordDecode.decodedResult;
+            this.isLoading = false;
         },
+        //格式化结束时间
         formatTime(market) {
             let currentTime = Date.parse(new Date());
             let endTimeTime = ((market.over_height - this.$store.state.blockHeight) * 1000 * 3 * 60) + currentTime;
-
             return formatDate(new Date(endTimeTime), 'yyyy-MM-dd hh:mm:ss')
-            // return endTimeTime;
         },
     }
 };
@@ -245,8 +258,6 @@ export default {
 .market-item {
   background-color: #1B1B23;
   border-radius: 10px;
-  /*margin-left: 15px;*/
-  /*margin-right: 15px;*/
   padding-top: 10px;
   padding-bottom: 10px;
   border: 0 solid #000000
@@ -340,11 +351,9 @@ export default {
   margin-top: 15px;
 }
 
-
 .market-item:hover {
   background-color: #22222a;
 }
-
 
 .item-content-text {
   text-align: left;

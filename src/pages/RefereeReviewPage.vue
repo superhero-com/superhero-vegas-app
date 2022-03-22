@@ -69,7 +69,7 @@ export default {
 
   methods: {
     async load() {
-      if (this.$store.state.aeInstance == null) return;
+      if (this.$store.state.aeSdk == null) return;
       const startResultDecode = await this.$store.state.veagsContract.methods.get_markets_wait(this.$store.state.address);
       let startResult = startResultDecode.decodedResult;
       console.log(JSON.stringify(startResult.decodedResult));

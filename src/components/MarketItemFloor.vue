@@ -15,13 +15,13 @@
             </div>
         </div>
 
-        <div v-if="isOver" class="item-footer-time-group-state">
+        <div v-if="isOver" :class="state">
             <div class="item-footer-time-group-left-group-state">
-                <svg-icon class="icon item-footer-time-group-left-group-icon-state" name='icon_dice'></svg-icon>
+                <svg-icon class="icon item-footer-time-group-left-group-icon-state" :name='state_icon'></svg-icon>
                 <span class="item-footer-time-group-left-group-text-state">STATE:</span>
             </div>
             <div class="item-footer-time-group-right-group-state">
-                <span class="item-footer-time-group-right-group-text-state">WAIT RESULT</span>
+                <span class="item-footer-time-group-right-group-text-state">{{ state_text }}</span>
             </div>
         </div>
     </div>
@@ -32,8 +32,17 @@ export default {
     props: {
         isOver: {},
         model: {},
-        toAe: {}
-    }
+        toAe: {},
+        state: {},
+        state_text: {},
+        state_icon: {},
+
+    },
+
+    methods: {
+    },
+
+
 }
 </script>
 <style lang="scss" scoped>
@@ -111,6 +120,54 @@ export default {
   padding-left: 2px;
   padding-right: 10px;
   height: 24px
+}
+
+.item-footer-time-group-state-progress {
+  text-align: left;
+  float: right;
+  display: flex;
+  background: rgba(247, 41, 110, 0);
+  height: 30px;
+  border-radius: 5px;
+  margin-top: 5px;
+  margin-right: 10px;
+  background: rgb(247, 191, 49);
+}
+
+.item-footer-time-group-state-failure {
+  text-align: left;
+  float: right;
+  display: flex;
+  background: rgba(247, 41, 110, 0);
+  height: 30px;
+  border-radius: 5px;
+  margin-top: 5px;
+  margin-right: 10px;
+  background: rgb(160, 164, 179);
+}
+
+.item-footer-time-group-state-success-no {
+  text-align: left;
+  float: right;
+  display: flex;
+  background: rgba(247, 41, 110, 0);
+  height: 30px;
+  border-radius: 5px;
+  margin-top: 5px;
+  margin-right: 10px;
+  background: rgb(49, 91, 247);
+}
+
+.item-footer-time-group-state-success-yes {
+  text-align: left;
+  float: right;
+  display: flex;
+  background: rgba(247, 41, 110, 0);
+  height: 30px;
+  border-radius: 5px;
+  margin-top: 5px;
+  margin-right: 10px;
+  background: rgb(88, 160, 0);
 }
 
 .item-footer-time-group-right-group {

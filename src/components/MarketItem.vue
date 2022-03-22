@@ -13,7 +13,7 @@
             <a href="#" class="card-item-content" style="color:#f7296e">{{ model.source_url }}</a>
         </div>
 
-        <MarketItemFloor :is-over="isOver(model)" :model="model" :to-ae="formatAe(model.total_amount)" />
+        <MarketItemFloor :is-over="isOver(model)" :model="model" :state="state" :state_icon="state_icon" :state_text="state_text" :to-ae="formatAe(model.total_amount)" />
 
         <VegasSnackbar :snackbar="snackbar" :snackbar-msg="snackbarMsg" />
     </div>
@@ -33,12 +33,21 @@ export default {
     name: 'MarketItem',
     props: {
         //预测实体数据
-        model: {}
+        model: {},
+        //当前投票的第几个条目
+        putResultIndex: {},
+        //用户是否领取过
+        isUserMarketsReceive: {},
     },
     data() {
         return {
+            //错误提示
             snackbar: false,
             snackbarMsg: "",
+            //状态(文案,icon)
+            state: "",
+            state_text: "",
+            state_icon: "",
         }
     },
     watch: {
@@ -50,30 +59,65 @@ export default {
         },
     },
     mounted() {
-
+        //更新状态
+        this.updateType(this.model)
     },
 
     methods: {
+
         //转换ae
         formatAe(amount) {
             return AmountFormatter.toAe(amount);
         },
+
         //复制地址
         copyMarket() {
             console.log("123");
             this.snackbarMsg = "Copy Success"
             this.snackbar = true;
         },
+
         //预测是否已经结束
         isOver(market) {
             return this.$store.state.blockHeight > market.over_height;
         },
+
+        //设置状态
+        updateType(market) {
+            //如果是正在进行和等待结果，都设置进行中
+            if (market.progress === 0 || market.progress === 1) {
+                this.state = "item-footer-time-group-state-progress";
+                this.state_text = "IN PROGRESS";
+                this.state_icon = "type_progress";
+            } else {
+                //如果投票的结果和最终的结果相等表示中奖
+                if (market.result === this.putResultIndex) {
+                    //如果领取过
+                    if (this.isUserMarketsReceive) {
+                        this.state = "item-footer-time-group-state-success-yes";
+                        this.state_icon = "type_success_ok";
+                        this.state_text = "RECEIVE SUCCESS";
+                    } else {
+                        this.state = "item-footer-time-group-state-success-no";
+                        this.state_icon = "type_success_no";
+                        this.state_text = "NOT RECEIVE";
+                    }
+                } else {
+                    //未中奖
+                    this.state = "item-footer-time-group-state-failure";
+                    this.state_text = "NOT WINNING";
+                    this.state_icon = "type_failure";
+                }
+            }
+        },
+
         //格式化时间
         formatTime: function (market) {
             let currentTime = Date.parse(Date());
             let endTimeTime = ((market.over_height - this.$store.state.blockHeight) * 1000 * 3 * 60) + currentTime;
             return formatDate(new Date(endTimeTime), 'yyyy-MM-dd hh:mm')
         },
+
         sourceClock(url) {
             window.location.href = url;
             event.stopPropagation()
@@ -117,6 +161,7 @@ export default {
   font-size: 14px;
   color: #fff;
 }
+
 
 .carousel {
   margin-top: 12px;

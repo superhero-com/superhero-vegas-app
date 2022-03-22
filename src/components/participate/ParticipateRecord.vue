@@ -2,9 +2,9 @@
     <div>
 
 
-        <div v-if="is_not_data" style="margin-top:100px;text-align: center;color: white">No up-to-date global market
+        <div v-if="isNotData" style="margin-top:100px;text-align: center;color: white">No up-to-date global market
         </div>
-        <div class="d-flex justify-center" v-if="is_loading">
+        <div class="d-flex justify-center" v-if="isLoading">
             <v-progress-circular
                     :size="40"
                     class="mt-16"
@@ -13,8 +13,8 @@
             ></v-progress-circular>
         </div>
 
-        <div v-if="!is_loading">
-            <div v-for="(item,index) in marketsStart" :key="index">
+        <div v-if="!isLoading">
+            <div v-for="(item,index) in marketsRecord" :key="index">
 
                 <router-link :to="{path:'/market_detail', query: {owner:item.owner,market_id:item.market_id}}">
                     <div class="mt-3">
@@ -39,14 +39,13 @@ export default {
     components: {MarketRecordItem},
     name: 'ParticipateRecord',
     props: {
-        msg: String
     },
 
     data() {
         return {
-            is_loading: true,
-            is_not_data: false,
-            marketsStart: [],
+            isLoading: true,
+            isNotData: false,
+            marketsRecord: [],
         }
     },
     mounted: function () {
@@ -58,22 +57,22 @@ export default {
 
     methods: {
         async load() {
-            console.log("load ready1");
-            if (this.$store.state.aeInstance == null) return;
+            if (this.$store.state.aeSdk == null) return;
             const startResultDecode = await this.$store.state.veagsContract.methods.get_market_records(this.$store.state.address);
             let startResult = startResultDecode.decodedResult;
-            console.log(JSON.stringify(startResult));
+
             if (startResult.length === 0) {
-                this.is_not_data = true;
-                this.is_loading = false;
+                this.isNotData = true;
+                this.isLoading = false;
                 return;
             }
-            this.marketsStart = startResult;
-            this.marketsStart.sort(function (a, b) {
+            //排序
+            this.marketsRecord = startResult;
+            this.marketsRecord.sort(function (a, b) {
                 return a.put_time < b.put_time ? 1 : -1
             });
-            this.is_loading = false;
-            this.is_not_data = false;
+            this.isLoading = false;
+            this.isNotData = false;
         }
     }
 }

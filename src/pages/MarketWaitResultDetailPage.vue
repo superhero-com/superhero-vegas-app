@@ -215,7 +215,7 @@ export default {
             }
         },
         async load() {
-            if (this.$store.state.aeInstance == null) return;
+            if (this.$store.state.aeSdk == null) return;
             this.is_loading = true;
             let owner = this.$route.query.owner;
             let market_id = this.$route.query.market_id;

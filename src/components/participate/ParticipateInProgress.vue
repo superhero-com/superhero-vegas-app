@@ -1,11 +1,11 @@
 <template>
     <div style="text-align: center;">
-        <div v-if="is_not_data" style="margin-top:200px;text-align: center;color: white">There are no ongoing topics
+        <div v-if="isNotData" style="margin-top:200px;text-align: center;color: white">There are no ongoing topics
             that I
             initiated
         </div>
 
-        <div class="d-flex justify-center" v-if="is_loading">
+        <div class="d-flex justify-center" v-if="isLoading">
             <v-progress-circular
                     :size="40"
                     class="mt-16"
@@ -13,7 +13,7 @@
                     indeterminate
             ></v-progress-circular>
         </div>
-        <div v-if="!is_loading">
+        <div v-if="!isLoading">
             <div v-for="(item,index) in marketsStart" :key="index">
 
                 <router-link :to="{path: getPath(item[1]), query: {owner:item[1].owner,market_id:item[1].market_id}}">
@@ -39,14 +39,14 @@ import MarketItem from "../../components/MarketItem";
 export default {
     components: {MarketItem},
     name: 'ParticipateInProgress',
-    props: {
-        msg: String,
-
-    },
+    props: {},
     data() {
         return {
-            is_loading: true,
-            is_not_data: false,
+            //是否loading
+            isLoading: true,
+            //是否没有数据
+            isNotData: false,
+            //正在进行中的列表
             marketsStart: [],
         }
     },
@@ -59,27 +59,30 @@ export default {
 
     methods: {
 
+        //转换path,如果等待结果的话去等待结果页面,如果不是等待结果的话去详情页面
         getPath(market) {
-            if (this.$store.state.aeInstance == null) return  'market_detail';
+            if (this.$store.state.aeSdk == null) return 'market_detail';
             return this.$store.state.blockHeight > market.over_height ? '/market_detail_wait' : 'market_detail'
         },
+
+
         async load() {
-            console.log("load ready1");
-            if (this.$store.state.aeInstance == null) return;
+            if (this.$store.state.aeSdk == null) return;
             const startResultDecode = await this.$store.state.veagsContract.methods.get_markets_start(this.$store.state.address);
             let startResult = startResultDecode.decodedResult;
-            console.log(JSON.stringify(startResult));
+            //如果没有进行中的数据设置为没数据状态
             if (startResult.length === 0) {
-                this.is_loading = false;
-                this.is_not_data = true;
+                this.isLoading = false;
+                this.isNotData = true;
                 return;
             }
+            //排序
             this.marketsStart = startResult;
             this.marketsStart.sort(function (a, b) {
                 return a[1].create_time < b[1].create_time ? 1 : -1
             });
-            this.is_loading = false;
-            this.is_not_data = false;
+            this.isLoading = false;
+            this.isNotData = false;
         }
     }
 }
