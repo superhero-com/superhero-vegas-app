@@ -10,7 +10,7 @@ export default new Vuetify({
         dark: true,
         themes: {
             dark: {
-                primary: '#1161FE', // #E53935
+                primary: '#1161fe', // #E53935
                 secondary: colors.red.lighten4, // #FFCDD2
                 accent: colors.indigo.base, // #3F51B5
                 background:'#0F0017',

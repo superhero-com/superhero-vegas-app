@@ -107,13 +107,32 @@ export default {
             return this.progress != null;
         },
 
+        //预测是否已经结束
+        isOver(market) {
+            return this.$store.state.blockHeight > market.over_height.toString();
+        },
+
         //设置具体状态
         updateType(market) {
+            market.progress = parseInt(market.progress.toString());
+            market.result = parseInt(market.result.toString());
+            this.model.put_result_index = parseInt(this.model.put_result_index.toString());
+            console.log(this.model);
+            console.log(this.isOver(market));
+            console.log(this.$store.state.blockHeight);
+            console.log(market.over_height.toString());
             //如果是正在进行和等待结果，都设置进行中
             if (market.progress === 0 || market.progress === 1) {
-                this.state = "item-footer-time-group-state-progress";
-                this.state_text = "IN PROGRESS";
-                this.state_icon = "type_progress";
+                if(this.isOver(market)){
+                    this.state = "item-footer-time-group-state-wait";
+                    this.state_text = "WAIT RESULT";
+                    this.state_icon = "type_progress";
+                }else{
+                    this.state = "item-footer-time-group-state-progress";
+                    this.state_text = "IN PROGRESS";
+                    this.state_icon = "type_progress";
+                }
+
             } else {
                 //如果投票的结果和最终的结果相等表示中奖
                 if (market.result === this.model.put_result_index) {
@@ -137,7 +156,7 @@ export default {
         },
         //格式化ae数量
         formatAe(amount) {
-            return AmountFormatter.toAe(amount);
+            return AmountFormatter.toAe(amount.toString());
         },
         //生成url复制
         copyMarket() {
@@ -146,7 +165,8 @@ export default {
         },
         //格式化时间
         formatTime(model) {
-            return formatDate(new Date(model.put_time), 'yyyy-MM-dd hh:mm:ss')
+            console.log(model.put_time.toString())
+            return formatDate(new Date(parseInt(model.put_time.toString())), 'yyyy-MM-dd hh:mm:ss')
         },
 
     }
@@ -393,8 +413,22 @@ export default {
   border-radius: 5px;
   margin-top: 5px;
   margin-right: 10px;
-  background: rgb(247, 191, 49);
+  background: rgb(49, 91, 247);
 }
+
+.item-footer-time-group-state-wait {
+  text-align: left;
+  float: right;
+  display: flex;
+  background: rgba(247, 41, 110, 0);
+  height: 30px;
+  border-radius: 5px;
+  margin-top: 5px;
+  margin-right: 10px;
+  background: rgb(98, 0, 195);
+}
+
+
 
 .item-footer-time-group-state-failure {
   text-align: left;

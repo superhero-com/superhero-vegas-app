@@ -34,7 +34,6 @@
 <script>
 
 import MarketRecordItem from "@/components/MarketRecordItem";
-
 export default {
     components: {MarketRecordItem},
     name: 'ParticipateRecord',
@@ -61,15 +60,21 @@ export default {
             const startResultDecode = await this.$store.state.veagsContract.methods.get_market_records(this.$store.state.address);
             let startResult = startResultDecode.decodedResult;
 
-            if (startResult.length === 0) {
+            let startResultArr=[];
+            // 依次获取map对象值
+            startResult.forEach(function (value) {
+                startResultArr.push(value)
+            });
+            console.log(startResultArr);
+            if (startResultArr.length === 0) {
                 this.isNotData = true;
                 this.isLoading = false;
                 return;
             }
             //排序
-            this.marketsRecord = startResult;
+            this.marketsRecord = startResultArr;
             this.marketsRecord.sort(function (a, b) {
-                return a.put_time < b.put_time ? 1 : -1
+                return a.put_time.toString() < b.put_time.toString ? 1 : -1
             });
             this.isLoading = false;
             this.isNotData = false;

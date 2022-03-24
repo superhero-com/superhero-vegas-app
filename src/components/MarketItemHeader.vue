@@ -4,22 +4,23 @@
             <template v-slot:activator="{ on, attrs }">
                 <div v-bind="attrs"
                      v-on="on"
-                     v-bind:class="{
-                             'item-header-type':model.market_type === 1,
-                             'item-header-type-warning':model.market_type === 0}">
+                     :class="{
+                             'item-header-type':isMarketSafe(),
+                             'item-header-type-warning':!isMarketSafe()}">
                     <svg-icon class="item-header-type-icon" name='icon_hint'></svg-icon>
-                    <span>{{ model.market_type === 1 ? "SAFE" : "PRIVATE" }}</span>
+                    <span>{{ isMarketSafe() ? "SAFE" : "PRIVATE" }}</span>
                 </div>
+
+
             </template>
             <span>
                     {{
-                        model.market_type === 1 ?
-                                "The topic is created by the community and the results are aggregated by different users" :
-                                "The private forecast is provided by the creator, the provider may be fraudulent, please confirm whether the question maker can be trusted"
-                    }}
+                    isMarketSafe() ?
+                            "The topic is created by the community and the results are aggregated by different users" :
+                            "The private forecast is provided by the creator, the provider may be fraudulent, please confirm whether the question maker can be trusted"
+                }}
                 </span>
         </v-tooltip>
-
         <div class="item-header-time">
             <span>EndTime : {{ formatTime }}</span>
         </div>
@@ -35,11 +36,14 @@ export default {
     props: {
         copyMarket: {},
         formatTime: {},
+        isMarketSafe: {},
         model: {}
-    }
+    },
+
 }
 </script>
 <style lang="scss" scoped>
+
 
 .item-header {
   color: #babac0;
@@ -79,14 +83,15 @@ export default {
   float: left;
   margin-right: 5px
 }
+
 .item-header-type {
   font-size: 12px;
-  padding-left: 10px;
+  padding-left: 8px;
   padding-right: 10px;
   text-align: center;
   float: left;
-  border-radius: 50px;
-  background: green;
+  border-radius: 5px;
+  background: rgb(49, 91, 247);
   margin: 6px 10px;
   height: 28px;
   line-height: 28px;
@@ -100,7 +105,7 @@ export default {
   padding-right: 10px;
   text-align: center;
   float: left;
-  border-radius: 50px;
+  border-radius: 5px;
   background: #db041f;
   margin: 6px 10px;
   height: 28px;

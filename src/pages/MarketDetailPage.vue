@@ -22,13 +22,13 @@
                 <div class="d-flex justify-start mt-3 mb">
 
                     <span class="ml-6" style="width: 8px;height: 30px ;background-color: rgb(49, 91, 247); border-radius: 3px;"></span>
-                    <span class=".text-xl-h1 text-h6 ml-2">Optional results</span>
+                    <span class="text-h6 ml-2">Optional results</span>
                 </div>
                 <div v-show="isUserMarketRecord" class="flex-column justify-center mt-5 mr-15 mb-5">
                     <div class="d-flex justify-start" v-for="(item,index) in model.answers" :key="index">
 
                         <span class="ml-10 " style="line-height: 45px">{{ index + 1 }}</span>
-                        <v-progress-linear :value="getAnswersProportion(item.count)" height="40" class="mb-3 ml-4 rounded-lg"
+                        <v-progress-linear :value="getAnswersProportion(item.count)" height="40" class="mb-5 ml-4 rounded-lg"
                                            color="primary accent-4">
                             <strong>{{ item.content }} {{ getAnswersProportion(item.count) }}% {{ getMyAnswer(index) }}</strong>
                         </v-progress-linear>
@@ -39,7 +39,7 @@
                     <div class="d-flex justify-start" v-for="(item,index) in model.answers" :key="index">
 
                         <span class="ml-10 " style="line-height: 45px">{{ index + 1 }}</span>
-                        <v-btn min-width="501" @click='showAlert(index)' height="40" class="mb-3 ml-4 rounded-lg"
+                        <v-btn min-width="501" @click='showAlert(index)' height="40" class="mb-5 ml-4 rounded-lg"
                                color="primary accent-4" elevation="0"
                                large>
                             {{ item.content }}
@@ -166,7 +166,7 @@ export default {
     methods: {
         //转换ae
         formatAe(amount) {
-            return AmountFormatter.toAe(amount);
+            return AmountFormatter.toAe(amount.toString());
         },
         //领取
         async receive() {
@@ -175,14 +175,15 @@ export default {
         },
         //获取当前投票的百分比
         getAnswersProportion(count) {
+            count = parseInt(count);
             if (count === 0) {
                 return 0;
             }
-            return count / this.model.put_count * 100;
+            return count / parseInt(this.model.put_count.toString()) * 100;
         },
         //获得自己投票的标示
         getMyAnswer(index) {
-            if (index === this.userMarketsRecordResult) {
+            if (index === parseInt(this.userMarketsRecordResult.toString())) {
                 return "(My)";
             }
             return "";
@@ -208,7 +209,7 @@ export default {
                     return;
                 }
                 //提交问题
-                await this.$store.state.veagsContract.methods.submit_answer(this.model.owner, this.model.market_id, this.selectIndex, {amount: this.model.min_amount});
+                await this.$store.state.veagsContract.methods.submit_answer(this.model.owner, this.model.market_id, this.selectIndex, {amount: this.model.min_amount.toString()});
                 //重新加载页面
                 await this.load();
             } catch (e) {
@@ -223,12 +224,16 @@ export default {
         async load() {
             //sdk没有初始化直接返回
             if (this.$store.state.aeSdk == null) return;
+            if (this.$store.state.veagsContract == null) return;
             //页面开始loading
             this.isLoading = true;
             //获取url中的归属人
             let owner = this.$route.query.owner;
             //获取marketId
             let marketId = this.$route.query.market_id;
+            console.log(this.$store.state.veagsContract);
+            console.log(owner);
+            console.log(marketId);
             //获取合约中的具体信息
             const getMarketDecode = await this.$store.state.veagsContract.methods.get_market(owner, marketId);
             //获取当前用户是否参与过

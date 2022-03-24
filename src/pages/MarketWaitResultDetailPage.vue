@@ -1,8 +1,9 @@
 <template>
     <div>
-        <p class=".text-xl-h4 text-h5 mt-5">Provide an answer</p>
+        <p class=".text-xl-h4 text-h5 mt-5">Start making predictions.</p>
 
-        <div class="d-flex justify-center" v-if="is_loading">
+
+        <div class="d-flex justify-center" v-if="isLoading">
             <v-progress-circular
                     :size="40"
                     class="mt-16"
@@ -11,80 +12,55 @@
             ></v-progress-circular>
         </div>
 
-        <div v-if="!is_loading">
-            <div class="market-item">
-                <div class="item-header">
-                    <div class="item-header-id">
-                        <span>PROGRESS:{{ model.progress }}</span>
-                    </div>
-                    <div class="item-header-time">
-                        <span>EndTime :{{ formatTime(model) }}</span>
-                    </div>
-                    <v-tooltip bottom>
-                        <template v-slot:activator="{ on, attrs }">
-                            <div v-bind="attrs"
-                                 v-on="on" class="item-header-type">
-                                <svg-icon class="item-header-type-icon" name='icon_hint'></svg-icon>
-                                <span>Manual</span>
-                            </div>
+        <div v-if="!isLoading">
+            <div class="mt-3">
+                <MarketItem :is_market="false" :model="model" :put-result-index="-1" :is-user-markets-receive="false"></MarketItem>
+            </div>
 
+            <div class="market-item mt-3">
 
-                        </template>
-                        <span>The forecast results are controlled by the publisher. Please pay attention to the risks</span>
-                    </v-tooltip>
+                <div class="d-flex justify-start mt-3 mb">
 
+                    <span class="ml-6" style="width: 8px;height: 30px ;background-color: rgb(49, 91, 247); border-radius: 3px;"></span>
+                    <span class="text-h6 ml-2">Optional results</span>
                 </div>
+                <div v-show="isUserMarketResultRecord" class="flex-column justify-center mt-5 mr-15 mb-5">
+                    <div class="d-flex justify-start" v-for="(item,index) in model.answers" :key="index">
 
-                <div class="item-content-text">
-                    <span>{{ model.content }}</span>
-                </div>
-
-
-                <div v-show="is_user_markets_record" class="flex-column justify-center ml-15 mr-15">
-                    <div v-for="(item,index) in model.answers" :key="index">
-                        <v-progress-linear :value="getAnswersProportion(item.count)" height="40" class="mb-3 "
+                        <span class="ml-10 " style="line-height: 45px">{{ index + 1 }}</span>
+                        <v-progress-linear :value="getAnswersProportion(item.count)" height="40" class="mb-3 ml-4 rounded-lg"
                                            color="primary accent-4">
-                            <strong>{{ item.content }} {{ getAnswersProportion(item.count) }}%</strong>
+                            <strong>{{ item.content }} {{ getAnswersProportion(item.count) }}% {{ getMyAnswer(index) }}</strong>
                         </v-progress-linear>
                     </div>
                 </div>
-                <div v-show="!is_user_markets_record" class="flex-column justify-center ml-15 mr-15">
-                    <div v-for="(item,index) in model.answers" :key="index">
-                        <v-btn tile class="mb-3" block @click='showAlert(index)' color="primary accent-4" elevation="0" large>
+
+                <div v-show="!isUserMarketResultRecord" class="flex-column justify-center mt-5 mr-15  mb-5">
+                    <div class="d-flex justify-start" v-for="(item,index) in model.answers" :key="index">
+
+                        <span class="ml-10 " style="line-height: 45px">{{ index + 1 }}</span>
+                        <v-btn min-width="501" @click='showAlert(index)' height="40" class="mb-3 ml-4 rounded-lg"
+                               color="primary accent-4" elevation="0"
+                               large>
                             {{ item.content }}
                         </v-btn>
+
                     </div>
 
+                </div>
 
-                </div>
-                <div class="item-content-source">
-                    <span class="item-content-source-title">Data source：</span>
-                    <a href="#" class="card-item-content" style="color:#f7296e">
-                        {{ model.source_url }}
-                    </a>
-                </div>
-                <div class="item-footer">
-                    <div class="item-footer-pledge">
-                        <span class="item-content-source-title">Total pledge：</span>
-                        <span class="card-item-content" style="color: #9D9D9D;"> {{ toAe(model.total_amount) }} (AE)</span>
-                    </div>
-                    <div class="item-footer-time-group">
-                        <div class="item-footer-time-group-left-group">
-                            <svg-icon class="icon item-footer-time-group-left-group-icon" name='icon_dice'></svg-icon>
-                            <span class="item-footer-time-group-left-group-text">Start Prediction</span>
-                        </div>
-                        <div class="item-footer-time-group-right-group">
-                            <span class="item-footer-time-group-right-group-text">{{ toAe(model.min_amount) }} AE/At a time</span>
-                            <svg-icon class="icon item-footer-time-group-right-group-icon" name='icon_ae'></svg-icon>
-                        </div>
-                    </div>
-                </div>
+
             </div>
-
+            {{ model.over_height }}
+            {{ $store.state.blockHeight }}
         </div>
+
+
+
+
         <v-dialog
-                v-if="!is_loading"
-                v-model="agree_dialog"
+                v-if="!isLoading"
+                v-model="agreeDialog"
                 max-width="400"
         >
             <v-card>
@@ -93,8 +69,9 @@
                 </v-card-title>
 
                 <v-card-text>
-                    The answer you're going to bet on is {{ model.answers[select_index].content }}
-                    Bets will cost you {{ toAe(model.min_amount) }} AE,After reaching the end time, you will receive the prize manually
+                    The answer you're going to bet on is {{ model.answers[selectIndex].content }}
+                    Bets will cost you {{ formatAe(model.min_amount) }} AE,After reaching the end time, you will receive the
+                    prize manually
                     and will be limited to one bet per topic
                 </v-card-text>
 
@@ -104,7 +81,7 @@
                     <v-btn
                             color="green darken-1"
                             text
-                            @click="agree_dialog = false"
+                            @click="agreeDialog = false"
                     >
                         Disagree
                     </v-btn>
@@ -112,7 +89,7 @@
                     <v-btn
                             color="green darken-1"
                             text
-                            :loading="agree_loading"
+                            :loading="agreeLoading"
                             @click="submitResult()"
                     >
                         Agree
@@ -121,24 +98,7 @@
             </v-card>
         </v-dialog>
 
-        <v-snackbar
-                v-model="snackbar"
-                :vertical="true"
-                color="red accent-2"
-        >
-            {{ error_text }}
-
-            <template v-slot:action="{ attrs }">
-                <v-btn
-                        color="indigo"
-                        text
-                        v-bind="attrs"
-                        @click="snackbar = false"
-                >
-                    Close
-                </v-btn>
-            </template>
-        </v-snackbar>
+        <VegasSnackbar :snackbar="snackbar" :snackbar-msg="snackbarMsg" />
 
     </div>
 
@@ -147,59 +107,90 @@
 <script>
 import {AmountFormatter} from '@aeternity/aepp-sdk/'
 import {formatDate} from "@/utils/date";
+import MarketItem from "@/components/MarketItem";
+import VegasSnackbar from "@/components/VegasSnackbar";
 
 export default {
     name: 'MarketWaitResultDetailPage',
-    components: {},
+    components: {VegasSnackbar, MarketItem},
     props: {
         msg: String
     },
     data() {
         return {
-
-            agree_dialog: false,
-            agree_loading: false,
+            //同意dialog
+            agreeDialog: false,
+            //确认按钮loading状态
+            agreeLoading: false,
+            //错误提示组件
             snackbar: false,
-            error_text: '',
-
-            select_index: 0,
-            is_loading: true,
-            is_user_markets_record: false,
-            model: null,
+            //错误提示组件的msg
+            snackbarMsg: '',
+            //临时变量，选择的第几个问题
+            selectIndex: 0,
+            //是否显示loading
+            isLoading: true,
+            //当前预测是否已经有答案了
+            isUserMarketResultRecord: false,
+            //数据
+            model: {},
         }
     },
-
+    watch: {
+        //定时关闭通知
+        snackbar(val) {
+            val && setTimeout(() => {
+                this.snackbar = false
+            }, 2000)
+        },
+    },
     mounted: function () {
+        //注册load事件
         this.$bus.on('load', this.load);
         this.load();
     },
-
     beforeDestroy() {
+        //移除load事件
         this.$bus.off('load', this.load);
     },
     methods: {
-
-        toAe(amount) {
-            return AmountFormatter.toAe(amount);
+        //转换ae
+        formatAe(amount) {
+            return AmountFormatter.toAe(amount.toString());
         },
+        //获取当前投票的百分比
         getAnswersProportion(count) {
-            return count / this.model.put_count * 100;
+            count = parseInt(count);
+            if (count === 0) {
+                return 0;
+            }
+            return count / parseInt(this.model.put_count.toString()) * 100;
         },
-        showAlert(index) {
-            this.select_index = index;
-            this.agree_dialog = true;
+        //获得自己投票的标示
+        getMyAnswer(index) {
+            if (index === this.userMarketsRecordResult) {
+                return "(My)";
+            }
+            return "";
+        },
 
+        //显示对话框
+        showAlert(index) {
+            this.selectIndex = index;
+            this.agreeDialog = true;
         },
+
+        //提交选择的答案
         async submitResult() {
             try {
-                this.agree_loading = true;
+                this.agreeLoading = true;
 
 
                 let result;
-                if (this.model.market_type === 0) {
-                    result = await this.$store.state.veagsContract.methods.private_update_market_progress_to_over(this.model.owner, this.model.market_id, this.select_index);
+                if (parseInt(this.model.market_type.toString()) === 0) {
+                    result = await this.$store.state.veagsContract.methods.private_update_market_progress_to_over(this.model.owner, this.model.market_id, this.selectIndex);
                 } else {
-                    result = await this.$store.state.veagsContract.methods.provide_answer(this.model.owner, this.model.market_id, this.select_index);
+                    result = await this.$store.state.veagsContract.methods.provide_answer(this.model.owner, this.model.market_id, this.selectIndex);
                 }
 
                 console.log(result);
@@ -207,36 +198,41 @@ export default {
                 await this.load();
             } catch (e) {
                 console.log(e.message);
-                this.error_text = e.message;
+                this.snackbarMsg = e.message;
                 this.snackbar = true;
             } finally {
-                this.agree_loading = false;
-                this.agree_dialog = false;
+                this.agreeLoading = false;
+                this.agreeLoading = false;
             }
         },
         async load() {
+            //sdk没有初始化直接返回
             if (this.$store.state.aeSdk == null) return;
-            this.is_loading = true;
+            if (this.$store.state.veagsContract == null) return;
+            //页面开始loading
+            this.isLoading = true;
+            //获取url中的归属人
             let owner = this.$route.query.owner;
-            let market_id = this.$route.query.market_id;
-            console.log("owner:" + owner);
-            console.log("market_id:" + market_id);
-
-            const getMarketData = await this.$store.state.veagsContract.methods.get_market(owner, market_id);
-            this.model = getMarketData.decodedResult;
-            if (this.model.market_type === 0 && this.model.result !==-1) {
-                this.is_user_markets_record =true;
+            //获取marketId
+            let marketId = this.$route.query.market_id;
+            console.log(this.$store.state.veagsContract);
+            console.log(owner);
+            console.log(marketId);
+            //获取合约中的具体信息
+            const getMarketDecode = await this.$store.state.veagsContract.methods.get_market(owner, marketId);
+            //解码
+            this.model = getMarketDecode.decodedResult;
+            if (this.model.market_type.toString() === 0 && this.model.result.toString() !==-1) {
+                this.isUserMarketResultRecord =true;
             }
 
-            console.log(JSON.stringify(this.model));
-            this.is_loading = false;
+            this.isLoading = false;
         },
+        //格式化结束时间
         formatTime(market) {
             let currentTime = Date.parse(new Date());
             let endTimeTime = ((market.over_height - this.$store.state.blockHeight) * 1000 * 3 * 60) + currentTime;
-
             return formatDate(new Date(endTimeTime), 'yyyy-MM-dd hh:mm:ss')
-            // return endTimeTime;
         },
     }
 };
@@ -246,8 +242,6 @@ export default {
 .market-item {
   background-color: #1B1B23;
   border-radius: 10px;
-  /*margin-left: 15px;*/
-  /*margin-right: 15px;*/
   padding-top: 10px;
   padding-bottom: 10px;
   border: 0 solid #000000
@@ -341,11 +335,9 @@ export default {
   margin-top: 15px;
 }
 
-
 .market-item:hover {
   background-color: #22222a;
 }
-
 
 .item-content-text {
   text-align: left;

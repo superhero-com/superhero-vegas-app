@@ -1,11 +1,11 @@
 <template>
     <div class="market-item">
-        <MarketItemHeader :copy-market="copyMarket" :format-time="formatTime(model)" :model="model" />
+        <MarketItemHeader :copy-market="copyMarket" :format-time="formatTime(model)" :is-market-safe="isMarketSafe" :model="model" />
 
         <v-divider :dark='true' class="ml-5 mr-5 mt-2"></v-divider>
 
-        <div class="item-content-text">
-            <span>{{ model.content }}</span>
+        <div class="item-content-text ">
+            <span class="text-h6">{{ model.content }}</span>
         </div>
 
         <div class="item-content-source">
@@ -13,7 +13,7 @@
             <a href="#" class="card-item-content" style="color:#f7296e">{{ model.source_url }}</a>
         </div>
 
-        <MarketItemFloor :is-over="isOver(model)" :model="model" :state="state" :state_icon="state_icon" :state_text="state_text" :to-ae="formatAe(model.total_amount)" />
+        <MarketItemFloor :is-over="isOver(model)" :model="model" :state="state" :stateIcon="stateIcon" :stateText="stateText" :to-ae="formatAe(model.total_amount)" />
 
         <VegasSnackbar :snackbar="snackbar" :snackbar-msg="snackbarMsg" />
     </div>
@@ -46,8 +46,8 @@ export default {
             snackbarMsg: "",
             //状态(文案,icon)
             state: "",
-            state_text: "",
-            state_icon: "",
+            stateText: "",
+            stateIcon: "",
         }
     },
     watch: {
@@ -64,10 +64,13 @@ export default {
     },
 
     methods: {
-
+        //是否是安全模式
+        isMarketSafe() {
+            return parseInt(this.model.market_type.toString()) === 1;
+        },
         //转换ae
         formatAe(amount) {
-            return AmountFormatter.toAe(amount);
+            return AmountFormatter.toAe(amount.toString());
         },
 
         //复制地址
@@ -79,34 +82,38 @@ export default {
 
         //预测是否已经结束
         isOver(market) {
-            return this.$store.state.blockHeight > market.over_height;
+            return this.$store.state.blockHeight > market.over_height.toString();
         },
 
         //设置状态
         updateType(market) {
+            market.progress = parseInt(market.progress.toString());
+            market.result = parseInt(market.result.toString());
+            let putResultIndex = parseInt(this.putResultIndex);
             //如果是正在进行和等待结果，都设置进行中
             if (market.progress === 0 || market.progress === 1) {
-                this.state = "item-footer-time-group-state-progress";
-                this.state_text = "IN PROGRESS";
-                this.state_icon = "type_progress";
+                this.state = "item-footer-time-group-state-wait";
+                this.stateText = "WAIT RESULT";
+                this.stateIcon = "type_progress";
             } else {
+                console.log(putResultIndex);
                 //如果投票的结果和最终的结果相等表示中奖
-                if (market.result === this.putResultIndex) {
+                if (market.result === putResultIndex) {
                     //如果领取过
                     if (this.isUserMarketsReceive) {
                         this.state = "item-footer-time-group-state-success-yes";
-                        this.state_icon = "type_success_ok";
-                        this.state_text = "RECEIVE SUCCESS";
+                        this.stateIcon = "type_success_ok";
+                        this.stateText = "RECEIVE SUCCESS";
                     } else {
                         this.state = "item-footer-time-group-state-success-no";
-                        this.state_icon = "type_success_no";
-                        this.state_text = "NOT RECEIVE";
+                        this.stateIcon = "type_success_no";
+                        this.stateText = "NOT RECEIVE";
                     }
                 } else {
                     //未中奖
                     this.state = "item-footer-time-group-state-failure";
-                    this.state_text = "NOT WINNING";
-                    this.state_icon = "type_failure";
+                    this.stateText = "NOT WINNING";
+                    this.stateIcon = "type_failure";
                 }
             }
         },
@@ -114,9 +121,13 @@ export default {
         //格式化时间
         formatTime: function (market) {
             let currentTime = Date.parse(Date());
-            let endTimeTime = ((market.over_height - this.$store.state.blockHeight) * 1000 * 3 * 60) + currentTime;
+            // let bigint = (123);
+            // console.log(market.over_height.toString());
+            let endTimeTime = ((market.over_height.toString() - (this.$store.state.blockHeight)) * 1000 * 3 * 60) + currentTime;
             return formatDate(new Date(endTimeTime), 'yyyy-MM-dd hh:mm')
         },
+
+
 
         sourceClock(url) {
             window.location.href = url;
@@ -185,9 +196,7 @@ export default {
 .item-content-text {
   text-align: left;
   padding: 15px 30px;
-  font-size: 18px;
   line-height: 30px;
-  font-weight: bold;
   color: #ffffff
 }
 

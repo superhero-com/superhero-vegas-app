@@ -66,12 +66,13 @@
 <script>
 
 import {BrowserWindowMessageConnection, Node, RpcAepp, WalletDetector} from '@aeternity/aepp-sdk'
-import VegasMarketContract from "@/contracts/VegasMarketContract";
+import VegasMarketContract from "@/contracts/VegasMarketContract.json";
 import Navigation from "./components/Navigation";
 import WalletPage from "@/components/WalletPage";
 
 const MAIN_NET_NODE_INTERNAL_URL = 'https://node.aeasy.io';
-const COMPILER_URL = 'https://compiler.aeasy.io';
+const COMPILER_URL = 'https://latest.compiler.aepps.com';
+// const COMPILER_URL = 'https://compiler.aeasy.io';
 
 export default {
     name: 'App',
@@ -95,12 +96,16 @@ export default {
             this.$store.state.address = await this.$store.state.aeSdk.address();
             this.$store.state.isLogin = true;
             //获取vegas合约
-            this.$store.state.veagsContract = await this.$store.state.aeSdk.getContractInstance(VegasMarketContract, {contractAddress: "ct_vxg1raPbxkboAdxmSMBzEczZgSXT2Vueu238MPydd9iSntN5G"});
+            // this.$store.state.veagsContract = await this.$store.state.aeSdk.getContractInstance(VegasMarketContract, {contractAddress: "ct_vxg1raPbxkboAdxmSMBzEczZgSXT2Vueu238MPydd9iSntN5G"});
+            this.$store.state.veagsContract = await this.$store.state.aeSdk.getContractInstance(({
+                aci: VegasMarketContract,
+                contractAddress: "ct_2WrK5nynGPPraSy2TUTCTDeu7XyeiY9nPheMG9mb64gDRQL1r9"
+            }));
+            this.$store.state.blockHeight = await this.$store.state.aeSdk.height();
 
             this.forGetHeight();
 
             this.$bus.emit('load');
-            this.$bus.emit('load_market_detail');
 
 
         },

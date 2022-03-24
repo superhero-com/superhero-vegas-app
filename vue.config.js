@@ -27,6 +27,6 @@
 // }
 
 module.exports = {
-    transpileDependencies: ['@aeternity/aepp-sdk']
+    transpileDependencies: ['@aeternity/aepp-sdk','@aeternity/aepp-sdk/src/tx/builder/helpers'],
 }
 

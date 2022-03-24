@@ -40,12 +40,13 @@
             <div style="text-align: center">
 
                 <router-link to='/mark_detail'>
+
                     <v-btn @click='superHero()'
                            large
-                           dense
-                           color="primary"
-                           elevation="2"
-                           class="mt-4 rounded-lg">
+
+                           class=" mt-6 mb-3 ml-4 rounded-lg"
+                           color="primary accent-4" elevation="0"
+                         >
                         <v-icon left>
                             mdi-magnify
                         </v-icon>

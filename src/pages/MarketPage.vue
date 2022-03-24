@@ -24,9 +24,9 @@
     <div v-if="!is_loading">
       <div v-for="(item,index) in marketsStart" :key="index">
 
-        <router-link :to="{path:'/market_detail', query: {owner:item[1].owner,market_id:item[1].market_id}}">
+        <router-link :to="{path:'/market_detail', query: {owner:item.owner,market_id:item.market_id}}">
           <div class="mt-3">
-            <MarketItem :is_market="false" :model="item[1]"></MarketItem>
+            <MarketItem :is_market="false" :model="item"></MarketItem>
           </div>
         </router-link>
 
@@ -74,17 +74,21 @@ export default {
   methods: {
     async load() {
       if (this.$store.state.aeSdk == null) return;
-      const startResultDecode = await this.$store.state.veagsContract.methods.get_markets_start("ak_idkx6m3bgRr7WiKXuB8EBYBoRqVsaSc6qo4dsd23HKgj3qiCF");
+      const startResultDecode = await this.$store.state.veagsContract.methods.get_markets_start("ak_CNcf2oywqbgmVg3FfKdbHQJfB959wrVwqfzSpdWVKZnep7nj4");
       let startResult = startResultDecode.decodedResult;
-      console.log(JSON.stringify(startResult.decodedResult));
-      if (startResult.length === 0) {
+        let startResultArr=[];
+        // 依次获取map对象值
+        startResult.forEach(function (value) {
+            startResultArr.push(value)
+        });
+      if (startResultArr.length === 0) {
         this.is_not_data = true;
         this.is_loading = false;
         return;
       }
-      this.marketsStart = startResult;
+      this.marketsStart = startResultArr;
       this.marketsStart.sort(function (a, b) {
-        return a[1].create_time < b[1].create_time ? 1 : -1
+        return a.create_time < b.create_time ? 1 : -1
       });
       this.is_loading = false;
       this.is_not_data = false;
