@@ -99,7 +99,7 @@ export default {
             // this.$store.state.veagsContract = await this.$store.state.aeSdk.getContractInstance(VegasMarketContract, {contractAddress: "ct_vxg1raPbxkboAdxmSMBzEczZgSXT2Vueu238MPydd9iSntN5G"});
             this.$store.state.veagsContract = await this.$store.state.aeSdk.getContractInstance(({
                 aci: VegasMarketContract,
-                contractAddress: "ct_2WrK5nynGPPraSy2TUTCTDeu7XyeiY9nPheMG9mb64gDRQL1r9"
+                contractAddress: "ct_2ERhd2C8eRerstJpnQhYEGnk1pvJQZQbmAWSq9dE3V4P8djLQy"
             }));
             this.$store.state.blockHeight = await this.$store.state.aeSdk.height();
 
