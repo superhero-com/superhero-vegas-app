@@ -1,5 +1,5 @@
 <template>
-    <div class="market-item">
+    <div class="market-item ">
         <MarketItemHeader :copy-market="copyMarket" :format-time="formatTime(model)" :is-market-safe="isMarketSafe" :model="model" />
 
         <v-divider :dark='true' class="ml-5 mr-5 mt-2"></v-divider>
@@ -13,7 +13,7 @@
             <a href="#" class="card-item-content" style="color:#f7296e">{{ model.source_url }}</a>
         </div>
 
-        <MarketItemFloor :is-over="isOver(model)" :model="model" :state="state" :stateIcon="stateIcon" :stateText="stateText" :to-ae="formatAe(model.total_amount)" />
+        <MarketItemFloor :is-over="isOver(model)" :model="model" :state="state" :stateIcon="stateIcon" :stateText="stateText" :to-min-ae="formatAe(model.min_amount)" :to-total-ae="formatAe(model.total_amount)" />
 
         <VegasSnackbar :snackbar="snackbar" :snackbar-msg="snackbarMsg" />
     </div>

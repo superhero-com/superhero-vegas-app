@@ -2,7 +2,7 @@
     <div class="item-footer">
         <div class="item-footer-pledge">
             <span class="item-content-source-title">Total pledge：</span>
-            <span class="card-item-content" style="color: #9D9D9D;"> {{ toAe }} (AE)</span>
+            <span class="card-item-content" style="color: #9D9D9D;"> {{ toTotalAe }} (AE)</span>
         </div>
         <div v-if="!isOver" class="item-footer-time-group">
             <div class="item-footer-time-group-left-group">
@@ -10,7 +10,7 @@
                 <span class="item-footer-time-group-left-group-text">IN PROGRESS</span>
             </div>
             <div class="item-footer-time-group-right-group">
-                <span class="item-footer-time-group-right-group-text">{{ toAe }} AE/Amount</span>
+                <span class="item-footer-time-group-right-group-text">{{ toMinAe }} AE/Amount</span>
                 <svg-icon class="icon item-footer-time-group-right-group-icon" name='icon_ae'></svg-icon>
             </div>
         </div>
@@ -32,7 +32,8 @@ export default {
     props: {
         isOver: {},
         model: {},
-        toAe: {},
+        toMinAe: {},
+        toTotalAe: {},
         state: {},
         stateText: {},
         stateIcon: {},
