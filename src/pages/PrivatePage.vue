@@ -44,7 +44,7 @@
                     <v-btn @click='superHero()'
                            large
 
-                           class=" mt-6 mb-3 ml-4 rounded-lg"
+                           class=" mt-6 mb-3 ml-4"
                            color="primary accent-4" elevation="0"
                          >
                         <v-icon left>

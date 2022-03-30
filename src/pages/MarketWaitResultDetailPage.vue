@@ -1,6 +1,6 @@
 <template>
     <div>
-        <p class=".text-xl-h4 text-h5 mt-5">Start making predictions.</p>
+        <p class=".text-xl-h4 text-h5 mt-5">Provide the results</p>
 
 
         <div class="d-flex justify-center" v-if="isLoading">
@@ -28,7 +28,7 @@
                     <div class="d-flex justify-start" v-for="(item,index) in model.answers" :key="index">
 
                         <span class="ml-10 " style="line-height: 45px">{{ index + 1 }}</span>
-                        <v-progress-linear :value="getAnswersProportion(item.count)" height="40" class="mb-3 ml-4 rounded-lg"
+                        <v-progress-linear :value="getAnswersProportion(item.count)" height="40" class="mb-3 ml-4 rounded"
                                            color="primary accent-4">
                             <strong>{{ item.content }} {{ getAnswersProportion(item.count) }}% {{ getMyAnswer(index) }}</strong>
                         </v-progress-linear>
@@ -39,7 +39,7 @@
                     <div class="d-flex justify-start" v-for="(item,index) in model.answers" :key="index">
 
                         <span class="ml-10 " style="line-height: 45px">{{ index + 1 }}</span>
-                        <v-btn min-width="501" @click='showAlert(index)' height="40" class="mb-3 ml-4 rounded-lg"
+                        <v-btn min-width="501" @click='showAlert(index)' height="40" class="mb-3 ml-4 rounded"
                                color="primary accent-4" elevation="0"
                                large>
                             {{ item.content }}
@@ -56,8 +56,6 @@
         </div>
 
 
-
-
         <v-dialog
                 v-if="!isLoading"
                 v-model="agreeDialog"
@@ -65,14 +63,11 @@
         >
             <v-card>
                 <v-card-title class="text-h5">
-                    Whether the betting?
+                    Provide confirm
                 </v-card-title>
 
                 <v-card-text>
-                    The answer you're going to bet on is {{ model.answers[selectIndex].content }}
-                    Bets will cost you {{ formatAe(model.min_amount) }} AE,After reaching the end time, you will receive the
-                    prize manually
-                    and will be limited to one bet per topic
+                    Are you sure you want {{ model.answers[selectIndex].content }} to be the right answer? If the violation will be deducted to provide eligibility
                 </v-card-text>
 
                 <v-card-actions>
@@ -202,7 +197,7 @@ export default {
                 this.snackbar = true;
             } finally {
                 this.agreeLoading = false;
-                this.agreeLoading = false;
+                this.agreeDialog = false;
             }
         },
         async load() {
@@ -220,10 +215,21 @@ export default {
             console.log(marketId);
             //获取合约中的具体信息
             const getMarketDecode = await this.$store.state.veagsContract.methods.get_market(owner, marketId);
-            //解码
             this.model = getMarketDecode.decodedResult;
-            if (this.model.market_type.toString() === 0 && this.model.result.toString() !==-1) {
-                this.isUserMarketResultRecord =true;
+            if (parseInt(this.model.market_type) === 0 && parseInt(this.model.result) !== -1) {
+                this.isUserMarketResultRecord = true;
+                console.log(true);
+            }else{
+                const isOracleMarketRecord = await this.$store.state.veagsContract.methods.is_oracle_market_record(marketId);
+                this.isUserMarketResultRecord = isOracleMarketRecord.decodedResult;
+                console.log( this.isUserMarketResultRecord);
+            }
+            console.log(  this.isUserMarketResultRecord );
+            if(this.isUserMarketResultRecord){
+                await this.$router.push({
+                    path: '/market_detail',
+                    query: {owner: owner, market_id: marketId}
+                })
             }
 
             this.isLoading = false;

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <p class=".text-xl-h4 text-h5 mt-5">Start making predictions.</p>
+        <p class=".text-xl-h4 text-h5 mt-5">Market Detail</p>
 
 
         <div class="d-flex justify-center" v-if="isLoading">
@@ -14,6 +14,7 @@
 
         <div v-if="!isLoading">
             <div class="mt-3">
+
                 <MarketItem :is_market="false" :model="model" :put-result-index="userMarketsRecordResult" :is-user-markets-receive="isUserMarketReceive"></MarketItem>
             </div>
 
@@ -28,7 +29,7 @@
                     <div class="d-flex justify-start" v-for="(item,index) in model.answers" :key="index">
 
                         <span class="ml-10 " style="line-height: 45px">{{ index + 1 }}</span>
-                        <v-progress-linear :value="getAnswersProportion(item.count)" height="40" class="mb-5 ml-4 rounded-lg"
+                        <v-progress-linear :value="getAnswersProportion(item.count)" height="40" class="mb-3 ml-4 rounded"
                                            color="primary accent-4">
                             <strong>{{ item.content }} {{ getAnswersProportion(item.count) }}% {{ getMyAnswer(index) }}</strong>
                         </v-progress-linear>
@@ -39,8 +40,9 @@
                     <div class="d-flex justify-start" v-for="(item,index) in model.answers" :key="index">
 
                         <span class="ml-10 " style="line-height: 45px">{{ index + 1 }}</span>
-                        <v-btn min-width="501" @click='showAlert(index)' height="40" class="mb-5 ml-4 rounded-lg"
+                        <v-btn min-width="501" @click='showAlert(index)' height="40" class="mb-3 ml-4 rounded"
                                color="primary accent-4" elevation="0"
+
                                large>
                             {{ item.content }}
                         </v-btn>
@@ -51,17 +53,50 @@
 
 
             </div>
+
+            <div class="market-item mt-3">
+
+                <div class="d-flex justify-start mt-3 mb">
+
+                    <span class="ml-6" style="width: 8px;height: 30px ;background-color: rgb(49, 91, 247); border-radius: 3px;"></span>
+                    <span class="text-h6 ml-2">Results the details</span>
+
+
+                </div>
+                <div class=" d-flex  flex-column justify-start">
+
+                    <span class="text-h8 ml-6  mt-3">
+                        The end result is :   {{ formatMarketResult() }}
+                          <span class="text-h6">
+
+                          </span>
+
+                      </span>
+                    <span v-show="this.oracleResults.length !== 0" class="text-h8 ml-6  mt-3">
+                       Provide people :
+                        <span v-for="(item,index) in this.oracleResults" :key="index">
+                                <v-chip class="ma-2" label text-color="white">{{ item.name }} > {{ model.answers[item.result].content }}</v-chip>
+                        </span>
+                    </span>
+                </div>
+                <div class="mt-3 mr-5" style="text-align: right">
+                    <v-btn
+                            class="mb-3 ml-4 "
+                            color="primary accent-4" elevation="0"
+                            :loading="receiveLoading"
+                            :disabled="isUserMarketReceiveStatus"
+                            @click="receive"
+                    >
+                        {{ formatReceive() }}
+                    </v-btn>
+                </div>
+
+
+            </div>
+
             {{ model.over_height }}
             {{ $store.state.blockHeight }}
         </div>
-
-        <v-btn
-                class="mb-3 ml-4 rounded-lg"
-                color="primary accent-4" elevation="0"
-                @click="receive"
-        >
-            Receive
-        </v-btn>
 
 
         <v-dialog
@@ -128,6 +163,8 @@ export default {
             agreeDialog: false,
             //确认按钮loading状态
             agreeLoading: false,
+            //领取按钮loading状态
+            receiveLoading: false,
             //错误提示组件
             snackbar: false,
             //错误提示组件的msg
@@ -142,8 +179,12 @@ export default {
             userMarketsRecordResult: -1,
             //当前用户是否中奖后领取过
             isUserMarketReceive: false,
+            //当前用户是否可以领取
+            isUserMarketReceiveStatus: false,
             //数据
             model: {},
+            //数据
+            oracleResults: [],
         }
     },
     watch: {
@@ -164,14 +205,65 @@ export default {
         this.$bus.off('load', this.load);
     },
     methods: {
+
+        //转换ae
+        formatMarketResult() {
+            let result = parseInt(this.model.result)
+            if (result === -1) {
+                if (this.oracleResults.length > 0) {
+                    return "Need more data";
+                }
+                return "Not over yet";
+            } else {
+                return this.model.answers[result].content;
+            }
+
+        },
+        formatReceive() {
+            let result = parseInt(this.model.result)
+            if (result === -1) {
+                this.isUserMarketReceiveStatus = true;
+                return "Not over yet";
+            }
+            if (this.isUserMarketReceive) {
+                this.isUserMarketReceiveStatus = true;
+                return "Receive Success"
+            }
+            if (result !== this.userMarketsRecordResult) {
+                this.isUserMarketReceiveStatus = true;
+                return "Not winning2";
+            }
+
+            let totalAmount = parseInt(this.model.total_amount);
+
+            let winCount = parseInt(this.model.answers[this.model.result].count);
+            if (totalAmount === 0 || winCount === 0) {
+                this.isUserMarketReceiveStatus = true;
+                return "Not winning";
+            }
+            this.isUserMarketReceiveStatus = false;
+            let receiveAmount = totalAmount / winCount;
+            return "Receive≈(" + AmountFormatter.toAe(receiveAmount.toString()) + "AE)";
+        },
         //转换ae
         formatAe(amount) {
             return AmountFormatter.toAe(amount.toString());
         },
         //领取
         async receive() {
-            const result = await this.$store.state.veagsContract.methods.receive_reward(this.model.owner, this.model.market_id);
-            console.log(result);
+            try {
+                this.receiveLoading = true;
+                const result = await this.$store.state.veagsContract.methods.receive_reward(this.model.owner, this.model.market_id);
+                console.log(result);
+                await this.load();
+            } catch (e) {
+                console.log(e.message);
+                this.snackbarMsg = e.message;
+                this.snackbar = true;
+            } finally {
+                this.receiveLoading = false;
+            }
+
         },
         //获取当前投票的百分比
         getAnswersProportion(count) {
@@ -242,11 +334,39 @@ export default {
             const getUserMarketsRecordResultDecode = await this.$store.state.veagsContract.methods.get_user_markets_record_result(owner, marketId);
             //获取是否已经领取过奖金
             const isUserMarketsReceiveRecordDecode = await this.$store.state.veagsContract.methods.is_user_markets_receive_record(owner, marketId);
+            //获取聚合器记录
+            const getOracleMarketRecordDecode = await this.$store.state.veagsContract.methods.get_oracle_market_record(marketId);
+            //获取当前用户是否是聚合器账户
+            const getAggregatorUserDecode = await this.$store.state.veagsContract.methods.get_aggregator_user();
+
             //解码
             this.model = getMarketDecode.decodedResult;
             this.isUserMarketRecord = isUserMarketsRecordDecode.decodedResult;
             this.userMarketsRecordResult = getUserMarketsRecordResultDecode.decodedResult;
             this.isUserMarketReceive = await isUserMarketsReceiveRecordDecode.decodedResult;
+
+            let getOracleMarketRecord = await getOracleMarketRecordDecode.decodedResult;
+            let getAggregatorUser = getAggregatorUserDecode.decodedResult;
+
+            if (parseInt(this.model.result) !== -1 || this.$store.state.blockHeight > parseInt(this.model.over_height)) {
+                this.isUserMarketRecord = true;
+            }
+
+            let marketOracleResults = [];
+            getOracleMarketRecord.forEach(function (value, key) {
+                let name = getAggregatorUser.get(key);
+                if (name === undefined) {
+                    name = key.slice(0, 5) + "..." + key.slice(-4);
+                }
+                marketOracleResults.push({
+                    address: key,
+                    name: name,
+                    result: parseInt(value)
+                })
+            });
+            this.oracleResults = marketOracleResults;
+            console.log(this.oracleResults)
+
             this.isLoading = false;
         },
         //格式化结束时间

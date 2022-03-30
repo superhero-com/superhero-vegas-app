@@ -70,9 +70,9 @@ export default {
     methods: {
         async load() {
             if (this.$store.state.aeSdk == null) return;
+            if (this.$store.state.veagsContract == null) return;
             const startResultDecode = await this.$store.state.veagsContract.methods.get_markets_wait(this.$store.state.address);
             let startResult = startResultDecode.decodedResult;
-            console.log(JSON.stringify(startResult.decodedResult));
             // 依次获取map对象值
             let startResultArr = [];
             startResult.forEach(function (value) {

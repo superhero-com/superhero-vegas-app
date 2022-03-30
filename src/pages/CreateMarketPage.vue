@@ -156,7 +156,6 @@ export default {
 
             snackbar: false,
             snackbarMsg: '',
-            error_text: '',
 
             over_height: 'one',
 
@@ -249,6 +248,8 @@ export default {
             } catch (e) {
                 console.log(e);
                 this.createLoading = false;
+                this.snackbarMsg = e.message;
+                this.snackbar = true;
             }
 
 

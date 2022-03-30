@@ -4,7 +4,6 @@
 
             <v-btn @click='loginOut()'
                    color="primary"
-                   elevation="2"
                    rounded-lg
                    >{{ btn_connect_data }}
             </v-btn>

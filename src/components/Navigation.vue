@@ -4,7 +4,7 @@
             <svg-icon class="ml-5 mr-5" name="icon_logo" alt=""/>
         </div>
         <ul class="pa-0">
-            <li v-for="(item,index) in nva_list" :key="index">
+            <li v-for="(item,index) in this.$store.state.nvaList" :key="index">
 
 
                 <router-link :to='item.page' >
@@ -32,39 +32,7 @@
         data() {
             return {
                 currentSelect: 0,
-                nva_list: [
-                    {
-                        text: 'Markets',
-                        icon: 'nav_home',
-                        page: '/',
-                    },
-                    {
-                        text: 'Private',
-                        icon: 'nav_private',
-                        page: '/private',
-                    },
-                    {
-                        text: 'My Bet',
-                        icon: 'nav_my',
-                        page: '/participate',
-                    },
-                    {
-                        text: 'Referee Review',
-                        icon: 'nav_review',
-                        page: '/referee_view',
-                    },
-                    {
-                        text: 'Update',
-                        icon: 'nav_update',
-                        page: '/update',
-                    },
-                    {
-                        text: 'About',
-                        icon: 'nav_about',
-                        page: '/about',
-                    }
 
-                ],
             }
         },
         methods: {}
