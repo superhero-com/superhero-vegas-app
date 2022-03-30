@@ -229,7 +229,9 @@ export default {
                 this.isUserMarketReceiveStatus = true;
                 return "Receive Success"
             }
-            if (result !== this.userMarketsRecordResult) {
+            console.log(result);
+            console.log(this.userMarketsRecordResult);
+            if (result !== parseInt(this.userMarketsRecordResult) ){
                 this.isUserMarketReceiveStatus = true;
                 return "Not winning2";
             }
