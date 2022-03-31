@@ -98,7 +98,7 @@ export default {
             //获取vegas合约
             this.$store.state.veagsContract = await this.$store.state.aeSdk.getContractInstance(({
                 aci: VegasMarketContract,
-                contractAddress: "ct_JmhriRxUHXKChJj9MrE8ExaNtCPYeLJukwd2nwWCMPEyKVRLn"
+                contractAddress: "ct_2qrfQuyTK8PvQSx3zJfrWiWoiwnyoNWrEGq1FF6iJDcPjizFFr"
             }));
 
             //获取当前用户是否是聚合器账户
@@ -127,7 +127,7 @@ export default {
             this.$store.state.isLogin = true;
 
             this.forGetHeight();
-            this.forPoolAVT();
+            // this.forPoolAVT();
             this.$bus.emit('load');
         },
 

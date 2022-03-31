@@ -10,7 +10,7 @@
 
         <div class="item-content-source">
             <span class="item-content-source-title">Data source：</span>
-            <a href="#" class="card-item-content" style="color:#f7296e">{{ model.source_url }}</a>
+            <a href="#"  target="_blank" class="card-item-content"  style="color:#f7296e">{{ model.source_url }}</a>
         </div>
 
         <MarketItemFloor :is-over="isOver(model)" :model="model" :state="state" :stateIcon="stateIcon" :stateText="stateText" :to-min-ae="formatAe(model.min_amount)" :to-total-ae="formatAe(model.total_amount)" />

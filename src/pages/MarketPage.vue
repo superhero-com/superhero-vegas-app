@@ -75,7 +75,7 @@ export default {
         async load() {
             if (this.$store.state.aeSdk == null) return;
             if (this.$store.state.veagsContract == null) return;
-            const startResultDecode = await this.$store.state.veagsContract.methods.get_markets_start("ak_CNcf2oywqbgmVg3FfKdbHQJfB959wrVwqfzSpdWVKZnep7nj4");
+            const startResultDecode = await this.$store.state.veagsContract.methods.get_markets_start("ak_idkx6m3bgRr7WiKXuB8EBYBoRqVsaSc6qo4dsd23HKgj3qiCF");
             let startResult = startResultDecode.decodedResult;
             let startResultArr = [];
             // 依次获取map对象值

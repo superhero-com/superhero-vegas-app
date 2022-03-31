@@ -72,6 +72,12 @@
                           </span>
 
                       </span>
+                    <span v-show="parseInt(model.result) !==-1 && parseInt(model.market_type) === 0" class="text-h8 ml-6  mt-3">
+                       Provide people :
+                        <span>
+                                <v-chip class="ma-2" label text-color="white">{{ formatPrivateProvide() }}</v-chip>
+                        </span>
+                    </span>
                     <span v-show="this.oracleResults.length !== 0" class="text-h8 ml-6  mt-3">
                        Provide people :
                         <span v-for="(item,index) in this.oracleResults" :key="index">
@@ -206,7 +212,16 @@ export default {
     },
     methods: {
 
-        //转换ae
+        formatPrivateProvide() {
+            let result = parseInt(this.model.result)
+            if (result === -1) {
+                return "Not over yet";
+            }
+            return this.model.owner.slice(0, 5) + "..." + this.model.owner.slice(-4) +" : "+this.model.answers[this.model.result].content;
+
+
+
+        },        //转换ae
         formatMarketResult() {
             let result = parseInt(this.model.result)
             if (result === -1) {
@@ -231,7 +246,7 @@ export default {
             }
             console.log(result);
             console.log(this.userMarketsRecordResult);
-            if (result !== parseInt(this.userMarketsRecordResult) ){
+            if (result !== parseInt(this.userMarketsRecordResult)) {
                 this.isUserMarketReceiveStatus = true;
                 return "Not winning2";
             }
@@ -251,11 +266,15 @@ export default {
         formatAe(amount) {
             return AmountFormatter.toAe(amount.toString());
         },
+
         //领取
         async receive() {
             try {
                 this.receiveLoading = true;
-                const result = await this.$store.state.veagsContract.methods.receive_reward(this.model.owner, this.model.market_id);
+                const result = await this.$store.state.veagsContract.methods.receive_reward(this.model.owner, this.model.market_id, {
+                    gasPrice: 1000000000,
+                    gas: 60000
+                });
                 console.log(result);
                 await this.load();
             } catch (e) {
