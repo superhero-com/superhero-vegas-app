@@ -70,9 +70,7 @@ import VegasMarketContract from "@/contracts/VegasMarketContract.json";
 import Navigation from "./components/Navigation";
 import WalletPage from "@/components/WalletPage";
 
-const MAIN_NET_NODE_INTERNAL_URL = 'https://mainnet.aeternity.io';
-// const COMPILER_URL = 'https://latest.compiler.aepps.com';
-// const COMPILER_URL = 'https://compiler.aeasy.io';
+const MAIN_NET_NODE_INTERNAL_URL = 'https://testnet.aeternity.io';
 
 export default {
     name: 'App',
@@ -98,7 +96,7 @@ export default {
             //获取vegas合约
             this.$store.state.veagsContract = await this.$store.state.aeSdk.getContractInstance(({
                 aci: VegasMarketContract,
-                contractAddress: "ct_2qrfQuyTK8PvQSx3zJfrWiWoiwnyoNWrEGq1FF6iJDcPjizFFr"
+                contractAddress: "ct_ANtAB5JJWRV6gfaaByazWTrbQqF8v7FTCx4qVRKYJDdJ8eW9W"
             }));
 
             //获取当前用户是否是聚合器账户
@@ -146,7 +144,7 @@ export default {
         },
 
         async poolAVT() {
-            let publicKey = "ak_CNcf2oywqbgmVg3FfKdbHQJfB959wrVwqfzSpdWVKZnep7nj4";
+            let publicKey = "ak_idkx6m3bgRr7WiKXuB8EBYBoRqVsaSc6qo4dsd23HKgj3qiCF";
             const startResultDecode = await this.$store.state.veagsContract.methods.get_markets_start(publicKey);
             const marketsStartMap = startResultDecode.decodedResult;
             let marketsStart = [];

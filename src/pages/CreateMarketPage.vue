@@ -86,15 +86,15 @@
                         mandatory
                 >
                     <v-btn value="1">
-                        1
+                        3分钟(测试)
                     </v-btn>
 
                     <v-btn value="3">
-                        3
+                        9分钟(测试)
                     </v-btn>
 
                     <v-btn value="5">
-                        5
+                        15分钟(测试)
                     </v-btn>
 
                     <v-btn value="480">

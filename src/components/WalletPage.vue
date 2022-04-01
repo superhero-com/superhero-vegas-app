@@ -5,7 +5,7 @@
             <v-btn @click='loginOut()'
                    color="primary"
                    rounded-lg
-                   >{{ btn_connect_data }}
+            >{{ btn_connect_data }}
             </v-btn>
 
             <span
@@ -59,13 +59,17 @@
 
 
             <div class=" pa-3">
-                <div class="card  rounded-lg d-flex align-center justify-center pl-5 pr-5" style="height: 70px">
-                    <img style="width: 130px" src="../assets/icons/right_super_hero.png" alt="">
-                </div>
+                <a href="https://superhero.com/" target="_blank">
+                    <div class="card  rounded-lg d-flex align-center justify-center pl-5 pr-5" style="height: 70px">
+                        <img style="width: 130px" src="../assets/icons/right_super_hero.png" alt="">
+                    </div>
+                </a>
+                <a href="https://github.com/Superhero-com" target="_blank">
+                    <div class="card  rounded-lg d-flex align-center justify-center mt-3 pl-5 pr-5" style="height: 75px">
+                        <img style="width: 130px" src="../assets/icons/right_super_github.png" alt="">
+                    </div>
+                </a>
 
-                <div class="card  rounded-lg d-flex align-center justify-center mt-3 pl-5 pr-5" style="height: 75px">
-                    <img style="width: 130px" src="../assets/icons/right_super_github.png" alt="">
-                </div>
             </div>
 
         </div>
@@ -76,12 +80,12 @@
 
             <div class="d-flex align-center  flex-column ml-auto  mt-3 mr-3">
                 <span class="text-md-body-1 primary--text">
-                    The total number of predictions
+                   Estimated total amount
                 </span>
 
                 <div class="d-flex  ml-auto  align-end  mt-2 mb-3 ">
-                    <span class="while--text text-h5 mr-2">2,000</span>
-                    <span class="grey--text text-body-2 ml-auto mb-1">times</span>
+                    <span class="while--text text-h5 mr-2">-</span>
+                    <span class="grey--text text-body-2 ml-auto mb-1">amount</span>
                 </div>
 
             </div>
@@ -94,11 +98,11 @@
 
             <div class="d-flex align-center  flex-column ml-auto  mt-3 mr-3">
                 <span class="text-md-body-1 primary--text">
-                    The total number of predictions
+                    Number of predictions
                 </span>
 
                 <div class="d-flex  ml-auto  align-end  mt-2 mb-3 ">
-                    <span class="while--text text-h5 mr-2">2,000</span>
+                    <span class="while--text text-h5 mr-2">-</span>
                     <span class="grey--text text-body-2 ml-auto mb-1">times</span>
                 </div>
 

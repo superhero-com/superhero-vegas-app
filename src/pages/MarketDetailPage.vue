@@ -100,8 +100,6 @@
 
             </div>
 
-            {{ model.over_height }}
-            {{ $store.state.blockHeight }}
         </div>
 
 
