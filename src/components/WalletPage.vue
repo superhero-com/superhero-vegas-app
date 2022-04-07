@@ -84,7 +84,7 @@
                 </span>
 
                 <div class="d-flex  ml-auto  align-end  mt-2 mb-3 ">
-                    <span class="while--text text-h5 mr-2">-</span>
+                    <span class="while--text text-h5 mr-2">{{allAmount}}</span>
                     <span class="grey--text text-body-2 ml-auto mb-1">amount</span>
                 </div>
 
@@ -102,7 +102,7 @@
                 </span>
 
                 <div class="d-flex  ml-auto  align-end  mt-2 mb-3 ">
-                    <span class="while--text text-h5 mr-2">-</span>
+                    <span class="while--text text-h5 mr-2">{{allCount}}</span>
                     <span class="grey--text text-body-2 ml-auto mb-1">times</span>
                 </div>
 
@@ -137,14 +137,30 @@ export default {
             gradientDirection: 'top',
             gradients,
             fill: false,
-
+            allCount:"-",
+            allAmount:"-",
             btn_connect_data: "Log out",
         }
     },
     mounted: function () {
-
+        this.$bus.on('load', this.load);
+        this.load();
+    },
+    beforeDestroy() {
+        this.$bus.off('load', this.load);
     },
     methods: {
+        async load() {
+            //sdk没有初始化直接返回
+            if (this.$store.state.aeSdk == null) return;
+            if (this.$store.state.veagsContract == null) return;
+            //获取当前用户是否是聚合器账户
+            let {decodedResult:allCount} = await this.$store.state.veagsContract.methods.get_all_count();
+            let {decodedResult:allAmount} = await this.$store.state.veagsContract.methods.get_all_amount();
+            this.allAmount = parseInt(allAmount).toString()
+            this.allCount = parseInt(allCount).toString()
+
+        },
         formatAddress() {
             return this.$store.state.address.slice(0, 5) + "..." + this.$store.state.address.slice(-4);
         },

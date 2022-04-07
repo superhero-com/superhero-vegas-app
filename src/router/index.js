@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import MarketPage from "../pages/MarketPage";
-import PrivatePage from "../pages/PrivatePage";
+// import PrivatePage from "../pages/PrivatePage";
 import ParticipatePage from "../pages/ParticipatePage";
 import UpdatePage from "../pages/UpdatePage";
 import AboutPage from "../pages/AboutPage";
@@ -42,7 +42,7 @@ export default new Router({
         {
             path: '/private',
             name: 'PrivatePage',
-            component: PrivatePage,
+            component: CreateMarketPage,
             meta: {
                 keepAlive: false // 需要被缓存
             }

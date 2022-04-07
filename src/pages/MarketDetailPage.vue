@@ -215,8 +215,7 @@ export default {
             if (result === -1) {
                 return "Not over yet";
             }
-            return this.model.owner.slice(0, 5) + "..." + this.model.owner.slice(-4) +" : "+this.model.answers[this.model.result].content;
-
+            return this.model.owner.slice(0, 5) + "..." + this.model.owner.slice(-4) + " : " + this.model.answers[this.model.result].content;
 
 
         },        //转换ae
@@ -346,26 +345,16 @@ export default {
             console.log(owner);
             console.log(marketId);
             //获取合约中的具体信息
-            const getMarketDecode = await this.$store.state.veagsContract.methods.get_market(owner, marketId);
-            //获取当前用户是否参与过
-            const isUserMarketsRecordDecode = await this.$store.state.veagsContract.methods.is_user_markets_record(owner, marketId);
-            //获取当前用户的投票结果
-            const getUserMarketsRecordResultDecode = await this.$store.state.veagsContract.methods.get_user_markets_record_result(owner, marketId);
-            //获取是否已经领取过奖金
-            const isUserMarketsReceiveRecordDecode = await this.$store.state.veagsContract.methods.is_user_markets_receive_record(owner, marketId);
-            //获取聚合器记录
-            const getOracleMarketRecordDecode = await this.$store.state.veagsContract.methods.get_oracle_market_record(marketId);
-            //获取当前用户是否是聚合器账户
-            const getAggregatorUserDecode = await this.$store.state.veagsContract.methods.get_aggregator_user();
+            const {decodedResult: marketDetail} = await this.$store.state.veagsContract.methods.get_market_detail(owner, marketId);
 
             //解码
-            this.model = getMarketDecode.decodedResult;
-            this.isUserMarketRecord = isUserMarketsRecordDecode.decodedResult;
-            this.userMarketsRecordResult = getUserMarketsRecordResultDecode.decodedResult;
-            this.isUserMarketReceive = await isUserMarketsReceiveRecordDecode.decodedResult;
+            this.model = marketDetail.market;
+            this.isUserMarketRecord = marketDetail.is_user_markets_record;
+            this.userMarketsRecordResult = marketDetail.get_user_markets_record_result;
+            this.isUserMarketReceive = marketDetail.is_user_markets_receive_record;
 
-            let getOracleMarketRecord = await getOracleMarketRecordDecode.decodedResult;
-            let getAggregatorUser = getAggregatorUserDecode.decodedResult;
+            let getOracleMarketRecord = marketDetail.get_oracle_market_record;
+            let getAggregatorUser = marketDetail.get_aggregator_user;
 
             if (parseInt(this.model.result) !== -1 || this.$store.state.blockHeight > parseInt(this.model.over_height)) {
                 this.isUserMarketRecord = true;

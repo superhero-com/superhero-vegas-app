@@ -5,7 +5,7 @@
                 <span>Occurred Time : {{ formatTime(model) }}</span>
             </div>
 
-            <v-btn class="item-header-share" @click.native.prevent="copyMarket" icon x-small color="while">
+            <v-btn class="item-header-share" @click.native.prevent="copyMarket"  v-clipboard:copy="url" v-clipboard:success="copyMarket"   icon x-small color="while">
                 <v-icon>mdi-content-copy</v-icon>
             </v-btn>
 
@@ -79,6 +79,8 @@ export default {
             state: "",
             state_text: "",
             state_icon: "",
+
+            url:"https://boxwallet.app/static/dist/index.html#/market_detail?owner="+this.model.owner+"&market_id="+this.model.market_id,
             //是否已经领取过奖金
             isUserMarketReceive: false,
         }

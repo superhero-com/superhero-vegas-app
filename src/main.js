@@ -9,9 +9,9 @@ import vuetify from './plugins/vuetify'
 import './assets/styles/reset.css'
 
 import VueBus from 'vue-bus';
+import VueClipboard from 'vue-clipboard2'
 
-
-
+Vue.use(VueClipboard)
 
 Vue.config.productionTip = true;
 

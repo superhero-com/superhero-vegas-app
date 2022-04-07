@@ -3,7 +3,7 @@
     <!--        <img src="../assets/logo.png" alt="">-->
 
 
-    <div>
+    <div class="pb-16">
 
 
         <p class=".text-xl-h4 text-h5 mt-5">Welcome Back to AEVegas!</p>
@@ -76,8 +76,7 @@ export default {
             if (this.$store.state.aeSdk == null) return;
             if (this.$store.state.veagsContract == null) return;
 
-            const {decodedResult: owner} = await this.$store.state.veagsContract.methods.get_owner();
-            const startResultDecode = await this.$store.state.veagsContract.methods.get_markets_start(owner);
+            const startResultDecode = await this.$store.state.veagsContract.methods.get_markets_start(this.$store.state.address,false);
             let startResult = startResultDecode.decodedResult;
             let startResultArr = [];
             // 依次获取map对象值

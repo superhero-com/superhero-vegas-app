@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@aeternity/aepp-sdk": "^11.0.0",
+    "clipboard": "^2.0.10",
     "core-js": "^3.6.5",
     "font-awesome": "^4.7.0",
     "svg-inject": "^0.1.0",
@@ -16,6 +17,7 @@
     "svg-sprite-loader": "^6.0.9",
     "vue": "^2.6.11",
     "vue-bus": "^1.2.1",
+    "vue-clipboard2": "^0.3.3",
     "vue-router": "^3.5.1",
     "vuetify": "^2.4.0",
     "vuex": "^3.6.2"

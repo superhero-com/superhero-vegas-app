@@ -75,7 +75,7 @@ export default {
             //排序
             this.marketsRecord = startResultArr;
             this.marketsRecord.sort(function (a, b) {
-                return a.put_time.toString() < b.put_time.toString ? 1 : -1
+                return a.put_time.toString() > b.put_time.toString ? 1 : -1
             });
             this.isLoading = false;
             this.isNotData = false;

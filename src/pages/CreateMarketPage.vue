@@ -85,16 +85,9 @@
                         borderless
                         mandatory
                 >
-                    <v-btn value="1">
-                        3分钟(测试)
-                    </v-btn>
-
-                    <v-btn value="3">
-                        9分钟(测试)
-                    </v-btn>
 
                     <v-btn value="5">
-                        15分钟(测试)
+                        15 Minutes(Test)
                     </v-btn>
 
                     <v-btn value="480">
@@ -206,15 +199,23 @@ export default {
             }
 
             if (this.content === null || this.content === '') {
+                this.snackbar = true;
+                this.snackbarMsg = "Please enter the content";
                 return;
             }
             if (this.sourceUrl === null || this.sourceUrl === '') {
+                this.snackbar = true;
+                this.snackbarMsg = "Please enter the sourceUrl";
                 return;
             }
             if (this.minAmount === null || this.minAmount === '') {
+                this.snackbar = true;
+                this.snackbarMsg = "Please enter the min Amount";
                 return;
             }
             if (this.over_height === null || this.over_height === '') {
+                this.snackbar = true;
+                this.snackbarMsg = "Please enter the over time";
                 return;
             }
 

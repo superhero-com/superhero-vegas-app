@@ -214,18 +214,17 @@ export default {
             console.log(owner);
             console.log(marketId);
             //获取合约中的具体信息
-            const getMarketDecode = await this.$store.state.veagsContract.methods.get_market(owner, marketId);
-            this.model = getMarketDecode.decodedResult;
+            const {decodedResult: marketDetail} = await this.$store.state.veagsContract.methods.get_market_detail(owner, marketId);
+            this.model = marketDetail.market;
             if (parseInt(this.model.market_type) === 0 && parseInt(this.model.result) !== -1) {
                 this.isUserMarketResultRecord = true;
                 console.log(true);
-            }else{
-                const isOracleMarketRecord = await this.$store.state.veagsContract.methods.is_oracle_market_record(marketId);
-                this.isUserMarketResultRecord = isOracleMarketRecord.decodedResult;
-                console.log( this.isUserMarketResultRecord);
+            } else {
+                this.isUserMarketResultRecord = marketDetail.is_oracle_market_record;
+                console.log(this.isUserMarketResultRecord);
             }
-            console.log(  this.isUserMarketResultRecord );
-            if(this.isUserMarketResultRecord){
+            console.log(this.isUserMarketResultRecord);
+            if (this.isUserMarketResultRecord) {
                 await this.$router.push({
                     path: '/market_detail',
                     query: {owner: owner, market_id: marketId}

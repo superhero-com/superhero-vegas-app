@@ -216,23 +216,27 @@
         {
           "arguments": [
             {
-              "name": "market_id",
-              "type": "string"
+              "name": "config",
+              "type": "VegasMarketContact.config"
             }
           ],
-          "name": "get_oracle_market_provide_count",
+          "name": "update_config",
           "payable": false,
-          "returns": "int",
-          "stateful": false
+          "returns": "VegasMarketContact.config",
+          "stateful": true
         },
         {
           "arguments": [
             {
               "name": "market_address",
               "type": "address"
+            },
+            {
+              "name": "is_private",
+              "type": "bool"
             }
           ],
-          "name": "get_market_public",
+          "name": "get_markets_start",
           "payable": false,
           "returns": {
             "map": [
@@ -240,6 +244,60 @@
               "VegasMarketContact.market"
             ]
           },
+          "stateful": false
+        },
+        {
+          "arguments": [],
+          "name": "get_markets_referee",
+          "payable": false,
+          "returns": {
+            "map": [
+              "string",
+              "VegasMarketContact.market"
+            ]
+          },
+          "stateful": false
+        },
+        {
+          "arguments": [
+            {
+              "name": "market_address",
+              "type": "address"
+            },
+            {
+              "name": "market_id",
+              "type": "string"
+            }
+          ],
+          "name": "get_market_detail",
+          "payable": false,
+          "returns": "VegasMarketContact.market_detail",
+          "stateful": false
+        },
+        {
+          "arguments": [],
+          "name": "get_all_count",
+          "payable": false,
+          "returns": "int",
+          "stateful": false
+        },
+        {
+          "arguments": [],
+          "name": "get_all_amount",
+          "payable": false,
+          "returns": "int",
+          "stateful": false
+        },
+        {
+          "arguments": [
+            {
+              "name": "market_id",
+              "type": "string"
+            }
+          ],
+          "name": "get_oracle_market_provide_count",
+          "payable": false,
+          "returns": "int",
           "stateful": false
         },
         {
@@ -323,23 +381,6 @@
             "map": [
               "address",
               "int"
-            ]
-          },
-          "stateful": false
-        },
-        {
-          "arguments": [
-            {
-              "name": "market_address",
-              "type": "address"
-            }
-          ],
-          "name": "get_markets_start",
-          "payable": false,
-          "returns": {
-            "map": [
-              "string",
-              "VegasMarketContact.market"
             ]
           },
           "stateful": false
@@ -615,6 +656,14 @@
             }
           },
           {
+            "name": "all_count",
+            "type": "int"
+          },
+          {
+            "name": "all_amount",
+            "type": "int"
+          },
+          {
             "name": "config",
             "type": "VegasMarketContact.config"
           }
@@ -812,6 +861,52 @@
               {
                 "name": "count",
                 "type": "int"
+              }
+            ]
+          },
+          "vars": []
+        },
+        {
+          "name": "market_detail",
+          "typedef": {
+            "record": [
+              {
+                "name": "market",
+                "type": "VegasMarketContact.market"
+              },
+              {
+                "name": "is_oracle_market_record",
+                "type": "bool"
+              },
+              {
+                "name": "is_user_markets_record",
+                "type": "bool"
+              },
+              {
+                "name": "get_user_markets_record_result",
+                "type": "int"
+              },
+              {
+                "name": "is_user_markets_receive_record",
+                "type": "bool"
+              },
+              {
+                "name": "get_oracle_market_record",
+                "type": {
+                  "map": [
+                    "address",
+                    "int"
+                  ]
+                }
+              },
+              {
+                "name": "get_aggregator_user",
+                "type": {
+                  "map": [
+                    "address",
+                    "string"
+                  ]
+                }
               }
             ]
           },
