@@ -96,7 +96,7 @@ export default {
             //获取vegas合约
             this.$store.state.veagsContract = await this.$store.state.aeSdk.getContractInstance(({
                 aci: VegasMarketContract,
-                contractAddress: "ct_ANtAB5JJWRV6gfaaByazWTrbQqF8v7FTCx4qVRKYJDdJ8eW9W"
+                contractAddress: "ct_DVKyXDzMNddjfxRmDq87w1CNT8dHQusmfRAt5UtYnEHandd37"
             }));
 
             //获取当前用户是否是聚合器账户

@@ -75,19 +75,31 @@ export default {
         async load() {
             if (this.$store.state.aeSdk == null) return;
             if (this.$store.state.veagsContract == null) return;
-            const startResultDecode = await this.$store.state.veagsContract.methods.get_markets_start("ak_idkx6m3bgRr7WiKXuB8EBYBoRqVsaSc6qo4dsd23HKgj3qiCF");
+
+            const {decodedResult: owner} = await this.$store.state.veagsContract.methods.get_owner();
+            const startResultDecode = await this.$store.state.veagsContract.methods.get_markets_start(owner);
             let startResult = startResultDecode.decodedResult;
             let startResultArr = [];
             // 依次获取map对象值
             startResult.forEach(function (value) {
                 startResultArr.push(value)
             });
-            if (startResultArr.length === 0) {
+
+
+            let startResultArrWait = [];
+            let self = this;
+            for (const value of startResultArr) {
+                if (parseInt(self.$store.state.blockHeight) <= parseInt(value.over_height)) {
+                    startResultArrWait.push(value)
+                }
+            }
+
+            if (startResultArrWait.length === 0) {
                 this.is_not_data = true;
                 this.is_loading = false;
                 return;
             }
-            this.marketsStart = startResultArr;
+            this.marketsStart = startResultArrWait;
             this.marketsStart.sort(function (a, b) {
                 return a.create_time < b.create_time ? 1 : -1
             });

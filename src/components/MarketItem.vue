@@ -91,7 +91,7 @@ export default {
             market.result = parseInt(market.result.toString());
             let putResultIndex = parseInt(this.putResultIndex);
             //如果是正在进行和等待结果，都设置进行中
-            if (market.progress === 0 || market.progress === 1) {
+            if (market.progress === 0) {
                 this.state = "item-footer-time-group-state-wait";
                 this.stateText = "WAIT RESULT";
                 this.stateIcon = "type_progress";

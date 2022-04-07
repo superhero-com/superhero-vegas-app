@@ -290,7 +290,7 @@ export default {
             if (count === 0) {
                 return 0;
             }
-            return count / parseInt(this.model.put_count.toString()) * 100;
+            return (count / parseInt(this.model.put_count.toString()) * 100).toFixed(2);
         },
         //获得自己投票的标示
         getMyAnswer(index) {

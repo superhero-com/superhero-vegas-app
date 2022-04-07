@@ -71,28 +71,44 @@ export default {
         async load() {
             if (this.$store.state.aeSdk == null) return;
             if (this.$store.state.veagsContract == null) return;
-            const startResultDecode = await this.$store.state.veagsContract.methods.get_markets_wait(this.$store.state.address);
+            const {decodedResult: owner} = await this.$store.state.veagsContract.methods.get_owner();
+            const startResultDecode = await this.$store.state.veagsContract.methods.get_markets_start(owner);
             let startResult = startResultDecode.decodedResult;
-            // 依次获取map对象值
+
             let startResultArr = [];
             startResult.forEach(function (value) {
                 startResultArr.push(value)
             });
-            if (startResultArr.length === 0) {
-                this.is_not_data = true;
-                this.is_loading = false;
-                return;
-            }
+
+
             if (startResultArr.length === 0) {
                 this.is_not_data = true;
                 this.is_loading = false;
                 return;
             }
 
-            this.marketsStart = startResultArr;
+
+            let startResultArrWait = [];
+            let self = this;
+            for (const value of startResultArr) {
+                if (parseInt(self.$store.state.blockHeight) >= parseInt(value.over_height)) {
+                    const isOracleMarketRecordDecode = await this.$store.state.veagsContract.methods.is_oracle_market_record(value.market_id);
+                    let isOracleMarketRecord = isOracleMarketRecordDecode.decodedResult;
+                    if (!isOracleMarketRecord)
+                        startResultArrWait.push(value)
+                }
+            }
+            if (startResultArrWait.length === 0) {
+                this.is_not_data = true;
+                this.is_loading = false;
+                return;
+            }
+
+            this.marketsStart = startResultArrWait;
             this.marketsStart.sort(function (a, b) {
                 return a.create_time < b.create_time ? 1 : -1
             });
+
             this.is_loading = false;
             this.is_not_data = false;
         }
