@@ -70,7 +70,7 @@ import VegasMarketContract from "@/contracts/VegasMarketContract.json";
 import Navigation from "./components/Navigation";
 import WalletPage from "@/components/WalletPage";
 
-const MAIN_NET_NODE_INTERNAL_URL = 'https://testnet.aeternity.io';
+const MAIN_NET_NODE_INTERNAL_URL = 'https://mainnet.aeternity.io';
 
 export default {
     name: 'App',
@@ -96,7 +96,7 @@ export default {
             //获取vegas合约
             this.$store.state.veagsContract = await this.$store.state.aeSdk.getContractInstance(({
                 aci: VegasMarketContract,
-                contractAddress: "ct_2tVVddgw4UGRQ7wGYTAPXWZnMowo9x48iDpvx8idXzKLgFiHW1"
+                contractAddress: "ct_pDFECPmzPmVR6EXZtwSFMwNaY8QNLKiXQfKPTQzs7jifFaPTL"
             }));
 
             //获取当前用户是否是聚合器账户

@@ -23,11 +23,6 @@
               "int",
               "int"
             ]
-          },
-          {
-            "ContractBalance": [
-              "int"
-            ]
           }
         ]
       },
@@ -88,6 +83,22 @@
           ],
           "name": "submit_answer",
           "payable": true,
+          "returns": "bool",
+          "stateful": true
+        },
+        {
+          "arguments": [
+            {
+              "name": "market_address",
+              "type": "address"
+            },
+            {
+              "name": "market_id",
+              "type": "string"
+            }
+          ],
+          "name": "stop_market",
+          "payable": false,
           "returns": "bool",
           "stateful": true
         },
@@ -671,110 +682,6 @@
       },
       "type_defs": [
         {
-          "name": "market_rocord",
-          "typedef": {
-            "record": [
-              {
-                "name": "market_id",
-                "type": "string"
-              },
-              {
-                "name": "owner",
-                "type": "address"
-              },
-              {
-                "name": "content",
-                "type": "string"
-              },
-              {
-                "name": "amount",
-                "type": "int"
-              },
-              {
-                "name": "put_result",
-                "type": "string"
-              },
-              {
-                "name": "put_result_index",
-                "type": "int"
-              },
-              {
-                "name": "put_time",
-                "type": "int"
-              },
-              {
-                "name": "put_height",
-                "type": "int"
-              }
-            ]
-          },
-          "vars": []
-        },
-        {
-          "name": "config",
-          "typedef": {
-            "record": [
-              {
-                "name": "decimals",
-                "type": "int"
-              },
-              {
-                "name": "oracle_trigger_count",
-                "type": "int"
-              },
-              {
-                "name": "market_min_height",
-                "type": "int"
-              },
-              {
-                "name": "market_max_height",
-                "type": "int"
-              },
-              {
-                "name": "market_min_amount",
-                "type": "int"
-              },
-              {
-                "name": "market_max_amount",
-                "type": "int"
-              },
-              {
-                "name": "record_max_count",
-                "type": "int"
-              },
-              {
-                "name": "market_max_people",
-                "type": "int"
-              },
-              {
-                "name": "platform_address",
-                "type": "address"
-              },
-              {
-                "name": "foundation_address",
-                "type": "address"
-              },
-              {
-                "name": "platform_percentage",
-                "type": "int"
-              },
-              {
-                "name": "foundation_percentage",
-                "type": "int"
-              },
-              {
-                "name": "create_percentage",
-                "type": "int"
-              },
-              {
-                "name": "max_market_put_count",
-                "type": "int"
-              }
-            ]
-          },
-          "vars": []
-        },
-        {
           "name": "market",
           "typedef": {
             "record": [
@@ -867,6 +774,46 @@
           "vars": []
         },
         {
+          "name": "market_rocord",
+          "typedef": {
+            "record": [
+              {
+                "name": "market_id",
+                "type": "string"
+              },
+              {
+                "name": "owner",
+                "type": "address"
+              },
+              {
+                "name": "content",
+                "type": "string"
+              },
+              {
+                "name": "amount",
+                "type": "int"
+              },
+              {
+                "name": "put_result",
+                "type": "string"
+              },
+              {
+                "name": "put_result_index",
+                "type": "int"
+              },
+              {
+                "name": "put_time",
+                "type": "int"
+              },
+              {
+                "name": "put_height",
+                "type": "int"
+              }
+            ]
+          },
+          "vars": []
+        },
+        {
           "name": "market_detail",
           "typedef": {
             "record": [
@@ -911,6 +858,66 @@
             ]
           },
           "vars": []
+        },
+        {
+          "name": "config",
+          "typedef": {
+            "record": [
+              {
+                "name": "decimals",
+                "type": "int"
+              },
+              {
+                "name": "oracle_trigger_count",
+                "type": "int"
+              },
+              {
+                "name": "market_min_height",
+                "type": "int"
+              },
+              {
+                "name": "market_max_height",
+                "type": "int"
+              },
+              {
+                "name": "market_min_amount",
+                "type": "int"
+              },
+              {
+                "name": "market_max_amount",
+                "type": "int"
+              },
+              {
+                "name": "record_max_count",
+                "type": "int"
+              },
+              {
+                "name": "market_max_people",
+                "type": "int"
+              },
+              {
+                "name": "platform_address",
+                "type": "address"
+              },
+              {
+                "name": "foundation_address",
+                "type": "address"
+              },
+              {
+                "name": "platform_percentage",
+                "type": "int"
+              },
+              {
+                "name": "foundation_percentage",
+                "type": "int"
+              },
+              {
+                "name": "create_percentage",
+                "type": "int"
+              }
+            ]
+          },
+          "vars": []
         }
       ]
     }
@@ -934,5 +941,6 @@
         "type_defs": []
       }
     }
-  ]
+  ],
+  "interface": "\n\n\npayable main contract VegasMarketContact =\n  record state = {markets : map(address, map(string, VegasMarketContact.market)),markets_start : map(address, map(string, VegasMarketContact.market)),markets_record : map(address, list(VegasMarketContact.market_rocord)),user_markets_record : map(address, map(string, map(address, int))),user_markets_receive_record : map(address, map(string, map(address, int))),oracle_market : map(string, list(int)),oracle_market_count : map(string, int),oracle_market_record : map(string, map(address, int)),owner : address,aggregator_user : map(address, string),certificate : map(string, address),certificate_people : map(address, string),all_count : int,all_amount : int,config : VegasMarketContact.config}\n  datatype event = AddMarketEvent(address, string) | SubmitAnswerEvent(address, string, address, int) | ReceiveReward(address, int, int)\n  record market = {market_id : string,owner : address,content : string,source_url : string,answers : list(VegasMarketContact.answer),create_time : int,over_height : int,max_people : int,min_amount : int,total_amount : int,receive_amount : int,put_count : int,receive_count : int,result : int,progress : int,market_type : int}\n  record answer = {content : string,count : int}\n  record market_rocord = {market_id : string,owner : address,content : string,amount : int,put_result : string,put_result_index : int,put_time : int,put_height : int}\n  record market_detail = {market : VegasMarketContact.market,is_oracle_market_record : bool,is_user_markets_record : bool,get_user_markets_record_result : int,is_user_markets_receive_record : bool,get_oracle_market_record : map(address, int),get_aggregator_user : map(address, string)}\n  record config = {decimals : int,oracle_trigger_count : int,market_min_height : int,market_max_height : int,market_min_amount : int,market_max_amount : int,record_max_count : int,market_max_people : int,platform_address : address,foundation_address : address,platform_percentage : int,foundation_percentage : int,create_percentage : int}\n  stateful entrypoint init : () => VegasMarketContact.state\n  stateful entrypoint add_market : (string, string, int, int, list(VegasMarketContact.answer)) => VegasMarketContact.market\n  payable stateful entrypoint submit_answer : (address, string, int) => bool\n  stateful entrypoint stop_market : (address, string) => bool\n  stateful entrypoint provide_answer : (address, string, int) => bool\n  stateful entrypoint private_update_market_progress_to_over : (address, string, int) => bool\n  stateful entrypoint receive_reward : (address, string) => int\n  stateful entrypoint add_certificate : (string) => unit\n  stateful entrypoint delete_certificate : (string) => bool\n  stateful entrypoint add_aggregator_user : (address, string) => address\n  stateful entrypoint delete_aggregator_user : (address) => bool\n  stateful entrypoint chagne_owner : (address) => address\n  stateful entrypoint update_config : (VegasMarketContact.config) => VegasMarketContact.config\n  entrypoint get_markets_start : (address, bool) => map(string, VegasMarketContact.market)\n  entrypoint get_markets_referee : () => map(string, VegasMarketContact.market)\n  entrypoint get_market_detail : (address, string) => VegasMarketContact.market_detail\n  entrypoint get_all_count : () => int\n  entrypoint get_all_amount : () => int\n  entrypoint get_oracle_market_provide_count : (string) => int\n  entrypoint get_market : (address, string) => VegasMarketContact.market\n  entrypoint is_user_markets_receive_record : (address, string) => bool\n  entrypoint is_user_markets_record : (address, string) => bool\n  entrypoint get_user_markets_record_result : (address, string) => int\n  entrypoint get_user_markets_record : (address, string) => map(address, int)\n  entrypoint get_markets_start_size : (address) => int\n  entrypoint is_oracle_market_record : (string) => bool\n  entrypoint get_aggregator_user : () => map(address, string)\n  entrypoint get_oracle_market_record : (string) => map(address, int)\n  entrypoint get_market_records : (address) => list(VegasMarketContact.market_rocord)\n  entrypoint get_market_records_size : (address) => int\n  entrypoint get_config : () => VegasMarketContact.config\n  entrypoint get_owner : () => address\n  entrypoint get_state : () => VegasMarketContact.state\n  entrypoint is_repeat : (list(int)) => bool\n"
 }

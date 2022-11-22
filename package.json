@@ -9,7 +9,6 @@
   },
   "dependencies": {
     "@aeternity/aepp-sdk": "^11.0.0",
-    "clipboard": "^2.0.10",
     "core-js": "^3.6.5",
     "font-awesome": "^4.7.0",
     "svg-inject": "^0.1.0",
